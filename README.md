@@ -55,4 +55,4 @@ Thanks also to the Apple Developer documentation and community resources, which 
 
 ## License
 
-This project is open-source and available under the [MIT License](https://opensource.org/licenses/MIT).
+This project is open-source and available under the [MIT License](LICENSE).
