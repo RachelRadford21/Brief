@@ -23,6 +23,7 @@
 		AB41AA5C2D3D9FC700099765 /* BarlowCondensed-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA5A2D3D9FC700099765 /* BarlowCondensed-SemiBold.ttf */; };
 		AB41AA622D3DA87700099765 /* OpeningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA612D3DA87700099765 /* OpeningView.swift */; };
 		AB41AA662D3DAEA700099765 /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA652D3DAEA700099765 /* ArticleModel.swift */; };
+		AB41AA682D3DB64E00099765 /* ToolBarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		AB41AA5A2D3D9FC700099765 /* BarlowCondensed-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BarlowCondensed-SemiBold.ttf"; sourceTree = "<group>"; };
 		AB41AA612D3DA87700099765 /* OpeningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningView.swift; sourceTree = "<group>"; };
 		AB41AA652D3DAEA700099765 /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
+		AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -207,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				AB41AA612D3DA87700099765 /* OpeningView.swift */,
+				AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */,
 				AB41AA492D3D799F00099765 /* WebView.swift */,
 			);
 			path = View;
@@ -432,6 +435,7 @@
 			files = (
 				AB41AA592D3D9F0500099765 /* Extensions.swift in Sources */,
 				AB41AA4A2D3D799F00099765 /* WebView.swift in Sources */,
+				AB41AA682D3DB64E00099765 /* ToolBarButtonView.swift in Sources */,
 				AB41AA482D3D792100099765 /* ArticleViewModel.swift in Sources */,
 				AB41AA342D3D780900099765 /* BriefApp.swift in Sources */,
 				AB41AA352D3D780900099765 /* ContentView.swift in Sources */,
