@@ -8,7 +8,7 @@ import Observation
 import Social
 
 @Observable
-class ArticleViewModel: ObservableObject {
+class ArticleViewModel {
    var sharedURL: URL?
 
     func loadSharedURL() {

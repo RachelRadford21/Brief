@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import WebKit
-import Foundation
 
 struct ContentView: View {
     var articleManager: ArticleViewModel
