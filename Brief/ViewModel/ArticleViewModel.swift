@@ -56,10 +56,16 @@ class ArticleViewModel {
         return title
     }
     
-    func clearSharedURL() {
-        let sharedDefaults = UserDefaults(suiteName: "group.com.brief.app")
-        sharedDefaults?.removeObject(forKey: "sharedURL")
-    }
+  // Probably get rid of this
+  func clearSharedURL() {
+      let sharedDefaults = UserDefaults(suiteName: "group.com.brief.app")
+      if sharedDefaults?.string(forKey: "sharedURL") != nil {
+          sharedDefaults?.removeObject(forKey: "sharedURL")
+          print("Shared URL cleared.")
+      } else {
+          print("No shared URL to clear.")
+      }
+  }
     
     func saveArticleLocally(content: String, fileName: String) {
         let fileManager = FileManager.default

@@ -18,7 +18,7 @@ struct ContentView: View {
                 if let url = articleManager.sharedURL {
                     
                     articleTitleView
-                    
+                  
                     WebView(url: url)
                         .toolbar {
                             ToolbarItemGroup(placement: .bottomBar) {
@@ -35,7 +35,7 @@ struct ContentView: View {
                                 
                                 Spacer()
                                 ToolBarButtonView(buttonLabel: "trash.square") {
-                                    
+                                  
                                 }
                             }
                         }
@@ -44,6 +44,7 @@ struct ContentView: View {
                                 articleTitle = title ?? "No Title"
                             }
                         }
+                        
                 } else {
                     OpeningView()
                 }
@@ -55,7 +56,7 @@ struct ContentView: View {
 
 extension ContentView {
     var articleTitleView: some View {
-        Text("\(articleTitle)")
+        Text(articleTitle)
             .font(.custom("MerriweatherSans-VariableFont_wght", size: 18))
             .padding()
     }
