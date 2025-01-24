@@ -8,20 +8,20 @@
 import Foundation
 import SwiftData
 
-@Observable
+@Model
 class ArticleModel {
-    let id: UUID
+    var id: UUID
     var title: String
     var url: URL?
     var read: Bool
-    var dateSaved: Date?
+    var dateSaved: Date
     
     init(
         id: UUID,
         title: String,
         url: URL? = nil,
-        read: Bool,
-        dateSaved: Date? = nil
+        read: Bool = false,
+        dateSaved: Date
     ) {
         self.id = id
         self.title = title
@@ -29,5 +29,4 @@ class ArticleModel {
         self.read = read
         self.dateSaved = dateSaved
     }
-
 }

@@ -6,20 +6,23 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct BriefApp: App {
-    @Environment(\.scenePhase) private var scenePhase
-    var articleManager = ArticleViewModel()
-    
-    var body: some Scene {
-        WindowGroup {
-            ContentView(articleManager: articleManager)
-                .onChange(of: scenePhase) { _, newPhase in
-                    if newPhase == .active {
-                        articleManager.loadSharedURL()
-                    }
-                }
+  @Environment(\.scenePhase) private var scenePhase
+  var articleManager = SharedArticleManager()
+  let container = try! ModelContainer(for: ArticleModel.self)
+  let articleVM: ArticleViewModel = ArticleViewModel()
+  var body: some Scene {
+    WindowGroup {
+      ContentView(articleManager: articleManager, articleVM: articleVM)
+        .onChange(of: scenePhase) { _, newPhase in
+          if newPhase == .active {
+            articleManager.loadSharedURL()
+          }
         }
     }
+    .modelContainer(for: [ArticleModel.self])
+  }
 }
