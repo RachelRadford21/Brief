@@ -2,7 +2,7 @@
 
 **Brief** is an iOS app designed to simplify how users save and engage with articles. By leveraging Apple’s native frameworks like **Core ML**, **Natural Language**, and **SiriKit**, Brief aims to provide concise summaries of saved content, along with a simple, intuitive note-taking experience.
 
-This project is both a personal challenge and a learning journey. Inspired by tutorials like Peter Friese’s, I decided to take a different route, focusing on Apple’s native stack to create an app that feels deeply integrated into the ecosystem. While this might push the limits of my current skills, it’s a journey I’m excited to share.
+This project is both a personal challenge and a learning journey. Inspired by tutorials like Peter Friese’s [Second Brain](https://youtube.com/playlist?list=PLsnLd2esiGRTmfGZcZMnEy6hkBHXBH_en&si=gOZhnR84skKJpUBb) app, I decided to take a different route, focusing on Apple’s native stack to create an app that feels deeply integrated into the ecosystem. While this might push the limits of my current skills, it’s a journey I’m excited to share.
 
 Whether successful or not, I hope this project serves as a source of learning and inspiration for others.
 
