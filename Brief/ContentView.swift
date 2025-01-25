@@ -12,7 +12,6 @@ struct ContentView: View {
     @Environment(\.modelContext) var context
     @State var isArticleSaved: Bool = false
     @State var articleTitle: String = ""
-    @State private var path = NavigationPath()
     var articleManager: SharedArticleManager
     var articleVM: ArticleViewModel
     // Use later? If user posts multiple article then use diff view?
@@ -29,8 +28,8 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             Color.paperWhite.ignoresSafeArea()
-            
-            NavigationStack(path: $path) {
+            // This view is doing a lot
+            NavigationStack {
                 if let url = articleManager.sharedURL {
                     ArticleView(articleTitle: $articleTitle, url: url)
                         .onAppear {
@@ -45,18 +44,24 @@ struct ContentView: View {
                             isArticleSaved = false
                             print("\(String(describing: try? context.fetchCount(descriptor)))")
                         }
+                        .customToolbar(url: articleManager.sharedURL, buttons: [
+                            ("book", { /* book action */ }),
+                            ("square.and.arrow.down.on.square", {
+                                articleVM.saveArticle(title: articleTitle, url: articleManager.sharedURL!, read: false, dateSaved: Date())
+                                isArticleSaved = true
+                            }),
+                            ("trash.square", {
+                                articleTitle = ""
+                                articleManager.sharedURL = nil
+                                articleManager.clearSharedURL()
+                            })
+                        ])
+                } else if articleManager.sharedURL == nil {
+                    ArticleListView()
                 } else {
                     OpeningView()
                 }
             }
-            .customToolbar(url: articleManager.sharedURL, buttons: [
-                ("book", { /* book action */ }),
-                ("square.and.arrow.down.on.square", {
-                    articleVM.saveArticle(title: articleTitle, url: articleManager.sharedURL!, read: false, dateSaved: Date())
-                    isArticleSaved = true
-                }),
-                ("trash.square", {  })
-            ])
             
             if isArticleSaved {
                 ArticleListView()

@@ -38,5 +38,20 @@ class ArticleViewModel {
       print("Could Not Save Article")
     }
   }
+    
+    func deleteArticle(title: String, url: URL, read: Bool, dateSaved: Date) {
+      
+      let newArticle = ArticleModel(id: UUID(), title: title, url: url, read: read, dateSaved: dateSaved)
+      
+        context.delete(newArticle)
+      
+      do {
+        if context.hasChanges {
+          try context.save()
+        }
+      } catch {
+        print("Could Not Save Article")
+      }
+    }
  
 }
