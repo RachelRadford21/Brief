@@ -12,9 +12,7 @@ struct ToolBarButtonView: View {
     var action: () -> Void?
     
     var body: some View {
-
-            buttonLabelView
-
+        buttonLabelView
     }
 }
 

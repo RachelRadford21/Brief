@@ -12,16 +12,25 @@ struct ContentView: View {
     @Environment(\.modelContext) var context
     @State var isArticleSaved: Bool = false
     @State var articleTitle: String = ""
+    @State private var path = NavigationPath()
     var articleManager: SharedArticleManager
     var articleVM: ArticleViewModel
     // Use later? If user posts multiple article then use diff view?
     let descriptor = FetchDescriptor<ArticleModel>()
+    init(
+        articleManager: SharedArticleManager,
+        articleVM: ArticleViewModel
+    ) {
+        self.articleManager = articleManager
+        self.articleVM = articleVM
+    }
+    
     
     var body: some View {
         ZStack {
             Color.paperWhite.ignoresSafeArea()
             
-            NavigationStack {
+            NavigationStack(path: $path) {
                 if let url = articleManager.sharedURL {
                     ArticleView(articleTitle: $articleTitle, url: url)
                         .onAppear {
@@ -40,11 +49,14 @@ struct ContentView: View {
                     OpeningView()
                 }
             }
-            .toolbar {
-                if let url = articleManager.sharedURL {
-                    toolbarContent(url: url)
-                }
-            }
+            .customToolbar(url: articleManager.sharedURL, buttons: [
+                ("book", { /* book action */ }),
+                ("square.and.arrow.down.on.square", {
+                    articleVM.saveArticle(title: articleTitle, url: articleManager.sharedURL!, read: false, dateSaved: Date())
+                    isArticleSaved = true
+                }),
+                ("trash.square", {  })
+            ])
             
             if isArticleSaved {
                 ArticleListView()
@@ -55,28 +67,6 @@ struct ContentView: View {
 
 extension ContentView {
     
-    @ToolbarContentBuilder
-    func toolbarContent(url: URL) -> some ToolbarContent {
-        ToolbarItemGroup(placement: .bottomBar) {
-            
-            ToolBarButtonView(buttonLabel: "book") {
-            }
-            
-            Spacer()
-            
-            ToolBarButtonView(buttonLabel: "square.and.arrow.down.on.square") {
-                articleVM.saveArticle(title: articleTitle, url: url, read: false, dateSaved: Date())
-                isArticleSaved = true
-            }
-            
-            Spacer()
-            
-            ToolBarButtonView(buttonLabel: "trash.square") {
-                
-                isArticleSaved = false
-            }
-        }
-    }
 }
 
 

@@ -54,5 +54,4 @@ class ArticleModel: Codable {
         try container.encode(read, forKey: .read)
         try container.encode(dateSaved, forKey: .dateSaved)
     }
-        
 }

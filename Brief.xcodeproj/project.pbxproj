@@ -220,6 +220,7 @@
 				AB41AA492D3D799F00099765 /* WebView.swift */,
 				ABA37CD72D4071D00080096D /* ArticleListView.swift */,
 				AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */,
+				ABB21BC22D458FEA00A0FD86 /* GlobalViews */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -256,6 +257,13 @@
 				AB41AA652D3DAEA700099765 /* ArticleModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		ABB21BC22D458FEA00A0FD86 /* GlobalViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GlobalViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
