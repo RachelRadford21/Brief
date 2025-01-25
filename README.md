@@ -47,7 +47,7 @@ Thanks also to the Apple Developer documentation and community resources, which 
 ## Current Progress
 
 - [x] Basic app structure and Share Extension for saving articles.
-- [x] Initial UI for displaying saved articles and taking notes.
+- [] Initial UI for displaying saved articles and taking notes.
 - [ ] Implementing article summarization with **Natural Language**.
 - [ ] Exploring Siri integration for voice-driven summaries.
 
