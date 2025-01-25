@@ -12,7 +12,7 @@ import SwiftData
 class ArticleViewModel {
   let context: ModelContext
   var orders: [ArticleModel] = []
-  
+   
   init(
     context: ModelContext? = nil
   ) {
@@ -38,4 +38,5 @@ class ArticleViewModel {
       print("Could Not Save Article")
     }
   }
+ 
 }

@@ -14,6 +14,7 @@ struct BriefApp: App {
   var articleManager = SharedArticleManager()
   let container = try! ModelContainer(for: ArticleModel.self)
   let articleVM: ArticleViewModel = ArticleViewModel()
+    
   var body: some Scene {
     WindowGroup {
       ContentView(articleManager: articleManager, articleVM: articleVM)

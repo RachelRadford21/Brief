@@ -26,6 +26,7 @@
 		AB41AA682D3DB64E00099765 /* ToolBarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */; };
 		ABA37CD62D4063640080096D /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA37CD52D4063640080096D /* ArticleViewModel.swift */; };
 		ABA37CD82D4071D00080096D /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA37CD72D4071D00080096D /* ArticleListView.swift */; };
+		ABAD3E392D445FEE00180A86 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAD3E382D445FEE00180A86 /* ArticleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarButtonView.swift; sourceTree = "<group>"; };
 		ABA37CD52D4063640080096D /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 		ABA37CD72D4071D00080096D /* ArticleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListView.swift; sourceTree = "<group>"; };
+		ABAD3E382D445FEE00180A86 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -214,9 +216,10 @@
 			isa = PBXGroup;
 			children = (
 				AB41AA612D3DA87700099765 /* OpeningView.swift */,
-				AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */,
+				ABAD3E382D445FEE00180A86 /* ArticleView.swift */,
 				AB41AA492D3D799F00099765 /* WebView.swift */,
 				ABA37CD72D4071D00080096D /* ArticleListView.swift */,
+				AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				ABA37CD62D4063640080096D /* ArticleViewModel.swift in Sources */,
 				AB41AA662D3DAEA700099765 /* ArticleModel.swift in Sources */,
 				AB41AA622D3DA87700099765 /* OpeningView.swift in Sources */,
+				ABAD3E392D445FEE00180A86 /* ArticleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
