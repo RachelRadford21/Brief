@@ -14,8 +14,9 @@ struct ContentView: View {
     @State var articleTitle: String = ""
     var articleManager: SharedArticleManager
     var articleVM: ArticleViewModel
-    // Use later? If user posts multiple article then use diff view?
+    var article: ArticleModel?
     let descriptor = FetchDescriptor<ArticleModel>()
+    
     init(
         articleManager: SharedArticleManager,
         articleVM: ArticleViewModel
@@ -24,54 +25,71 @@ struct ContentView: View {
         self.articleVM = articleVM
     }
     
-    
     var body: some View {
-        ZStack {
-            Color.paperWhite.ignoresSafeArea()
-            // This view is doing a lot
-            NavigationStack {
-                if let url = articleManager.sharedURL {
-                    ArticleView(articleTitle: $articleTitle, url: url)
-                        .onAppear {
-                            articleManager.fetchArticleTitle(from: url) { title in
-                                articleTitle = title ?? "No Title"
-                            }
-                        }
-                        .onChange(of: url) {
-                            articleManager.fetchArticleTitle(from: url) { title in
-                                articleTitle = title ?? "No Title"
-                            }
-                            isArticleSaved = false
-                            print("\(String(describing: try? context.fetchCount(descriptor)))")
-                        }
-                        .customToolbar(url: articleManager.sharedURL, buttons: [
-                            ("book", { /* book action */ }),
-                            ("square.and.arrow.down.on.square", {
-                                articleVM.saveArticle(title: articleTitle, url: articleManager.sharedURL!, read: false, dateSaved: Date())
-                                isArticleSaved = true
-                            }),
-                            ("trash.square", {
-                                articleTitle = ""
-                                articleManager.sharedURL = nil
-                                articleManager.clearSharedURL()
-                            })
-                        ])
-                } else if articleManager.sharedURL == nil {
-                    ArticleListView()
-                } else {
-                    OpeningView()
-                }
-            }
-            
-            if isArticleSaved {
-                ArticleListView()
-            }
-        }
+        contentView
     }
 }
 
 extension ContentView {
+    var contentView: some View {
+        ZStack {
+            Color.paperWhite.ignoresSafeArea()
+            NavigationStack {
+                articleView()
+                
+                openingAndListViews()
+            }
+            .tint(.black)
+        }
+    }
     
+    @ViewBuilder
+    func articleView() -> some View {
+        if let url = articleManager.sharedURL {
+            ArticleView(articleTitle: $articleTitle, articleManager: articleManager, url: url)
+                .customToolbar(url: articleManager.sharedURL, buttons: [
+                    ("message", { shareArticle() }),
+                    ("arrow.up.document", {
+                        articleVM.saveArticle(
+                            title: articleTitle,
+                            url: articleManager.sharedURL!,
+                            read: false,
+                            dateSaved: Date()
+                        )
+                        isArticleSaved = true
+                    }),
+                    ("trash.square", {
+                        articleTitle = ""
+                        articleManager.sharedURL = nil
+                        articleManager.clearSharedURL()
+                    })
+                ])
+        }
+    }
+    
+    @ViewBuilder
+    func openingAndListViews() -> some View {
+        let results = try? context.fetch(descriptor)
+        if results?.isEmpty == true && articleManager.sharedURL == nil {
+            OpeningView()
+        }
+        if isArticleSaved || (results?.isEmpty == false) && articleManager.sharedURL == nil {
+            ArticleListView()
+                .onAppear {
+                    articleManager.sharedURL = nil
+                }
+        }
+    }
+    
+    private func shareArticle() {
+        let text = "Check out this article"
+        let url = URL(string: articleManager.sharedURL?.absoluteString ?? article?.url?.description ?? "")
+            
+            let activityController = UIActivityViewController(activityItems: [text, url as Any], applicationActivities: nil)
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let rootVC = windowScene.windows.first?.rootViewController {
+                rootVC.present(activityController, animated: true)
+            }
+    }
 }
-
 

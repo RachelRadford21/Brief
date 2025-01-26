@@ -61,7 +61,6 @@ class SharedArticleManager {
         return title
     }
     
-    // Probably get rid of this
     func clearSharedURL() {
         let sharedDefaults = UserDefaults(suiteName: "group.com.brief.app")
         if sharedDefaults?.string(forKey: "sharedURL") != nil {

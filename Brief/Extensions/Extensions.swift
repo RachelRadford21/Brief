@@ -15,20 +15,21 @@ extension Color {
 extension View {
     func customToolbar(
         url: URL?,
+        placement: ToolbarItemPlacement = .bottomBar,
         buttons: [(systemName: String, action: () -> Void)]
     ) -> some View {
         self.toolbar {
-            ToolbarItemGroup(placement: .bottomBar) {
+            ToolbarItemGroup(placement: placement) {
                 ForEach(buttons.indices, id: \.self) { index in
                     ToolBarButtonView(buttonLabel: buttons[index].systemName) {
                         buttons[index].action()
                     }
-                    
                     if index < buttons.indices.count - 1 {
                         Spacer()
                     }
                 }
             }
+            
         }
     }
 }

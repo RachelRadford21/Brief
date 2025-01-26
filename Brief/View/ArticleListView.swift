@@ -13,6 +13,7 @@ struct ArticleListView: View {
     @Environment(\.modelContext) var context
     @Query var articles: [ArticleModel]
     var articleManager: SharedArticleManager
+    
     init(
         articleManager: SharedArticleManager = SharedArticleManager()
     ) {
@@ -21,22 +22,43 @@ struct ArticleListView: View {
     
     var body: some View {
         NavigationStack {
-            Text("ARTICLES")
-                .font(.custom("MerriweatherSans-VariableFont_wght", size: 28))
             List(articles, id: \.id) { article in
                 NavigationLink(value: article) {
                     Text(article.title)
                         .font(.custom("BarlowCondensed-Regular", size: 20))
                 }
             }
+            .navigationTitle(navTitleView)
             .navigationDestination(for: ArticleModel.self) { article in
-                ArticleView(url: articleManager.sharedURL ?? article.url!)
+                ArticleView(articleManager: articleManager, url: articleManager.sharedURL ?? article.url!)
+                    .customToolbar(url: articleManager.sharedURL, buttons: [
+                        ("book", { /* book action */ }),
+                        ("square.and.arrow.down.on.square", {
+//                            articleVM.saveArticle(
+//                                title: articleTitle,
+//                                url: articleManager.sharedURL!,
+//                                read: false,
+//                                dateSaved: Date()
+//                            )
+//                            isArticleSaved = true
+                        }),
+                        ("trash.square", {
+//                            articleTitle = ""
+//                            articleManager.sharedURL = nil
+//                            articleManager.clearSharedURL()
+                        })
+                    ])
             }
         }
+        .tint(Color.black)
     }
 }
 
 extension ArticleListView {
- 
+    var navTitleView: Text {
+        Text("ARTICLES")
+            .font(.custom("Merriweather-SemiBold", size: 20))
+            // This is bad but I want to customize, may change later
+    }
 }
 
