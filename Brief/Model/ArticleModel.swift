@@ -15,19 +15,22 @@ class ArticleModel: Codable {
     var url: URL?
     var read: Bool
     var dateSaved: Date
-    
+    var isBookmarked: Bool
+  
     init(
         id: UUID,
         title: String,
         url: URL? = nil,
         read: Bool = false,
-        dateSaved: Date
+        dateSaved: Date,
+        isBookmarked: Bool = false
     ) {
         self.id = id
         self.title = title
         self.url = url
         self.read = read
         self.dateSaved = dateSaved
+        self.isBookmarked = isBookmarked
     }
     
     enum CodingKeys: String, CodingKey {
@@ -36,6 +39,7 @@ class ArticleModel: Codable {
         case url
         case read
         case dateSaved
+        case isBookmarked
     }
     
     required public init(from decoder: Decoder) throws {
@@ -44,6 +48,7 @@ class ArticleModel: Codable {
         self.url = try decoder.container(keyedBy: CodingKeys.self).decode(URL.self, forKey: .url)
         self.read = try decoder.container(keyedBy: CodingKeys.self).decode(Bool.self, forKey: .read)
         self.dateSaved = try decoder.container(keyedBy: CodingKeys.self).decode(Date.self, forKey: .dateSaved)
+        self.isBookmarked = try decoder.container(keyedBy: CodingKeys.self).decode(Bool.self, forKey: .isBookmarked)
     }
     
     func encode(to encoder: any Encoder) throws {
@@ -53,5 +58,6 @@ class ArticleModel: Codable {
         try container.encode(url, forKey: .url)
         try container.encode(read, forKey: .read)
         try container.encode(dateSaved, forKey: .dateSaved)
+        try container.encode(isBookmarked, forKey: .isBookmarked)
     }
 }

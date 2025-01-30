@@ -7,58 +7,81 @@
 
 import SwiftUI
 import SwiftData
-import SwiftUI
 
 struct ArticleListView: View {
-    @Environment(\.modelContext) var context
-    @Query var articles: [ArticleModel]
-    var articleManager: SharedArticleManager
-    
-    init(
-        articleManager: SharedArticleManager = SharedArticleManager()
-    ) {
-        self.articleManager = articleManager
-    }
-    
-    var body: some View {
-        NavigationStack {
-            List(articles, id: \.id) { article in
-                NavigationLink(value: article) {
-                    Text(article.title)
-                        .font(.custom("BarlowCondensed-Regular", size: 20))
-                }
-            }
-            .navigationTitle(navTitleView)
-            .navigationDestination(for: ArticleModel.self) { article in
-                ArticleView(articleManager: articleManager, url: articleManager.sharedURL ?? article.url!)
-                    .customToolbar(url: articleManager.sharedURL, buttons: [
-                        ("book", { /* book action */ }),
-                        ("square.and.arrow.down.on.square", {
-//                            articleVM.saveArticle(
-//                                title: articleTitle,
-//                                url: articleManager.sharedURL!,
-//                                read: false,
-//                                dateSaved: Date()
-//                            )
-//                            isArticleSaved = true
-                        }),
-                        ("trash.square", {
-//                            articleTitle = ""
-//                            articleManager.sharedURL = nil
-//                            articleManager.clearSharedURL()
-                        })
-                    ])
-            }
+  @Environment(\.modelContext) var context
+  @State private var isBookmarked: Bool = false
+  @Query var articles: [ArticleModel]
+  var articleManager: SharedArticleManager
+  var articleVM: ArticleViewModel
+  
+  init(
+    articleManager: SharedArticleManager = SharedArticleManager(),
+    articleVM: ArticleViewModel = ArticleViewModel()
+  ) {
+    self.articleManager = articleManager
+    self.articleVM = articleVM
+  }
+  
+  var body: some View {
+    NavigationStack {
+      
+      List(articles, id: \.id) { article in
+        NavigationLink(value: article) {
+          Text(article.title)
+            .font(.custom("BarlowCondensed-Regular", size: 20))
         }
-        .tint(Color.black)
+        .swipeActions {
+          swipeActionButtonsView(name: "trash") {
+            articleVM.deleteArticle(id: article.id, title: article.title, url: article.url!, read: article.read, dateSaved: article.dateSaved)
+          }
+          
+          swipeActionButtonsView(name: article.isBookmarked ? "bookmark" : "bookmark.slash") {
+            article.isBookmarked.toggle()
+            print("******************")
+            print("\(article.title)")
+            print("bookmark: \(article.isBookmarked)")
+            print("******************")
+          }
+          
+          swipeActionButtonsView(name: article.read ? "book.closed" : "book") {
+            article.read.toggle()
+            print("******************")
+            print("\(article.title)")
+            print("\(article.read)")
+            print("******************")
+          }
+        }
+      }
+      .navigationTitle(navTitleView)
+      .navigationDestination(for: ArticleModel.self) { article in
+        ArticleView(articleManager: articleManager, url: article.url ?? articleManager.sharedURL!)
+          .customToolbar(url: articleManager.sharedURL, buttons: [
+            (article.read ? "book.closed" : "book", { /* book action */ }),
+            (article.isBookmarked ? "bookmark.fill" : "bookmark", { /* book action */ }),
+            ("briefcase.fill", { }),
+            ("trash.square", { })
+          ])
+      }
     }
+    .tint(Color.black)
+  }
 }
 
 extension ArticleListView {
-    var navTitleView: Text {
-        Text("ARTICLES")
-            .font(.custom("Merriweather-SemiBold", size: 20))
-            // This is bad but I want to customize, may change later
+  var navTitleView: Text {
+    Text("ARTICLES")
+      .font(.custom("Merriweather-SemiBold", size: 20))
+    // This is bad but I want to customize, may change later
+  }
+  
+  func swipeActionButtonsView(name: String, action:  @escaping () -> Void) -> some View {
+    Button {
+      action()
+    } label: {
+      Image(systemName: name)
+        .foregroundStyle(isBookmarked ? Color.blue : Color.white)
     }
+    
+  }
 }
-
