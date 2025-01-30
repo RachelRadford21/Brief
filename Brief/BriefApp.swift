@@ -13,11 +13,10 @@ struct BriefApp: App {
   @Environment(\.scenePhase) private var scenePhase
   var articleManager = SharedArticleManager()
   let container = try! ModelContainer(for: ArticleModel.self)
-  let articleVM: ArticleViewModel = ArticleViewModel()
     
   var body: some Scene {
     WindowGroup {
-      ContentView(articleManager: articleManager, articleVM: articleVM)
+        ContentView(articleManager: articleManager)
         .onChange(of: scenePhase) { _, newPhase in
           if newPhase == .active {
             articleManager.loadSharedURL()

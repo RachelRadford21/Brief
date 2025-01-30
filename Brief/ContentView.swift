@@ -10,16 +10,14 @@ import SwiftData
 struct ContentView: View {
   @Environment(\.modelContext) var context
   @State var articleTitle: String = ""
+  @State var articleVM = ArticleViewModel.shared
   var articleManager: SharedArticleManager
-  var articleVM: ArticleViewModel
   let descriptor = FetchDescriptor<ArticleModel>()
   
   init(
-    articleManager: SharedArticleManager,
-    articleVM: ArticleViewModel
+    articleManager: SharedArticleManager
   ) {
     self.articleManager = articleManager
-    self.articleVM = articleVM
   }
   
   var body: some View {
@@ -41,7 +39,6 @@ extension ContentView {
   var articleView: some View {
     if let url = articleManager.sharedURL {
       ArticleView(
-        articleTitle: $articleTitle,
         articleManager: articleManager,
         url: url
       )
@@ -49,7 +46,7 @@ extension ContentView {
         ("message", { articleManager.shareArticle() }),
         ("arrow.down.document", {
           articleVM.saveArticle(
-            title: articleTitle,
+            title: articleVM.articleTitle,
             url: articleManager.sharedURL!,
             dateSaved: Date()
           )

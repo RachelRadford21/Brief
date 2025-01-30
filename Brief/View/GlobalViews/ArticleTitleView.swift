@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ArticleTitleView: View {
+    @State var articleVM = ArticleViewModel.shared
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text(articleVM.articleTitle)
+            .font(.custom("MerriweatherSans-VariableFont_wght", size: 18))
+            .padding()
     }
 }
 
-#Preview {
-    ArticleTitleView()
-}
+

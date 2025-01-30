@@ -17,54 +17,45 @@ struct ArticleListView: View {
   
   init(
     articleManager: SharedArticleManager = SharedArticleManager(),
-    articleVM: ArticleViewModel = ArticleViewModel()
+    articleVM: ArticleViewModel = ArticleViewModel.shared
   ) {
     self.articleManager = articleManager
     self.articleVM = articleVM
   }
   
-  var body: some View {
-    NavigationStack {
-      
-      List(articles, id: \.id) { article in
-        NavigationLink(value: article) {
-          Text(article.title)
-            .font(.custom("BarlowCondensed-Regular", size: 20))
+    var body: some View {
+        NavigationStack {
+            List(articles, id: \.id) { article in
+                NavigationLink(value: article) {
+                    Text(article.title)
+                        .font(.custom("BarlowCondensed-Regular", size: 20))
+                }
+                .swipeActions {
+                    swipeActionButtonsView(name: "trash") {
+                        articleVM.deleteArticle(id: article.id, title: article.title, url: article.url!, read: article.read, dateSaved: article.dateSaved)
+                    }
+                    
+                    swipeActionButtonsView(name: article.isBookmarked ? "bookmark" : "bookmark.slash") {
+                        article.isBookmarked.toggle()
+                    }
+                    
+                    swipeActionButtonsView(name: article.read ? "book.closed" : "book") {
+                        article.read.toggle()
+                    }
+                }
+            }
+            .navigationTitle(navTitleView)
+            .navigationDestination(for: ArticleModel.self) { article in
+                ArticleView(articleManager: articleManager, url: article.url ?? articleManager.sharedURL!)
+                    .customToolbar(url: articleManager.sharedURL, buttons: [
+                        ("note.text.badge.plus", { }),
+                        ("message", { articleManager.shareArticle() }),
+                        ("briefcase.fill", { }),
+                        ("trash.square", { })
+                    ])
+            }
         }
-        .swipeActions {
-          swipeActionButtonsView(name: "trash") {
-            articleVM.deleteArticle(id: article.id, title: article.title, url: article.url!, read: article.read, dateSaved: article.dateSaved)
-          }
-          
-          swipeActionButtonsView(name: article.isBookmarked ? "bookmark" : "bookmark.slash") {
-            article.isBookmarked.toggle()
-            print("******************")
-            print("\(article.title)")
-            print("bookmark: \(article.isBookmarked)")
-            print("******************")
-          }
-          
-          swipeActionButtonsView(name: article.read ? "book.closed" : "book") {
-            article.read.toggle()
-            print("******************")
-            print("\(article.title)")
-            print("\(article.read)")
-            print("******************")
-          }
-        }
-      }
-      .navigationTitle(navTitleView)
-      .navigationDestination(for: ArticleModel.self) { article in
-        ArticleView(articleManager: articleManager, url: article.url ?? articleManager.sharedURL!)
-          .customToolbar(url: articleManager.sharedURL, buttons: [
-            (article.read ? "book.closed" : "book", { /* book action */ }),
-            (article.isBookmarked ? "bookmark.fill" : "bookmark", { /* book action */ }),
-            ("briefcase.fill", { }),
-            ("trash.square", { })
-          ])
-      }
-    }
-    .tint(Color.black)
+        .tint(Color.black)
   }
 }
 

@@ -10,12 +10,12 @@ import SwiftData
 
 @Observable
 class ArticleViewModel {
+  static let shared = ArticleViewModel()
   let context: ModelContext
   var article: [ArticleModel] = []
-  var isArticleSaved: Bool = false
   var isBookmarked: Bool = false
-  var hasRead: Bool = false
-  
+  var articleTitle: String = ""
+    
   init(
     context: ModelContext? = nil
   ) {
@@ -29,8 +29,7 @@ class ArticleViewModel {
   
   func saveArticle(title: String, url: URL, dateSaved: Date) {
     
-    let newArticle = ArticleModel(id: UUID(), title: title, url: url, read: hasRead, dateSaved: dateSaved)
-    
+    let newArticle = ArticleModel(id: UUID(), title: title, url: url, dateSaved: dateSaved)
     context.insert(newArticle)
     
     do {
