@@ -84,4 +84,24 @@ class SharedArticleManager {
         }
     }
     
+  func shareArticle() {
+      let text = "Check out this article"
+
+      // Ensure the URL is valid
+      guard let urlString = sharedURL?.absoluteString,
+            let url = URL(string: urlString) else {
+          print("Invalid or missing URL")
+          return
+      }
+
+      // Create the share sheet
+      let activityController = UIActivityViewController(activityItems: [text, url], applicationActivities: nil)
+
+      // Present the share sheet
+      if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+         let rootVC = windowScene.windows.first?.rootViewController {
+          rootVC.present(activityController, animated: true)
+      }
+  }
+  
 }

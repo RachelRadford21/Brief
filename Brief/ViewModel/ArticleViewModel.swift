@@ -11,8 +11,11 @@ import SwiftData
 @Observable
 class ArticleViewModel {
   let context: ModelContext
-  var orders: [ArticleModel] = []
-   
+  var article: [ArticleModel] = []
+  var isArticleSaved: Bool = false
+  var isBookmarked: Bool = false
+  var hasRead: Bool = false
+  
   init(
     context: ModelContext? = nil
   ) {
@@ -24,9 +27,9 @@ class ArticleViewModel {
     }
   }
   
-  func saveArticle(title: String, url: URL, read: Bool, dateSaved: Date) {
+  func saveArticle(title: String, url: URL, dateSaved: Date) {
     
-    let newArticle = ArticleModel(id: UUID(), title: title, url: url, read: read, dateSaved: dateSaved)
+    let newArticle = ArticleModel(id: UUID(), title: title, url: url, read: hasRead, dateSaved: dateSaved)
     
     context.insert(newArticle)
     
@@ -38,20 +41,36 @@ class ArticleViewModel {
       print("Could Not Save Article")
     }
   }
-    
-    func deleteArticle(title: String, url: URL, read: Bool, dateSaved: Date) {
-      
-      let newArticle = ArticleModel(id: UUID(), title: title, url: url, read: read, dateSaved: dateSaved)
-      
-        context.delete(newArticle)
+  
+  func deleteArticle(id: UUID, title: String, url: URL, read: Bool, dateSaved: Date) {
+    let fetchRequest = FetchDescriptor<ArticleModel>()
       
       do {
-        if context.hasChanges {
-          try context.save()
-        }
+          let articles = try context.fetch(fetchRequest)
+
+        if let articleToDelete = articles.first(where: { $0.title == title }) {
+              context.delete(articleToDelete)
+
+              if context.hasChanges {
+                  try context.save()
+                  print("Article deleted successfully.")
+              }
+          
+          } else {
+              print("No matching article found.")
+          }
       } catch {
-        print("Could Not Save Article")
+          print("Error fetching or deleting article: \(error.localizedDescription)")
       }
-    }
- 
+  }
+    
+  func fetchData() -> [ArticleModel]? {
+      do {
+          let descriptor = FetchDescriptor<ArticleModel>()
+          return try context.fetch(descriptor)
+      } catch {
+          print("Error fetching articles: \(error.localizedDescription)")
+          return nil
+      }
+  }
 }
