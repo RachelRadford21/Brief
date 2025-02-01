@@ -14,11 +14,10 @@ struct OpeningView: View {
     private let maxFlips = 3
     
     var body: some View {
-        
         VStack {
             Text("BRIEF")
                 .font(.custom("MerriweatherSans-VariableFont_wght", size: 28))
-            
+
             subHeaderTextView
             
             Spacer()

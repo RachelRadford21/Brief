@@ -25,6 +25,9 @@
 		AB41AA662D3DAEA700099765 /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA652D3DAEA700099765 /* ArticleModel.swift */; };
 		AB41AA682D3DB64E00099765 /* ToolBarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */; };
 		AB45DDEE2D4C2E38002298DE /* ArticleTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB45DDED2D4C2E38002298DE /* ArticleTitleView.swift */; };
+		AB9552272D4EA44000BE843F /* distilbert_classification.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = AB9552262D4EA44000BE843F /* distilbert_classification.mlpackage */; };
+		AB9552282D4EA44000BE843F /* distilbert_classification.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = AB9552262D4EA44000BE843F /* distilbert_classification.mlpackage */; };
+		AB95522A2D4EA4AD00BE843F /* SummarizerVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9552292D4EA4AD00BE843F /* SummarizerVM.swift */; };
 		ABA37CD62D4063640080096D /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA37CD52D4063640080096D /* ArticleViewModel.swift */; };
 		ABA37CD82D4071D00080096D /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA37CD72D4071D00080096D /* ArticleListView.swift */; };
 		ABAD3E392D445FEE00180A86 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAD3E382D445FEE00180A86 /* ArticleView.swift */; };
@@ -89,6 +92,8 @@
 		AB41AA652D3DAEA700099765 /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarButtonView.swift; sourceTree = "<group>"; };
 		AB45DDED2D4C2E38002298DE /* ArticleTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTitleView.swift; sourceTree = "<group>"; };
+		AB9552262D4EA44000BE843F /* distilbert_classification.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = distilbert_classification.mlpackage; sourceTree = "<group>"; };
+		AB9552292D4EA4AD00BE843F /* SummarizerVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizerVM.swift; sourceTree = "<group>"; };
 		ABA37CD52D4063640080096D /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 		ABA37CD72D4071D00080096D /* ArticleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListView.swift; sourceTree = "<group>"; };
 		ABAD3E382D445FEE00180A86 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
@@ -230,6 +235,7 @@
 		AB41AA4E2D3D9D2C00099765 /* HelperFiles */ = {
 			isa = PBXGroup;
 			children = (
+				AB8115032D4EA541003ED46E /* Services */,
 				AB41AA572D3D9EDB00099765 /* Fonts */,
 			);
 			path = HelperFiles;
@@ -256,9 +262,18 @@
 		AB41AA632D3DAE5A00099765 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AB9552262D4EA44000BE843F /* distilbert_classification.mlpackage */,
 				AB41AA652D3DAEA700099765 /* ArticleModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		AB8115032D4EA541003ED46E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AB9552292D4EA4AD00BE843F /* SummarizerVM.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		ABB21BC22D458FEA00A0FD86 /* GlobalViews */ = {
@@ -454,7 +469,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB41AA592D3D9F0500099765 /* Extensions.swift in Sources */,
+				AB95522A2D4EA4AD00BE843F /* SummarizerVM.swift in Sources */,
 				ABA37CD82D4071D00080096D /* ArticleListView.swift in Sources */,
+				AB9552282D4EA44000BE843F /* distilbert_classification.mlpackage in Sources */,
 				AB41AA4A2D3D799F00099765 /* WebView.swift in Sources */,
 				AB41AA682D3DB64E00099765 /* ToolBarButtonView.swift in Sources */,
 				AB41AA482D3D792100099765 /* SharedArticleManager.swift in Sources */,
@@ -486,6 +503,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB9552272D4EA44000BE843F /* distilbert_classification.mlpackage in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
