@@ -10,11 +10,9 @@ import SwiftData
 
 struct ArticleListView: View {
   @Environment(\.modelContext) var context
-  @State private var isBookmarked: Bool = false
   @Query var articles: [ArticleModel]
   var articleManager: SharedArticleManager
   var articleVM: ArticleViewModel
-  
   init(
     articleManager: SharedArticleManager = SharedArticleManager(),
     articleVM: ArticleViewModel = ArticleViewModel.shared
@@ -55,7 +53,7 @@ struct ArticleListView: View {
                     ])
             }
         }
-        .tint(Color.black)
+        .tint(Color.accent.opacity(0.7))
   }
 }
 
@@ -71,8 +69,6 @@ extension ArticleListView {
       action()
     } label: {
       Image(systemName: name)
-        .foregroundStyle(isBookmarked ? Color.blue : Color.white)
     }
-    
   }
 }
