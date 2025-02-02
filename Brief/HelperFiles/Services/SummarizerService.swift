@@ -24,7 +24,7 @@ class SummarizerService {
     }
    
     func tokenizeText(_ text: String) -> [String] {
-        let tokenizer = NLTokenizer(unit: .document)
+        let tokenizer = NLTokenizer(unit: .word)
         tokenizer.string = text
 
         var tokens: [String] = []

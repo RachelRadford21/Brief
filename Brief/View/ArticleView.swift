@@ -10,6 +10,7 @@ import SwiftUI
 struct ArticleView: View {
     @State var articleVM = ArticleViewModel.shared
     var articleManager: SharedArticleManager
+    var summarizer = SummarizerService.shared
     var url: URL
     
     init(
@@ -29,23 +30,11 @@ struct ArticleView: View {
         }
         .onAppear {
             loadArticle(url: url)
-
-            articleManager.fetchAndExtractText(from: url.absoluteString) { html in
-                if let html = html {
-                    let articleText = articleManager.extractMainArticle(from: html)
-                    print("Extracted Article:", articleText)
-                }
-            }
+            extractAndTokenizeText(url: url)
         }
         .onChange(of: url) {
             loadArticle(url: url)
-
-            articleManager.fetchAndExtractText(from: url.absoluteString) { html in
-                if let html = html {
-                    let articleText = articleManager.extractMainArticle(from: html)
-                    print("Extracted Article:", articleText)
-                }
-            }
+            extractAndTokenizeText(url: url)
         }
     }
 }
@@ -60,6 +49,20 @@ extension ArticleView {
                 }
             } catch {
                 print("Error fetching title: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func extractAndTokenizeText(url: URL) {
+        articleManager.fetchAndExtractText(from: url.absoluteString) { html in
+            if let html = html {
+                let articleText = articleManager.extractMainArticle(from: html)
+                print("Extracted Article:", articleText)
+                Task {
+                    // decide if var for tokenized text in summarizer or a model value?
+                    summarizer.tokenizeText(articleText)
+                    print("Tokenized Article:", articleText)
+                }
             }
         }
     }
