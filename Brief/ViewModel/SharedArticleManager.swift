@@ -87,12 +87,25 @@ extension SharedArticleManager {
             throw URLError(.cannotDecodeContentData)
         }
         
-        if let title = parseTitle(from: htmlContent) {
+        if var title = parseTitle(from: htmlContent) {
+            title = title
+                .replacingOccurrences(of: "&nbsp;", with: " ")
+                .replacingOccurrences(of: "&amp;", with: "&")
+                .replacingOccurrences(of: "&lt;", with: "<")
+                .replacingOccurrences(of: "&gt;", with: ">")
+                .replacingOccurrences(of: "&quot;", with: "\"")
+                .replacingOccurrences(of: "&#39;", with: "'")
+                .replacingOccurrences(of: "&apos;", with: "'")
+        
+            title = title.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+            title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+            
             return title
         } else {
             throw URLError(.cannotParseResponse)
         }
     }
+
     
     func extractMainArticle(from html: String) -> String {
         let cleanedHTML = html
@@ -122,10 +135,6 @@ extension SharedArticleManager {
             completion(nil)
             return
         }
-//        guard let url = URL(string: url) else {
-//            completion(nil)
-//            return
-//        }
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil,
