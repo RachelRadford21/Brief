@@ -1,5 +1,5 @@
 //
-//  SummarizerVM.swift
+//  SummarizerService.swift
 //  Brief
 //
 //  Created by Rachel Radford on 2/1/25.
