@@ -9,16 +9,15 @@ import Social
 
 @Observable
 class SharedArticleManager {
+    private let sharedDefaults = UserDefaults(suiteName: "group.com.brief.app")
     var sharedURL: URL?
-    
     init(
         sharedURL: URL? = nil
     ) {
         self.sharedURL = sharedURL
     }
-    
+   
     func loadSharedURL() {
-        let sharedDefaults = UserDefaults(suiteName: "group.com.brief.app")
         if let urlString = sharedDefaults?.string(forKey: "sharedURL"),
            let url = URL(string: urlString) {
             print("Retrieved URL: \(url.absoluteString)")
@@ -27,7 +26,6 @@ class SharedArticleManager {
     }
     
     func clearSharedURL() {
-        let sharedDefaults = UserDefaults(suiteName: "group.com.brief.app")
         if sharedDefaults?.string(forKey: "sharedURL") != nil {
             sharedDefaults?.removeObject(forKey: "sharedURL")
             print("Shared URL cleared.")
@@ -61,9 +59,11 @@ class SharedArticleManager {
         
         let activityController = UIActivityViewController(activityItems: [text, url], applicationActivities: nil)
         
-        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-           let rootVC = windowScene.windows.first?.rootViewController {
-            rootVC.present(activityController, animated: true)
+        DispatchQueue.main.async {
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let rootVC = windowScene.windows.first?.rootViewController {
+                rootVC.present(activityController, animated: true)
+            }
         }
     }
 }
@@ -111,6 +111,13 @@ extension SharedArticleManager {
         let cleanedHTML = html
             .replacingOccurrences(of: "<script[^>]*>[\\s\\S]*?</script>", with: "", options: .regularExpression)
             .replacingOccurrences(of: "<style[^>]*>[\\s\\S]*?</style>", with: "", options: .regularExpression)
+            .replacingOccurrences(of: "&nbsp;", with: " ")
+            .replacingOccurrences(of: "&amp;", with: "&")
+            .replacingOccurrences(of: "&lt;", with: "<")
+            .replacingOccurrences(of: "&gt;", with: ">")
+            .replacingOccurrences(of: "&quot;", with: "\"")
+            .replacingOccurrences(of: "&#39;", with: "'")
+            .replacingOccurrences(of: "&apos;", with: "'")
         
         let regex = try! NSRegularExpression(pattern: "<p.*?>(.*?)</p>", options: .dotMatchesLineSeparators)
         let matches = regex.matches(in: cleanedHTML, range: NSRange(cleanedHTML.startIndex..., in: cleanedHTML))
@@ -125,6 +132,8 @@ extension SharedArticleManager {
         
         let articleText = filteredParagraphs.joined(separator: " ")
             .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
+            .replacingOccurrences(of: "\\s{2,}", with: " ", options: .regularExpression)
+            .replacingOccurrences(of: "\n{2,}", with: "\n", options: .regularExpression)
             .trimmingCharacters(in: .whitespacesAndNewlines)
         
         return articleText
