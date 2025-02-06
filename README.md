@@ -55,6 +55,7 @@ Thanks also to the Apple Developer documentation and community resources, which 
 --- 
 
 ### ⚡ How to Use This Notebook
+     There is a good chance your project will not run properly without this file
 - Running this notebook **generates a Core ML file using pretrained data**: `distilbert_classification.mlpackage`.
 - **Other pretrained models may be better suited to your needs.**  
   If you choose to use a different model, simply rename the model name where applicable.
