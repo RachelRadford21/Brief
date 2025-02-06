@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		AB1DCD9D2D504620005E1A0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AB1DCD9C2D504620005E1A0E /* README.md */; };
+		AB26C5912D5442BA0031AD43 /* distilbert_classification.mlpackage in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9552262D4EA44000BE843F /* distilbert_classification.mlpackage */; };
+		AB26C5972D544F6A0031AD43 /* distilbert_vocab.json in Resources */ = {isa = PBXBuildFile; fileRef = AB26C5962D544F6A0031AD43 /* distilbert_vocab.json */; };
+		AB26C5992D544FA10031AD43 /* distilbertVocabNotebook.ipynb in Resources */ = {isa = PBXBuildFile; fileRef = AB26C5982D544FA10031AD43 /* distilbertVocabNotebook.ipynb */; };
+		AB26C59C2D5451000031AD43 /* distilbert_vocab.json in Resources */ = {isa = PBXBuildFile; fileRef = AB26C5962D544F6A0031AD43 /* distilbert_vocab.json */; };
 		AB401C6C2D4FE4D6006885FF /* BriefColabNotebook.ipynb in Resources */ = {isa = PBXBuildFile; fileRef = AB401C6B2D4FE4D6006885FF /* BriefColabNotebook.ipynb */; };
 		AB41AA152D3D765400099765 /* BriefShareExt.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB41AA0B2D3D765300099765 /* BriefShareExt.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB41AA322D3D780900099765 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA2B2D3D780900099765 /* Preview Assets.xcassets */; };
@@ -75,6 +79,8 @@
 
 /* Begin PBXFileReference section */
 		AB1DCD9C2D504620005E1A0E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AB26C5962D544F6A0031AD43 /* distilbert_vocab.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = distilbert_vocab.json; sourceTree = "<group>"; };
+		AB26C5982D544FA10031AD43 /* distilbertVocabNotebook.ipynb */ = {isa = PBXFileReference; lastKnownFileType = text; path = distilbertVocabNotebook.ipynb; sourceTree = "<group>"; };
 		AB401C6B2D4FE4D6006885FF /* BriefColabNotebook.ipynb */ = {isa = PBXFileReference; lastKnownFileType = text; path = BriefColabNotebook.ipynb; sourceTree = "<group>"; };
 		AB41A9DA2D3D762900099765 /* Brief.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Brief.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB41A9EA2D3D762A00099765 /* BriefTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BriefTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,12 +166,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB26C5912D5442BA0031AD43 /* distilbert_classification.mlpackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB26C5902D5442B90031AD43 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AB41A9D12D3D762800099765 = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +187,7 @@
 				AB41A9ED2D3D762A00099765 /* BriefTests */,
 				AB41A9F72D3D762A00099765 /* BriefUITests */,
 				AB41AA0C2D3D765300099765 /* BriefShareExt */,
+				AB26C5902D5442B90031AD43 /* Frameworks */,
 				AB41A9DB2D3D762900099765 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -276,6 +291,8 @@
 		AB8115032D4EA541003ED46E /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				AB26C5962D544F6A0031AD43 /* distilbert_vocab.json */,
+				AB26C5982D544FA10031AD43 /* distilbertVocabNotebook.ipynb */,
 				AB401C6B2D4FE4D6006885FF /* BriefColabNotebook.ipynb */,
 				AB9552292D4EA4AD00BE843F /* SummarizerService.swift */,
 			);
@@ -436,10 +453,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB401C6C2D4FE4D6006885FF /* BriefColabNotebook.ipynb in Resources */,
+				AB26C5992D544FA10031AD43 /* distilbertVocabNotebook.ipynb in Resources */,
 				AB41AA512D3D9D4D00099765 /* BarlowCondensed-Regular.ttf in Resources */,
 				AB41AA532D3D9D5F00099765 /* MerriweatherSans-VariableFont_wght.ttf in Resources */,
 				AB1DCD9D2D504620005E1A0E /* README.md in Resources */,
 				AB41AA322D3D780900099765 /* Preview Assets.xcassets in Resources */,
+				AB26C5972D544F6A0031AD43 /* distilbert_vocab.json in Resources */,
 				AB41AA332D3D780900099765 /* Assets.xcassets in Resources */,
 				AB41AA5C2D3D9FC700099765 /* BarlowCondensed-SemiBold.ttf in Resources */,
 			);
@@ -463,6 +482,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB26C59C2D5451000031AD43 /* distilbert_vocab.json in Resources */,
 				AB41AA502D3D9D4D00099765 /* BarlowCondensed-Regular.ttf in Resources */,
 				AB41AA5B2D3D9FC700099765 /* BarlowCondensed-SemiBold.ttf in Resources */,
 				AB41AA542D3D9D5F00099765 /* MerriweatherSans-VariableFont_wght.ttf in Resources */,
