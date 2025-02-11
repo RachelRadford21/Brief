@@ -92,7 +92,6 @@
 		AB41AA652D3DAEA700099765 /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarButtonView.swift; sourceTree = "<group>"; };
 		AB45DDED2D4C2E38002298DE /* ArticleTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTitleView.swift; sourceTree = "<group>"; };
-		AB7383062D5AAEB3006D9BA0 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 		AB9552292D4EA4AD00BE843F /* SummarizerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizerService.swift; sourceTree = "<group>"; };
 		ABA37CD52D4063640080096D /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 		ABA37CD72D4071D00080096D /* ArticleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListView.swift; sourceTree = "<group>"; };
@@ -113,6 +112,11 @@
 		AB41AA0C2D3D765300099765 /* BriefShareExt */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = BriefShareExt;
+			sourceTree = "<group>";
+		};
+		AB9545B92D5AE0ED0002C19C /* BriefExt */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = BriefExt;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -163,6 +167,7 @@
 				AB41A9ED2D3D762A00099765 /* BriefTests */,
 				AB41A9F72D3D762A00099765 /* BriefUITests */,
 				AB41AA0C2D3D765300099765 /* BriefShareExt */,
+				AB9545B92D5AE0ED0002C19C /* BriefExt */,
 				AB26C5902D5442B90031AD43 /* Frameworks */,
 				AB41A9DB2D3D762900099765 /* Products */,
 			);
@@ -190,7 +195,6 @@
 		AB41AA312D3D780900099765 /* Brief */ = {
 			isa = PBXGroup;
 			children = (
-				AB7383062D5AAEB3006D9BA0 /* Notes.swift */,
 				AB41AA552D3D9D7300099765 /* Info.plist */,
 				AB1DCD9C2D504620005E1A0E /* README.md */,
 				AB41AA2F2D3D780900099765 /* BriefApp.swift */,
@@ -653,7 +657,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Brief/Preview Content\"";
 				DEVELOPMENT_TEAM = 25MBFXXLA7;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Brief/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -685,7 +689,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Brief/Preview Content\"";
 				DEVELOPMENT_TEAM = 25MBFXXLA7;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Brief/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -785,7 +789,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 25MBFXXLA7;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = BriefShareExt/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BriefShareExt;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -812,7 +816,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 25MBFXXLA7;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = BriefShareExt/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BriefShareExt;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
