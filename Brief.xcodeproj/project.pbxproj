@@ -8,11 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AB1DCD9D2D504620005E1A0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AB1DCD9C2D504620005E1A0E /* README.md */; };
-		AB26C5912D5442BA0031AD43 /* distilbert_classification.mlpackage in Frameworks */ = {isa = PBXBuildFile; fileRef = AB9552262D4EA44000BE843F /* distilbert_classification.mlpackage */; };
-		AB26C5972D544F6A0031AD43 /* distilbert_vocab.json in Resources */ = {isa = PBXBuildFile; fileRef = AB26C5962D544F6A0031AD43 /* distilbert_vocab.json */; };
-		AB26C5992D544FA10031AD43 /* distilbertVocabNotebook.ipynb in Resources */ = {isa = PBXBuildFile; fileRef = AB26C5982D544FA10031AD43 /* distilbertVocabNotebook.ipynb */; };
-		AB26C59C2D5451000031AD43 /* distilbert_vocab.json in Resources */ = {isa = PBXBuildFile; fileRef = AB26C5962D544F6A0031AD43 /* distilbert_vocab.json */; };
-		AB401C6C2D4FE4D6006885FF /* BriefColabNotebook.ipynb in Resources */ = {isa = PBXBuildFile; fileRef = AB401C6B2D4FE4D6006885FF /* BriefColabNotebook.ipynb */; };
 		AB41AA152D3D765400099765 /* BriefShareExt.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB41AA0B2D3D765300099765 /* BriefShareExt.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB41AA322D3D780900099765 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA2B2D3D780900099765 /* Preview Assets.xcassets */; };
 		AB41AA332D3D780900099765 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA2D2D3D780900099765 /* Assets.xcassets */; };
@@ -31,8 +26,6 @@
 		AB41AA662D3DAEA700099765 /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA652D3DAEA700099765 /* ArticleModel.swift */; };
 		AB41AA682D3DB64E00099765 /* ToolBarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */; };
 		AB45DDEE2D4C2E38002298DE /* ArticleTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB45DDED2D4C2E38002298DE /* ArticleTitleView.swift */; };
-		AB9552272D4EA44000BE843F /* distilbert_classification.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = AB9552262D4EA44000BE843F /* distilbert_classification.mlpackage */; };
-		AB9552282D4EA44000BE843F /* distilbert_classification.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = AB9552262D4EA44000BE843F /* distilbert_classification.mlpackage */; };
 		AB95522A2D4EA4AD00BE843F /* SummarizerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9552292D4EA4AD00BE843F /* SummarizerService.swift */; };
 		ABA37CD62D4063640080096D /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA37CD52D4063640080096D /* ArticleViewModel.swift */; };
 		ABA37CD82D4071D00080096D /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA37CD72D4071D00080096D /* ArticleListView.swift */; };
@@ -79,9 +72,6 @@
 
 /* Begin PBXFileReference section */
 		AB1DCD9C2D504620005E1A0E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		AB26C5962D544F6A0031AD43 /* distilbert_vocab.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = distilbert_vocab.json; sourceTree = "<group>"; };
-		AB26C5982D544FA10031AD43 /* distilbertVocabNotebook.ipynb */ = {isa = PBXFileReference; lastKnownFileType = text; path = distilbertVocabNotebook.ipynb; sourceTree = "<group>"; };
-		AB401C6B2D4FE4D6006885FF /* BriefColabNotebook.ipynb */ = {isa = PBXFileReference; lastKnownFileType = text; path = BriefColabNotebook.ipynb; sourceTree = "<group>"; };
 		AB41A9DA2D3D762900099765 /* Brief.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Brief.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB41A9EA2D3D762A00099765 /* BriefTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BriefTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB41A9F42D3D762A00099765 /* BriefUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BriefUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,22 +92,12 @@
 		AB41AA652D3DAEA700099765 /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarButtonView.swift; sourceTree = "<group>"; };
 		AB45DDED2D4C2E38002298DE /* ArticleTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTitleView.swift; sourceTree = "<group>"; };
-		AB9552262D4EA44000BE843F /* distilbert_classification.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = distilbert_classification.mlpackage; sourceTree = "<group>"; };
+		AB7383062D5AAEB3006D9BA0 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 		AB9552292D4EA4AD00BE843F /* SummarizerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizerService.swift; sourceTree = "<group>"; };
 		ABA37CD52D4063640080096D /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 		ABA37CD72D4071D00080096D /* ArticleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListView.swift; sourceTree = "<group>"; };
 		ABAD3E382D445FEE00180A86 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		AB41AA162D3D765400099765 /* Exceptions for "BriefShareExt" folder in "BriefShareExt" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = AB41AA0A2D3D765300099765 /* BriefShareExt */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AB41A9ED2D3D762A00099765 /* BriefTests */ = {
@@ -132,9 +112,6 @@
 		};
 		AB41AA0C2D3D765300099765 /* BriefShareExt */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				AB41AA162D3D765400099765 /* Exceptions for "BriefShareExt" folder in "BriefShareExt" target */,
-			);
 			path = BriefShareExt;
 			sourceTree = "<group>";
 		};
@@ -166,7 +143,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB26C5912D5442BA0031AD43 /* distilbert_classification.mlpackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +190,7 @@
 		AB41AA312D3D780900099765 /* Brief */ = {
 			isa = PBXGroup;
 			children = (
+				AB7383062D5AAEB3006D9BA0 /* Notes.swift */,
 				AB41AA552D3D9D7300099765 /* Info.plist */,
 				AB1DCD9C2D504620005E1A0E /* README.md */,
 				AB41AA2F2D3D780900099765 /* BriefApp.swift */,
@@ -282,7 +259,6 @@
 		AB41AA632D3DAE5A00099765 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AB9552262D4EA44000BE843F /* distilbert_classification.mlpackage */,
 				AB41AA652D3DAEA700099765 /* ArticleModel.swift */,
 			);
 			path = Model;
@@ -291,9 +267,6 @@
 		AB8115032D4EA541003ED46E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				AB26C5962D544F6A0031AD43 /* distilbert_vocab.json */,
-				AB26C5982D544FA10031AD43 /* distilbertVocabNotebook.ipynb */,
-				AB401C6B2D4FE4D6006885FF /* BriefColabNotebook.ipynb */,
 				AB9552292D4EA4AD00BE843F /* SummarizerService.swift */,
 			);
 			path = Services;
@@ -452,13 +425,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB401C6C2D4FE4D6006885FF /* BriefColabNotebook.ipynb in Resources */,
-				AB26C5992D544FA10031AD43 /* distilbertVocabNotebook.ipynb in Resources */,
 				AB41AA512D3D9D4D00099765 /* BarlowCondensed-Regular.ttf in Resources */,
 				AB41AA532D3D9D5F00099765 /* MerriweatherSans-VariableFont_wght.ttf in Resources */,
 				AB1DCD9D2D504620005E1A0E /* README.md in Resources */,
 				AB41AA322D3D780900099765 /* Preview Assets.xcassets in Resources */,
-				AB26C5972D544F6A0031AD43 /* distilbert_vocab.json in Resources */,
 				AB41AA332D3D780900099765 /* Assets.xcassets in Resources */,
 				AB41AA5C2D3D9FC700099765 /* BarlowCondensed-SemiBold.ttf in Resources */,
 			);
@@ -482,7 +452,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB26C59C2D5451000031AD43 /* distilbert_vocab.json in Resources */,
 				AB41AA502D3D9D4D00099765 /* BarlowCondensed-Regular.ttf in Resources */,
 				AB41AA5B2D3D9FC700099765 /* BarlowCondensed-SemiBold.ttf in Resources */,
 				AB41AA542D3D9D5F00099765 /* MerriweatherSans-VariableFont_wght.ttf in Resources */,
@@ -499,7 +468,6 @@
 				AB41AA592D3D9F0500099765 /* Extensions.swift in Sources */,
 				AB95522A2D4EA4AD00BE843F /* SummarizerService.swift in Sources */,
 				ABA37CD82D4071D00080096D /* ArticleListView.swift in Sources */,
-				AB9552282D4EA44000BE843F /* distilbert_classification.mlpackage in Sources */,
 				AB41AA4A2D3D799F00099765 /* WebView.swift in Sources */,
 				AB41AA682D3DB64E00099765 /* ToolBarButtonView.swift in Sources */,
 				AB41AA482D3D792100099765 /* SharedArticleManager.swift in Sources */,
@@ -531,7 +499,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB9552272D4EA44000BE843F /* distilbert_classification.mlpackage in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
