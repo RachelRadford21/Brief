@@ -52,29 +52,6 @@ Thanks also to the Apple Developer documentation and community resources, which 
 - [ ] Implementing article summarization with **Natural Language**.
 - [ ] Exploring Siri integration for voice-driven summaries.
 
---- 
-
-### ⚡ How to Use This Notebook
-     There is a good chance your project will not run properly without this file
-- Running this notebook **generates a Core ML file using pretrained data**: `distilbert_classification.mlpackage`.
-- **Other pretrained models may be better suited to your needs.**  
-  If you choose to use a different model, simply rename the model name where applicable.
-- After running the notebook, **move the generated model file** to your `Model` folder.
-
-
-🔗 **[View the notebook in GitHub](https://github.com/RachelRadford21/Brief/blob/main/Brief/HelperFiles/Services/BriefColabNotebook.ipynb)**
-
-### ⚠️ **GitHub File Size Limitations**
-The generated model file is **too large to be pushed directly to GitHub**.  
-If you need to include it in version control, consider:
-- **[Git Large File Storage (LFS)](https://git-lfs.github.com/)** – A Git extension designed for tracking large files.
-
-- **Adding it to `.gitignore`** to exclude it from Git:
-  ```plaintext
-  distilbert_classification.mlpackage
-
----
-
 ## License
 
 This project is open-source and available under the [MIT License](License).
