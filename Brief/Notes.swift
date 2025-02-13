@@ -16,4 +16,7 @@
     changes. For some reason, the deleted files were still being tracked. This caused challenges in
     fixing the issue and somewehre a long the way my info.plist files in the main & share ext were broken/corrupted.
     Thankfully, I was able to recover. However, it delayed my progress by days.
+ 
+    Also having display issues with the iPhone simulator. The views look fine in previews and iPad simulator but
+    not on iPhone simulator.
 */
