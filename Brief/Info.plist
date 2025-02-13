@@ -28,6 +28,8 @@
 		<string>BarlowCondensed-Regular.ttf</string>
 		<string>BarlowCondensed-SemiBold.ttf</string>
 	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
