@@ -8,29 +8,38 @@
 import SwiftUI
 
 struct OpeningView: View {
+    @Environment(\.colorScheme) var colorScheme
     @State private var isFlipped = false
     @State private var flipCount = 0
     private let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
     private let maxFlips = 3
     
     var body: some View {
-        VStack {
-            Text("BRIEF")
-                .font(.custom("MerriweatherSans-VariableFont_wght", size: 28))
+        openingView
 
-            subHeaderTextView
-            
-            Spacer()
-            
-            multilineTextView
-            
-            Spacer()
-        }
-        .padding()
     }
 }
 
 extension OpeningView {
+    var openingView: some View {
+            VStack {
+                headerView
+                
+                subHeaderTextView
+                
+                Spacer()
+                
+                multilineTextView
+                
+                Spacer()
+            }
+    }
+    
+    var headerView: some View {
+        Text("BRIEF")
+            .font(.custom("MerriweatherSans-VariableFont_wght", size: 28))
+    }
+    
     var subHeaderTextView: some View {
         Text("\(isFlipped ? "Read" : "Save") What Matters.")
             .font(.custom("MerriweatherSans-VariableFont_wght", size: 18))

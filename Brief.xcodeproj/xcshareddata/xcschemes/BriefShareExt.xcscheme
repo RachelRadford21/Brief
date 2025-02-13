@@ -16,7 +16,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AB41AA0A2D3D765300099765"
+               BlueprintIdentifier = "AB5ADB292D5C152B00AF5B74"
                BuildableName = "BriefShareExt.appex"
                BlueprintName = "BriefShareExt"
                ReferencedContainer = "container:Brief.xcodeproj">

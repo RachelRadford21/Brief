@@ -21,21 +21,16 @@ struct ContentView: View {
     }
     
     var body: some View {
-        
         contentView
-        
     }
 }
 
 extension ContentView {
-    
     @ViewBuilder
     var contentView: some View {
-        VStack {
             openingView
             articleView
             listView
-        }
     }
     
     @ViewBuilder
@@ -82,4 +77,7 @@ extension ContentView {
     }
 }
 
+#Preview {
+    ContentView(articleManager: SharedArticleManager())
+}
 

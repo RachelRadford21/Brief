@@ -2,35 +2,29 @@
 //  ShareViewController.swift
 //  BriefShareExt
 //
-//  Created by Rachel Radford on 1/19/25.
+//  Created by Rachel Radford on 2/11/25.
 //
 
-//import Social
-//
-//class ShareViewController: SLComposeServiceViewController {
-//    override func didSelectPost() {
-//        guard let extensionContext = self.extensionContext else { return }
-//
-//        for item in extensionContext.inputItems as? [NSExtensionItem] ?? [] {
-//            for attachment in item.attachments ?? [] {
-//                if attachment.hasItemConformingToTypeIdentifier("public.url") {
-//                    attachment.loadItem(forTypeIdentifier: "public.url", options: nil) { (url, error) in
-//                        if let url = url as? URL {
-//                            print("Received URL: \(url.absoluteString)")
-//                            self.saveURLToAppGroup(url: url)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        
-//        extensionContext.completeRequest(returningItems: nil, completionHandler: nil)
-//    }
-//
-//    private func saveURLToAppGroup(url: URL) {
-//        let sharedDefaults = UserDefaults(suiteName: "group.com.brief.app")
-//        sharedDefaults?.set(url.absoluteString, forKey: "sharedURL")
-//        sharedDefaults?.synchronize()
-//        print("Saved URL to App Group: \(url.absoluteString)")
-//    }
-//}
+import UIKit
+import Social
+
+class ShareViewController: SLComposeServiceViewController {
+
+    override func isContentValid() -> Bool {
+        // Do validation of contentText and/or NSExtensionContext attachments here
+        return true
+    }
+
+    override func didSelectPost() {
+        // This is called after the user selects Post. Do the upload of contentText and/or NSExtensionContext attachments.
+    
+        // Inform the host that we're done, so it un-blocks its UI. Note: Alternatively you could call super's -didSelectPost, which will similarly complete the extension context.
+        self.extensionContext!.completeRequest(returningItems: [], completionHandler: nil)
+    }
+
+    override func configurationItems() -> [Any]! {
+        // To add configuration options via table cells at the bottom of the sheet, return an array of SLComposeSheetConfigurationItem here.
+        return []
+    }
+
+}

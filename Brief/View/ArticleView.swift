@@ -22,11 +22,17 @@ struct ArticleView: View {
     }
     
     var body: some View {
+        articleView
+           
+    }
+}
+
+extension ArticleView {
+    var articleView: some View {
         VStack {
             ArticleTitleView()
             
             WebView(url: url)
-                .padding()
         }
         .onAppear {
             loadArticle(url: url)
@@ -37,9 +43,6 @@ struct ArticleView: View {
             extractAndTokenizeText(url: url)
         }
     }
-}
-
-extension ArticleView {
     func loadArticle(url: URL) {
         Task {
             do {
@@ -57,11 +60,11 @@ extension ArticleView {
         articleManager.fetchAndExtractText(from: url.absoluteString) { html in
             if let html = html {
                 let articleText = articleManager.extractMainArticle(from: html)
-              ///  print("Extracted Article:", articleText)
+              
                 Task {
-                    // decide if var for tokenized text in summarizer or a model value?
-                    summarizer.tokenizeText(articleText)
-                   // print("Tokenized Article:", articleText)
+                   
+                    print("Summarizer: \(summarizer.summarize(articleText))")
+                   
                 }
             }
         }

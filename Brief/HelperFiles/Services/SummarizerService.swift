@@ -11,94 +11,81 @@ import CoreML
 
 @Observable
 class SummarizerService {
-  static let shared = SummarizerService()
-  private let model: distilbert_classification
-  private var vocab: [String: Int] = [:]
+    static let shared = SummarizerService()
+    private let cache = NSCache<NSString, NSString>()
+        
+    func summarize(_ text: String) -> String {
+        if let cachedSummary = cache.object(forKey: text as NSString) as String? {
+            return cachedSummary
+        }
+
+        let processedText = preprocessText(text)
+        let sentences = tokenizeText(processedText)
+        let keySentences = rankSentences(sentences)
+        
+        let summary = keySentences.joined(separator: " ")
+        
+        // Cache the result
+        cache.setObject(summary as NSString, forKey: text as NSString)
+        
+        return summary
+    }
+        
+        private func preprocessText(_ text: String) -> String {
+            let stopWords: Set<String> = ["the", "and", "is", "of", "to", "in", "that", "it", "on", "for", "with"]
+            let words = text.components(separatedBy: " ").filter { !stopWords.contains($0.lowercased()) }
+            return words.joined(separator: " ")
+        }
+        
+        private func tokenizeText(_ text: String) -> [String] {
+            let tokenizer = NLTokenizer(unit: .sentence)
+            tokenizer.string = text
+            var sentences: [String] = []
+            
+            tokenizer.enumerateTokens(in: text.startIndex..<text.endIndex) { range, _ in
+                sentences.append(String(text[range]))
+                return true
+            }
+            
+            return sentences
+        }
+        
+        private func rankSentences(_ sentences: [String]) -> [String] {
+            var scoredSentences: [(String, Int)] = []
+            
+            for sentence in sentences {
+                let score = entityScore(for: sentence)
+                scoredSentences.append((sentence, score))
+            }
+            
+            let topSentences = scoredSentences.sorted { $0.1 > $1.1 }
+                                              .prefix(3) // Get the top 3 sentences
+                                              .map { $0.0 }
+            
+            return topSentences
+        }
+        
+        private func entityScore(for text: String) -> Int {
+            let tagger = NLTagger(tagSchemes: [.nameType])
+            tagger.string = text
+            
+            var score = 0
+            tagger.enumerateTags(in: text.startIndex..<text.endIndex,
+                                 unit: .word,
+                                 scheme: .nameType,
+                                 options: [.omitPunctuation, .omitWhitespace]) { tag, _ in
+                if let tag = tag, tag == .personalName || tag == .placeName || tag == .organizationName {
+                    score += 1
+                }
+                return true
+            }
+            
+            return score
+        }
+        
+        func getCachedSummary(for text: String) -> String? {
+            return cache.object(forKey: text as NSString) as String?
+        }
   
-  private init() {
-    guard let loadedModel = try? distilbert_classification(configuration: MLModelConfiguration()) else {
-      fatalError("Failed to load ML model")
-    }
-    self.model = loadedModel
-    loadVocabulary()
-  }
-  
-  private func loadVocabulary() {
-    guard let url = Bundle.main.url(forResource: "distilbert_vocab", withExtension: "json"),
-          let data = try? Data(contentsOf: url),
-          let vocabDict = try? JSONSerialization.jsonObject(with: data) as? [String: Int] else {
-      fatalError("Failed to load vocabulary file")
-    }
-    self.vocab = vocabDict
-  }
-  
-  func tokenizeText(_ text: String) -> [Int] {
-    let tokenizer = NLTokenizer(unit: .word)
-    tokenizer.string = text.lowercased()
-    
-    var tokenIds: [Int] = []
-    tokenizer.enumerateTokens(in: text.startIndex..<text.endIndex) { tokenRange, _ in
-      let token = String(text[tokenRange])
-      if let tokenId = vocab[token] {
-        tokenIds.append(tokenId)
-      } else {
-        tokenIds.append(vocab["[UNK]"] ?? 0)
-      }
-      return true
-    }
-    print("Tokenized IDs:", tokenIds)
-    return tokenIds
-  }
-  
-  func createAttentionMask(from tokens: [Int]) -> MLMultiArray? {
-    guard let array = try? MLMultiArray(shape: [NSNumber(value: tokens.count)], dataType: .int32) else {
-      return nil
-    }
-    for i in 0..<tokens.count {
-      array[i] = NSNumber(value: 1)
-    }
-    return array
-  }
-  
-  func convertToMLMultiArray(from input: [Int]) -> MLMultiArray? {
-    guard let array = try? MLMultiArray(shape: [NSNumber(value: input.count)], dataType: .int32) else {
-      return nil
-    }
-    for (index, value) in input.enumerated() {
-      array[index] = NSNumber(value: value)
-    }
-    return array
-  }
-  
-  func summarize(text: String) -> String {
-    let tokenizedInput = tokenizeText(text)
-    
-    guard let inputArray = convertToMLMultiArray(from: tokenizedInput),
-          let attentionMaskArray = createAttentionMask(from: tokenizedInput) else {
-      return "Error: Failed to process input"
-    }
-    
-    do {
-      let prediction = try model.prediction(input_ids: inputArray, attention_mask: attentionMaskArray)
-      guard let outputArray = prediction.featureValue(for: "output")?.multiArrayValue else {
-        return "Error: Model output is not MLMultiArray"
-      }
-      
-      var tokenIDs: [Int] = []
-      for i in 0..<outputArray.count {
-        tokenIDs.append(outputArray[i].intValue)
-      }
-      
-      let summary = decodeOutput(tokenIDs)
-      return summary
-      
-    } catch {
-      return "Error: \(error.localizedDescription)"
-    }
-  }
-  
-  func decodeOutput(_ outputTokens: [Int]) -> String {
-    let tokenMapping = vocab.reduce(into: [Int: String]()) { $0[$1.value] = $1.key }
-    return outputTokens.compactMap { tokenMapping[$0] }.joined(separator: " ")
-  }
+ 
 }

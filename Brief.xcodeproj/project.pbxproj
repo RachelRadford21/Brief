@@ -8,24 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		AB1DCD9D2D504620005E1A0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AB1DCD9C2D504620005E1A0E /* README.md */; };
-		AB41AA152D3D765400099765 /* BriefShareExt.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB41AA0B2D3D765300099765 /* BriefShareExt.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB41AA322D3D780900099765 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA2B2D3D780900099765 /* Preview Assets.xcassets */; };
 		AB41AA332D3D780900099765 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA2D2D3D780900099765 /* Assets.xcassets */; };
 		AB41AA342D3D780900099765 /* BriefApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA2F2D3D780900099765 /* BriefApp.swift */; };
 		AB41AA352D3D780900099765 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA302D3D780900099765 /* ContentView.swift */; };
 		AB41AA482D3D792100099765 /* SharedArticleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA442D3D792100099765 /* SharedArticleManager.swift */; };
 		AB41AA4A2D3D799F00099765 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA492D3D799F00099765 /* WebView.swift */; };
-		AB41AA502D3D9D4D00099765 /* BarlowCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA4F2D3D9D4D00099765 /* BarlowCondensed-Regular.ttf */; };
 		AB41AA512D3D9D4D00099765 /* BarlowCondensed-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA4F2D3D9D4D00099765 /* BarlowCondensed-Regular.ttf */; };
 		AB41AA532D3D9D5F00099765 /* MerriweatherSans-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA522D3D9D5F00099765 /* MerriweatherSans-VariableFont_wght.ttf */; };
-		AB41AA542D3D9D5F00099765 /* MerriweatherSans-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA522D3D9D5F00099765 /* MerriweatherSans-VariableFont_wght.ttf */; };
 		AB41AA592D3D9F0500099765 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA582D3D9F0500099765 /* Extensions.swift */; };
-		AB41AA5B2D3D9FC700099765 /* BarlowCondensed-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA5A2D3D9FC700099765 /* BarlowCondensed-SemiBold.ttf */; };
 		AB41AA5C2D3D9FC700099765 /* BarlowCondensed-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA5A2D3D9FC700099765 /* BarlowCondensed-SemiBold.ttf */; };
 		AB41AA622D3DA87700099765 /* OpeningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA612D3DA87700099765 /* OpeningView.swift */; };
 		AB41AA662D3DAEA700099765 /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA652D3DAEA700099765 /* ArticleModel.swift */; };
 		AB41AA682D3DB64E00099765 /* ToolBarButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */; };
 		AB45DDEE2D4C2E38002298DE /* ArticleTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB45DDED2D4C2E38002298DE /* ArticleTitleView.swift */; };
+		AB53443F2D5CF42F007B27D8 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB53443E2D5CF42A007B27D8 /* Notes.swift */; };
+		AB5ADB342D5C152B00AF5B74 /* BriefShareExt.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB5ADB2A2D5C152B00AF5B74 /* BriefShareExt.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AB5ADB3D2D5C1D8E00AF5B74 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB5ADB3C2D5C1D8E00AF5B74 /* Info.plist */; };
 		AB95522A2D4EA4AD00BE843F /* SummarizerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9552292D4EA4AD00BE843F /* SummarizerService.swift */; };
 		ABA37CD62D4063640080096D /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA37CD52D4063640080096D /* ArticleViewModel.swift */; };
 		ABA37CD82D4071D00080096D /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA37CD72D4071D00080096D /* ArticleListView.swift */; };
@@ -47,11 +46,11 @@
 			remoteGlobalIDString = AB41A9D92D3D762900099765;
 			remoteInfo = Brief;
 		};
-		AB41AA132D3D765400099765 /* PBXContainerItemProxy */ = {
+		AB5ADB322D5C152B00AF5B74 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AB41A9D22D3D762800099765 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = AB41AA0A2D3D765300099765;
+			remoteGlobalIDString = AB5ADB292D5C152B00AF5B74;
 			remoteInfo = BriefShareExt;
 		};
 /* End PBXContainerItemProxy section */
@@ -63,7 +62,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				AB41AA152D3D765400099765 /* BriefShareExt.appex in Embed Foundation Extensions */,
+				AB5ADB342D5C152B00AF5B74 /* BriefShareExt.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,7 +74,6 @@
 		AB41A9DA2D3D762900099765 /* Brief.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Brief.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB41A9EA2D3D762A00099765 /* BriefTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BriefTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB41A9F42D3D762A00099765 /* BriefUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BriefUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB41AA0B2D3D765300099765 /* BriefShareExt.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BriefShareExt.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB41AA2B2D3D780900099765 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AB41AA2D2D3D780900099765 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB41AA2E2D3D780900099765 /* Brief.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Brief.entitlements; sourceTree = "<group>"; };
@@ -85,18 +83,31 @@
 		AB41AA492D3D799F00099765 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		AB41AA4F2D3D9D4D00099765 /* BarlowCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BarlowCondensed-Regular.ttf"; sourceTree = "<group>"; };
 		AB41AA522D3D9D5F00099765 /* MerriweatherSans-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MerriweatherSans-VariableFont_wght.ttf"; sourceTree = "<group>"; };
-		AB41AA552D3D9D7300099765 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		AB41AA582D3D9F0500099765 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AB41AA5A2D3D9FC700099765 /* BarlowCondensed-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BarlowCondensed-SemiBold.ttf"; sourceTree = "<group>"; };
 		AB41AA612D3DA87700099765 /* OpeningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpeningView.swift; sourceTree = "<group>"; };
 		AB41AA652D3DAEA700099765 /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
 		AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarButtonView.swift; sourceTree = "<group>"; };
 		AB45DDED2D4C2E38002298DE /* ArticleTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTitleView.swift; sourceTree = "<group>"; };
+		AB53443E2D5CF42A007B27D8 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
+		AB5ADB2A2D5C152B00AF5B74 /* BriefShareExt.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BriefShareExt.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB5ADB3C2D5C1D8E00AF5B74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB9552292D4EA4AD00BE843F /* SummarizerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizerService.swift; sourceTree = "<group>"; };
 		ABA37CD52D4063640080096D /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 		ABA37CD72D4071D00080096D /* ArticleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListView.swift; sourceTree = "<group>"; };
 		ABAD3E382D445FEE00180A86 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AB53443D2D5CEC2E007B27D8 /* Exceptions for "BriefShareExt" folder in "BriefShareExt" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"/Localized: MainInterface.storyboard",
+				Info.plist,
+			);
+			target = AB5ADB292D5C152B00AF5B74 /* BriefShareExt */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AB41A9ED2D3D762A00099765 /* BriefTests */ = {
@@ -111,12 +122,10 @@
 		};
 		AB41AA0C2D3D765300099765 /* BriefShareExt */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				AB53443D2D5CEC2E007B27D8 /* Exceptions for "BriefShareExt" folder in "BriefShareExt" target */,
+			);
 			path = BriefShareExt;
-			sourceTree = "<group>";
-		};
-		AB9545B92D5AE0ED0002C19C /* BriefExt */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = BriefExt;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -143,7 +152,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB41AA082D3D765300099765 /* Frameworks */ = {
+		AB5ADB272D5C152B00AF5B74 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -153,13 +162,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AB26C5902D5442B90031AD43 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		AB41A9D12D3D762800099765 = {
 			isa = PBXGroup;
 			children = (
@@ -167,8 +169,6 @@
 				AB41A9ED2D3D762A00099765 /* BriefTests */,
 				AB41A9F72D3D762A00099765 /* BriefUITests */,
 				AB41AA0C2D3D765300099765 /* BriefShareExt */,
-				AB9545B92D5AE0ED0002C19C /* BriefExt */,
-				AB26C5902D5442B90031AD43 /* Frameworks */,
 				AB41A9DB2D3D762900099765 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -179,7 +179,7 @@
 				AB41A9DA2D3D762900099765 /* Brief.app */,
 				AB41A9EA2D3D762A00099765 /* BriefTests.xctest */,
 				AB41A9F42D3D762A00099765 /* BriefUITests.xctest */,
-				AB41AA0B2D3D765300099765 /* BriefShareExt.appex */,
+				AB5ADB2A2D5C152B00AF5B74 /* BriefShareExt.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -195,7 +195,8 @@
 		AB41AA312D3D780900099765 /* Brief */ = {
 			isa = PBXGroup;
 			children = (
-				AB41AA552D3D9D7300099765 /* Info.plist */,
+				AB53443E2D5CF42A007B27D8 /* Notes.swift */,
+				AB5ADB3C2D5C1D8E00AF5B74 /* Info.plist */,
 				AB1DCD9C2D504620005E1A0E /* README.md */,
 				AB41AA2F2D3D780900099765 /* BriefApp.swift */,
 				AB41AA302D3D780900099765 /* ContentView.swift */,
@@ -299,7 +300,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				AB41AA142D3D765400099765 /* PBXTargetDependency */,
+				AB5ADB332D5C152B00AF5B74 /* PBXTargetDependency */,
 			);
 			name = Brief;
 			packageProductDependencies = (
@@ -354,13 +355,13 @@
 			productReference = AB41A9F42D3D762A00099765 /* BriefUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		AB41AA0A2D3D765300099765 /* BriefShareExt */ = {
+		AB5ADB292D5C152B00AF5B74 /* BriefShareExt */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AB41AA172D3D765400099765 /* Build configuration list for PBXNativeTarget "BriefShareExt" */;
+			buildConfigurationList = AB5ADB362D5C152B00AF5B74 /* Build configuration list for PBXNativeTarget "BriefShareExt" */;
 			buildPhases = (
-				AB41AA072D3D765300099765 /* Sources */,
-				AB41AA082D3D765300099765 /* Frameworks */,
-				AB41AA092D3D765300099765 /* Resources */,
+				AB5ADB262D5C152B00AF5B74 /* Sources */,
+				AB5ADB272D5C152B00AF5B74 /* Frameworks */,
+				AB5ADB282D5C152B00AF5B74 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -373,7 +374,7 @@
 			packageProductDependencies = (
 			);
 			productName = BriefShareExt;
-			productReference = AB41AA0B2D3D765300099765 /* BriefShareExt.appex */;
+			productReference = AB5ADB2A2D5C152B00AF5B74 /* BriefShareExt.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -397,7 +398,7 @@
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = AB41A9D92D3D762900099765;
 					};
-					AB41AA0A2D3D765300099765 = {
+					AB5ADB292D5C152B00AF5B74 = {
 						CreatedOnToolsVersion = 16.2;
 					};
 				};
@@ -419,7 +420,7 @@
 				AB41A9D92D3D762900099765 /* Brief */,
 				AB41A9E92D3D762A00099765 /* BriefTests */,
 				AB41A9F32D3D762A00099765 /* BriefUITests */,
-				AB41AA0A2D3D765300099765 /* BriefShareExt */,
+				AB5ADB292D5C152B00AF5B74 /* BriefShareExt */,
 			);
 		};
 /* End PBXProject section */
@@ -442,6 +443,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB5ADB3D2D5C1D8E00AF5B74 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,13 +454,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB41AA092D3D765300099765 /* Resources */ = {
+		AB5ADB282D5C152B00AF5B74 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB41AA502D3D9D4D00099765 /* BarlowCondensed-Regular.ttf in Resources */,
-				AB41AA5B2D3D9FC700099765 /* BarlowCondensed-SemiBold.ttf in Resources */,
-				AB41AA542D3D9D5F00099765 /* MerriweatherSans-VariableFont_wght.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB41AA592D3D9F0500099765 /* Extensions.swift in Sources */,
+				AB53443F2D5CF42F007B27D8 /* Notes.swift in Sources */,
 				AB95522A2D4EA4AD00BE843F /* SummarizerService.swift in Sources */,
 				ABA37CD82D4071D00080096D /* ArticleListView.swift in Sources */,
 				AB41AA4A2D3D799F00099765 /* WebView.swift in Sources */,
@@ -499,7 +499,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB41AA072D3D765300099765 /* Sources */ = {
+		AB5ADB262D5C152B00AF5B74 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -519,10 +519,10 @@
 			target = AB41A9D92D3D762900099765 /* Brief */;
 			targetProxy = AB41A9F52D3D762A00099765 /* PBXContainerItemProxy */;
 		};
-		AB41AA142D3D765400099765 /* PBXTargetDependency */ = {
+		AB5ADB332D5C152B00AF5B74 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AB41AA0A2D3D765300099765 /* BriefShareExt */;
-			targetProxy = AB41AA132D3D765400099765 /* PBXContainerItemProxy */;
+			target = AB5ADB292D5C152B00AF5B74 /* BriefShareExt */;
+			targetProxy = AB5ADB322D5C152B00AF5B74 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -579,11 +579,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Brief/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rar.Brief;
+				PRODUCT_NAME = Brief;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -636,10 +639,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Brief/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rar.Brief;
+				PRODUCT_NAME = Brief;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
@@ -651,6 +657,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = Brief/Brief.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -664,13 +671,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.rar.Brief;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rar.Brief;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -683,6 +690,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				CODE_SIGN_ENTITLEMENTS = Brief/Brief.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -696,13 +704,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.rar.Brief;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rar.Brief;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -782,25 +790,26 @@
 			};
 			name = Release;
 		};
-		AB41AA182D3D765400099765 /* Debug */ = {
+		AB5ADB372D5C152B00AF5B74 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = BriefShareExt/BriefShareExt.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 25MBFXXLA7;
-				GENERATE_INFOPLIST_FILE = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BriefShareExt/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BriefShareExt;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.rar.Brief.BriefShareExt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rar.Brief.BriefShareExt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -809,25 +818,26 @@
 			};
 			name = Debug;
 		};
-		AB41AA192D3D765400099765 /* Release */ = {
+		AB5ADB382D5C152B00AF5B74 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = BriefShareExt/BriefShareExt.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 25MBFXXLA7;
-				GENERATE_INFOPLIST_FILE = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BriefShareExt/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = BriefShareExt;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = co.rar.Brief.BriefShareExt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rar.Brief.BriefShareExt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -875,11 +885,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AB41AA172D3D765400099765 /* Build configuration list for PBXNativeTarget "BriefShareExt" */ = {
+		AB5ADB362D5C152B00AF5B74 /* Build configuration list for PBXNativeTarget "BriefShareExt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AB41AA182D3D765400099765 /* Debug */,
-				AB41AA192D3D765400099765 /* Release */,
+				AB5ADB372D5C152B00AF5B74 /* Debug */,
+				AB5ADB382D5C152B00AF5B74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
