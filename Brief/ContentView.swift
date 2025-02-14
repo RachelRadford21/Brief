@@ -22,15 +22,18 @@ struct ContentView: View {
     
     var body: some View {
         contentView
+            .onAppear {
+                DataProcessor().loadCSV()
+            }
     }
-}
+ }
 
 extension ContentView {
     @ViewBuilder
     var contentView: some View {
-            openingView
-            articleView
-            listView
+        openingView
+        articleView
+        listView
     }
     
     @ViewBuilder
