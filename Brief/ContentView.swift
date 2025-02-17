@@ -22,9 +22,6 @@ struct ContentView: View {
     
     var body: some View {
         contentView
-            .onAppear {
-                DataProcessor().loadCSV()
-            }
     }
  }
 
@@ -75,12 +72,9 @@ extension ContentView {
     var listView: some View {
         let results = try? context.fetch(descriptor)
         if (results?.isEmpty == false) && articleManager.sharedURL == nil {
-            ArticleListView()
+            ArticleListView(articleManager: articleManager)
         }
     }
 }
 
-#Preview {
-    ContentView(articleManager: SharedArticleManager())
-}
 

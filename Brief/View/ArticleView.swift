@@ -59,13 +59,9 @@ extension ArticleView {
     func extractAndTokenizeText(url: URL) {
         articleManager.fetchAndExtractText(from: url.absoluteString) { html in
             if let html = html {
-                let articleText = articleManager.extractMainArticle(from: html)
-              
-                Task {
-                   
-                    print("Summarizer: \(summarizer.summarize(articleText))")
-                   
-                }
+
+                    print("Summarizer: \(summarizer.summarize(html))")
+                    
             }
         }
     }

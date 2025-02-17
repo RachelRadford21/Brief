@@ -28,9 +28,8 @@
 		AB95522A2D4EA4AD00BE843F /* SummarizerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9552292D4EA4AD00BE843F /* SummarizerService.swift */; };
 		ABA37CD62D4063640080096D /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA37CD52D4063640080096D /* ArticleViewModel.swift */; };
 		ABA37CD82D4071D00080096D /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA37CD72D4071D00080096D /* ArticleListView.swift */; };
+		ABAC3BC12D62BBC900EA1B9B /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAC3BC02D62BBC900EA1B9B /* ShareSheetView.swift */; };
 		ABAD3E392D445FEE00180A86 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAD3E382D445FEE00180A86 /* ArticleView.swift */; };
-		ABC763E72D5EC3C20017DCAC /* DataProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC763E62D5EC3C20017DCAC /* DataProcessing.swift */; };
-		ABC763E92D5EC69F0017DCAC /* train_sample.csv in Resources */ = {isa = PBXBuildFile; fileRef = ABC763E82D5EC69F0017DCAC /* train_sample.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,9 +96,8 @@
 		AB9552292D4EA4AD00BE843F /* SummarizerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizerService.swift; sourceTree = "<group>"; };
 		ABA37CD52D4063640080096D /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 		ABA37CD72D4071D00080096D /* ArticleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListView.swift; sourceTree = "<group>"; };
+		ABAC3BC02D62BBC900EA1B9B /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		ABAD3E382D445FEE00180A86 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
-		ABC763E62D5EC3C20017DCAC /* DataProcessing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProcessing.swift; sourceTree = "<group>"; };
-		ABC763E82D5EC69F0017DCAC /* train_sample.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = train_sample.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -276,7 +274,6 @@
 		AB8115032D4EA541003ED46E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				ABC763E52D5EC3970017DCAC /* DataProcessing */,
 				AB9552292D4EA4AD00BE843F /* SummarizerService.swift */,
 			);
 			path = Services;
@@ -286,17 +283,9 @@
 			isa = PBXGroup;
 			children = (
 				AB45DDED2D4C2E38002298DE /* ArticleTitleView.swift */,
+				ABAC3BC02D62BBC900EA1B9B /* ShareSheetView.swift */,
 			);
 			path = GlobalViews;
-			sourceTree = "<group>";
-		};
-		ABC763E52D5EC3970017DCAC /* DataProcessing */ = {
-			isa = PBXGroup;
-			children = (
-				ABC763E82D5EC69F0017DCAC /* train_sample.csv */,
-				ABC763E62D5EC3C20017DCAC /* DataProcessing.swift */,
-			);
-			path = DataProcessing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,7 +437,6 @@
 				AB41AA532D3D9D5F00099765 /* MerriweatherSans-VariableFont_wght.ttf in Resources */,
 				AB1DCD9D2D504620005E1A0E /* README.md in Resources */,
 				AB41AA322D3D780900099765 /* Preview Assets.xcassets in Resources */,
-				ABC763E92D5EC69F0017DCAC /* train_sample.csv in Resources */,
 				AB41AA332D3D780900099765 /* Assets.xcassets in Resources */,
 				AB41AA5C2D3D9FC700099765 /* BarlowCondensed-SemiBold.ttf in Resources */,
 			);
@@ -490,13 +478,13 @@
 				AB41AA4A2D3D799F00099765 /* WebView.swift in Sources */,
 				AB41AA682D3DB64E00099765 /* ToolBarButtonView.swift in Sources */,
 				AB41AA482D3D792100099765 /* SharedArticleManager.swift in Sources */,
+				ABAC3BC12D62BBC900EA1B9B /* ShareSheetView.swift in Sources */,
 				AB41AA342D3D780900099765 /* BriefApp.swift in Sources */,
 				AB41AA352D3D780900099765 /* ContentView.swift in Sources */,
 				ABA37CD62D4063640080096D /* ArticleViewModel.swift in Sources */,
 				AB41AA662D3DAEA700099765 /* ArticleModel.swift in Sources */,
 				AB41AA622D3DA87700099765 /* OpeningView.swift in Sources */,
 				AB45DDEE2D4C2E38002298DE /* ArticleTitleView.swift in Sources */,
-				ABC763E72D5EC3C20017DCAC /* DataProcessing.swift in Sources */,
 				ABAD3E392D445FEE00180A86 /* ArticleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

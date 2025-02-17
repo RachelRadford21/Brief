@@ -11,6 +11,7 @@ import Social
 class SharedArticleManager {
     private let sharedDefaults = UserDefaults(suiteName: "group.com.brief.app")
     var sharedURL: URL?
+
     init(
         sharedURL: URL? = nil
     ) {
@@ -50,7 +51,7 @@ class SharedArticleManager {
     
     func shareArticle() {
         let text = "Check out this article"
-        
+    
         guard let urlString = sharedURL?.absoluteString,
               let url = URL(string: urlString) else {
             print("Invalid or missing URL")
@@ -104,39 +105,6 @@ extension SharedArticleManager {
         } else {
             throw URLError(.cannotParseResponse)
         }
-    }
-
-    
-    func extractMainArticle(from html: String) -> String {
-        let cleanedHTML = html
-            .replacingOccurrences(of: "<script[^>]*>[\\s\\S]*?</script>", with: "", options: .regularExpression)
-            .replacingOccurrences(of: "<style[^>]*>[\\s\\S]*?</style>", with: "", options: .regularExpression)
-            .replacingOccurrences(of: "&nbsp;", with: " ")
-            .replacingOccurrences(of: "&amp;", with: "&")
-            .replacingOccurrences(of: "&lt;", with: "<")
-            .replacingOccurrences(of: "&gt;", with: ">")
-            .replacingOccurrences(of: "&quot;", with: "\"")
-            .replacingOccurrences(of: "&#39;", with: "'")
-            .replacingOccurrences(of: "&apos;", with: "'")
-        
-        let regex = try! NSRegularExpression(pattern: "<p.*?>(.*?)</p>", options: .dotMatchesLineSeparators)
-        let matches = regex.matches(in: cleanedHTML, range: NSRange(cleanedHTML.startIndex..., in: cleanedHTML))
-        
-        let paragraphs = matches.compactMap {
-            Range($0.range(at: 1), in: cleanedHTML).map { String(cleanedHTML[$0]) }
-        }
-        
-        let filteredParagraphs = paragraphs.filter {
-            $0.count > 50 && !$0.lowercased().contains("cookie") && !$0.lowercased().contains("subscribe")
-        }
-        
-        let articleText = filteredParagraphs.joined(separator: " ")
-            .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
-            .replacingOccurrences(of: "\\s{2,}", with: " ", options: .regularExpression)
-            .replacingOccurrences(of: "\n{2,}", with: "\n", options: .regularExpression)
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        return articleText
     }
     
     func fetchAndExtractText(from url: String, completion: @escaping (String?) -> Void) {
