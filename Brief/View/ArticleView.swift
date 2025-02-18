@@ -36,13 +36,14 @@ extension ArticleView {
         }
         .onAppear {
             loadArticle(url: url)
-            extractAndTokenizeText(url: url)
+            summarizer.extractAndTokenizeText(url: url)
         }
         .onChange(of: url) {
             loadArticle(url: url)
-            extractAndTokenizeText(url: url)
+            summarizer.extractAndTokenizeText(url: url)
         }
     }
+    
     func loadArticle(url: URL) {
         Task {
             do {
@@ -59,10 +60,12 @@ extension ArticleView {
     func extractAndTokenizeText(url: URL) {
         articleManager.fetchAndExtractText(from: url.absoluteString) { html in
             if let html = html {
-
+                articleVM.summary = summarizer.summarize(html)
+                print("summary: \(articleVM.summary)")
                     print("Summarizer: \(summarizer.summarize(html))")
                     
             }
         }
     }
+  
 }

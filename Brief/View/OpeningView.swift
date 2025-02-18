@@ -16,23 +16,23 @@ struct OpeningView: View {
     
     var body: some View {
         openingView
-
+        
     }
 }
 
 extension OpeningView {
     var openingView: some View {
-            VStack {
-                headerView
-                
-                subHeaderTextView
-                
-                Spacer()
-                
-                multilineTextView
-                
-                Spacer()
-            }
+        VStack {
+            headerView
+            
+            subHeaderTextView
+            
+            Spacer()
+            
+            multilineTextView
+            
+            Spacer()
+        }
     }
     
     var headerView: some View {

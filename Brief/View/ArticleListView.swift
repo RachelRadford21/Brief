@@ -10,10 +10,15 @@ import SwiftData
 
 struct ArticleListView: View {
     @Environment(\.modelContext) var context
+    @Environment(\.colorScheme) var colorScheme
     @State private var showShareSheet: Bool = false
+    @State private var showNotes: Bool = false
+    @State private var getBriefed: Bool = false
+    @State private var path = NavigationPath()
     @Query var articles: [ArticleModel]
     var articleManager: SharedArticleManager
     var articleVM: ArticleViewModel
+    
     init(
         articleManager: SharedArticleManager,
         articleVM: ArticleViewModel = ArticleViewModel.shared
@@ -51,7 +56,7 @@ extension ArticleListView {
     }
     
     var navStackView: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             List(articles, id: \.id) { article in
                 
                 NavigationLink(value: article) {
@@ -66,23 +71,27 @@ extension ArticleListView {
                         ActivityViewController(items: [url])
                     }
                 }
+                .sheet(isPresented: $getBriefed) {
+                    BriefedView()
+                }
                 
             }
             .navigationTitle(navTitleView)
             .navigationDestination(for: ArticleModel.self) { article in
                 ArticleView(articleManager: articleManager, url: article.url ?? articleManager.sharedURL!)
                     .customToolbar(url: articleManager.sharedURL, buttons: [
-                        ("note.text.badge.plus", { }),
+                        ("note.text.badge.plus", { showNotes.toggle() }),
                         ("message", { showShareSheet.toggle() }),
-                        ("briefcase.fill", { }),
-                        /// Need to work on going back to list after delete
+                        ("briefcase.fill", { getBriefed.toggle() }),
                         ("trash.square", {
                             articleVM.deleteArticle(id: article.id, title: article.title, url: article.url!, read: article.read, dateSaved: article.dateSaved)
+                            path.removeLast()
+                           
                         })
                     ])
             }
         }
-        .tint(Color.accent.opacity(0.7))
+        .tint(colorScheme == .dark ? Color.accent.opacity(0.7) : .black)
     }
     
     @MainActor @ViewBuilder

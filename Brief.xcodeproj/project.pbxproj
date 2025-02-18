@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB0CCAC12D64098B00D3A1E8 /* BriefedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0CCAC02D64098B00D3A1E8 /* BriefedView.swift */; };
 		AB1DCD9D2D504620005E1A0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AB1DCD9C2D504620005E1A0E /* README.md */; };
 		AB41AA322D3D780900099765 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA2B2D3D780900099765 /* Preview Assets.xcassets */; };
 		AB41AA332D3D780900099765 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA2D2D3D780900099765 /* Assets.xcassets */; };
@@ -71,6 +72,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AB0CCAC02D64098B00D3A1E8 /* BriefedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefedView.swift; sourceTree = "<group>"; };
 		AB1DCD9C2D504620005E1A0E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AB41A9DA2D3D762900099765 /* Brief.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Brief.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB41A9EA2D3D762A00099765 /* BriefTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BriefTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,6 +232,7 @@
 				ABAD3E382D445FEE00180A86 /* ArticleView.swift */,
 				AB41AA492D3D799F00099765 /* WebView.swift */,
 				ABA37CD72D4071D00080096D /* ArticleListView.swift */,
+				AB0CCAC02D64098B00D3A1E8 /* BriefedView.swift */,
 				AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */,
 				ABB21BC22D458FEA00A0FD86 /* GlobalViews */,
 			);
@@ -479,6 +482,7 @@
 				AB41AA682D3DB64E00099765 /* ToolBarButtonView.swift in Sources */,
 				AB41AA482D3D792100099765 /* SharedArticleManager.swift in Sources */,
 				ABAC3BC12D62BBC900EA1B9B /* ShareSheetView.swift in Sources */,
+				AB0CCAC12D64098B00D3A1E8 /* BriefedView.swift in Sources */,
 				AB41AA342D3D780900099765 /* BriefApp.swift in Sources */,
 				AB41AA352D3D780900099765 /* ContentView.swift in Sources */,
 				ABA37CD62D4063640080096D /* ArticleViewModel.swift in Sources */,

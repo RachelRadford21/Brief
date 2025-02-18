@@ -9,8 +9,8 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) var context
-    @State var articleTitle: String = ""
     @State var articleVM = ArticleViewModel.shared
+    @State var summarizer: SummarizerService = SummarizerService.shared
     var articleManager: SharedArticleManager
     let descriptor = FetchDescriptor<ArticleModel>()
     
@@ -23,7 +23,7 @@ struct ContentView: View {
     var body: some View {
         contentView
     }
- }
+}
 
 extension ContentView {
     @ViewBuilder
@@ -43,20 +43,26 @@ extension ContentView {
             .customToolbar(url: articleManager.sharedURL, buttons: [
                 ("message", { articleManager.shareArticle() }),
                 ("arrow.down.document", {
+                    
                     articleVM.saveArticle(
                         title: articleVM.articleTitle,
                         url: articleManager.sharedURL!,
-                        dateSaved: Date()
+                        dateSaved: Date(),
+                        articleSummary: articleVM.summary
                     )
+                   
                     articleManager.sharedURL = nil
                     articleManager.clearSharedURL()
                 }),
                 ("trash.square", {
-                    articleTitle = ""
                     articleManager.sharedURL = nil
                     articleManager.clearSharedURL()
                 })
             ])
+            .onAppear {
+                summarizer.extractAndTokenizeText(url: articleManager.sharedURL!)
+
+            }
         }
     }
     
@@ -71,7 +77,7 @@ extension ContentView {
     @ViewBuilder
     var listView: some View {
         let results = try? context.fetch(descriptor)
-        if (results?.isEmpty == false) && articleManager.sharedURL == nil {
+        if (results?.isEmpty == false) && articleManager.sharedURL == nil  {
             ArticleListView(articleManager: articleManager)
         }
     }

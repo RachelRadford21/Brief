@@ -12,6 +12,8 @@ import NaturalLanguage
 class SummarizerService {
     static let shared = SummarizerService()
     private let cache = NSCache<NSString, NSString>()
+    var articleVM = ArticleViewModel.shared
+    var articleManager: SharedArticleManager = SharedArticleManager()
     
     private let boilerplatePatterns = [
         "contact us",
@@ -212,7 +214,18 @@ class SummarizerService {
     }
     
     func getCachedSummary(for text: String) -> String? {
-        return cache.object(forKey: text as NSString) as String?
+           return cache.object(forKey: text as NSString) as String?
+    }
+    
+    func extractAndTokenizeText(url: URL) {
+        articleManager.fetchAndExtractText(from: url.absoluteString) { html in
+            if let html = html {
+                self.articleVM.summary = self.summarize(html)
+                print("summary: \(self.articleVM.summary)")
+                print("Summarizer: \(self.summarize(html))")
+                    
+            }
+        }
     }
 }
 
