@@ -23,7 +23,7 @@ struct ArticleView: View {
     
     var body: some View {
         articleView
-           
+        
     }
 }
 
@@ -61,11 +61,7 @@ extension ArticleView {
         articleManager.fetchAndExtractText(from: url.absoluteString) { html in
             if let html = html {
                 articleVM.summary = summarizer.summarize(html)
-                print("summary: \(articleVM.summary)")
-                    print("Summarizer: \(summarizer.summarize(html))")
-                    
             }
         }
     }
-  
 }

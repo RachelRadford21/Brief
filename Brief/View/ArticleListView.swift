@@ -58,10 +58,10 @@ extension ArticleListView {
     var navStackView: some View {
         NavigationStack(path: $path) {
             List(articles, id: \.id) { article in
-                
                 NavigationLink(value: article) {
                     Text(article.title)
                         .font(.custom("BarlowCondensed-Regular", size: 20))
+                        .lineLimit(2)
                 }
                 .swipeActions {
                     swipeActionsView(article: article)
@@ -72,9 +72,11 @@ extension ArticleListView {
                     }
                 }
                 .sheet(isPresented: $getBriefed) {
-                    BriefedView()
+                    BriefView()
                 }
-                
+                .sheet(isPresented: $showNotes) {
+                    NotesView()
+                }
             }
             .navigationTitle(navTitleView)
             .navigationDestination(for: ArticleModel.self) { article in
@@ -86,7 +88,7 @@ extension ArticleListView {
                         ("trash.square", {
                             articleVM.deleteArticle(id: article.id, title: article.title, url: article.url!, read: article.read, dateSaved: article.dateSaved)
                             path.removeLast()
-                           
+                            
                         })
                     ])
             }

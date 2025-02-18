@@ -50,7 +50,7 @@ extension ContentView {
                         dateSaved: Date(),
                         articleSummary: articleVM.summary
                     )
-                   
+                    
                     articleManager.sharedURL = nil
                     articleManager.clearSharedURL()
                 }),
@@ -61,7 +61,6 @@ extension ContentView {
             ])
             .onAppear {
                 summarizer.extractAndTokenizeText(url: articleManager.sharedURL!)
-
             }
         }
     }

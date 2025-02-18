@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB0CCAC12D64098B00D3A1E8 /* BriefedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0CCAC02D64098B00D3A1E8 /* BriefedView.swift */; };
 		AB1DCD9D2D504620005E1A0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AB1DCD9C2D504620005E1A0E /* README.md */; };
 		AB41AA322D3D780900099765 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA2B2D3D780900099765 /* Preview Assets.xcassets */; };
 		AB41AA332D3D780900099765 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA2D2D3D780900099765 /* Assets.xcassets */; };
@@ -25,12 +24,14 @@
 		AB45DDEE2D4C2E38002298DE /* ArticleTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB45DDED2D4C2E38002298DE /* ArticleTitleView.swift */; };
 		AB53443F2D5CF42F007B27D8 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB53443E2D5CF42A007B27D8 /* Notes.swift */; };
 		AB5ADB342D5C152B00AF5B74 /* BriefShareExt.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB5ADB2A2D5C152B00AF5B74 /* BriefShareExt.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		AB5ADB3D2D5C1D8E00AF5B74 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB5ADB3C2D5C1D8E00AF5B74 /* Info.plist */; };
 		AB95522A2D4EA4AD00BE843F /* SummarizerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9552292D4EA4AD00BE843F /* SummarizerService.swift */; };
 		ABA37CD62D4063640080096D /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA37CD52D4063640080096D /* ArticleViewModel.swift */; };
 		ABA37CD82D4071D00080096D /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA37CD72D4071D00080096D /* ArticleListView.swift */; };
 		ABAC3BC12D62BBC900EA1B9B /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAC3BC02D62BBC900EA1B9B /* ShareSheetView.swift */; };
 		ABAD3E392D445FEE00180A86 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAD3E382D445FEE00180A86 /* ArticleView.swift */; };
+		ABB709642D65443000B21AFC /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB709632D65443000B21AFC /* NotesView.swift */; };
+		ABB709682D6544DF00B21AFC /* BriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB709672D6544DF00B21AFC /* BriefView.swift */; };
+		ABB7096A2D65462600B21AFC /* SheetTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB709692D65462600B21AFC /* SheetTitleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +73,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AB0CCAC02D64098B00D3A1E8 /* BriefedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefedView.swift; sourceTree = "<group>"; };
 		AB1DCD9C2D504620005E1A0E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AB41A9DA2D3D762900099765 /* Brief.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Brief.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB41A9EA2D3D762A00099765 /* BriefTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BriefTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +100,9 @@
 		ABA37CD72D4071D00080096D /* ArticleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListView.swift; sourceTree = "<group>"; };
 		ABAC3BC02D62BBC900EA1B9B /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		ABAD3E382D445FEE00180A86 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
+		ABB709632D65443000B21AFC /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
+		ABB709672D6544DF00B21AFC /* BriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefView.swift; sourceTree = "<group>"; };
+		ABB709692D65462600B21AFC /* SheetTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetTitleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -230,9 +233,9 @@
 			children = (
 				AB41AA612D3DA87700099765 /* OpeningView.swift */,
 				ABAD3E382D445FEE00180A86 /* ArticleView.swift */,
-				AB41AA492D3D799F00099765 /* WebView.swift */,
 				ABA37CD72D4071D00080096D /* ArticleListView.swift */,
-				AB0CCAC02D64098B00D3A1E8 /* BriefedView.swift */,
+				ABB709632D65443000B21AFC /* NotesView.swift */,
+				ABB709672D6544DF00B21AFC /* BriefView.swift */,
 				AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */,
 				ABB21BC22D458FEA00A0FD86 /* GlobalViews */,
 			);
@@ -286,7 +289,9 @@
 			isa = PBXGroup;
 			children = (
 				AB45DDED2D4C2E38002298DE /* ArticleTitleView.swift */,
+				AB41AA492D3D799F00099765 /* WebView.swift */,
 				ABAC3BC02D62BBC900EA1B9B /* ShareSheetView.swift */,
+				ABB709692D65462600B21AFC /* SheetTitleView.swift */,
 			);
 			path = GlobalViews;
 			sourceTree = "<group>";
@@ -449,7 +454,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB5ADB3D2D5C1D8E00AF5B74 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,14 +483,16 @@
 				AB95522A2D4EA4AD00BE843F /* SummarizerService.swift in Sources */,
 				ABA37CD82D4071D00080096D /* ArticleListView.swift in Sources */,
 				AB41AA4A2D3D799F00099765 /* WebView.swift in Sources */,
+				ABB7096A2D65462600B21AFC /* SheetTitleView.swift in Sources */,
 				AB41AA682D3DB64E00099765 /* ToolBarButtonView.swift in Sources */,
 				AB41AA482D3D792100099765 /* SharedArticleManager.swift in Sources */,
 				ABAC3BC12D62BBC900EA1B9B /* ShareSheetView.swift in Sources */,
-				AB0CCAC12D64098B00D3A1E8 /* BriefedView.swift in Sources */,
 				AB41AA342D3D780900099765 /* BriefApp.swift in Sources */,
 				AB41AA352D3D780900099765 /* ContentView.swift in Sources */,
+				ABB709642D65443000B21AFC /* NotesView.swift in Sources */,
 				ABA37CD62D4063640080096D /* ArticleViewModel.swift in Sources */,
 				AB41AA662D3DAEA700099765 /* ArticleModel.swift in Sources */,
+				ABB709682D6544DF00B21AFC /* BriefView.swift in Sources */,
 				AB41AA622D3DA87700099765 /* OpeningView.swift in Sources */,
 				AB45DDEE2D4C2E38002298DE /* ArticleTitleView.swift in Sources */,
 				ABAD3E392D445FEE00180A86 /* ArticleView.swift in Sources */,
