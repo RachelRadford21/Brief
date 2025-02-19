@@ -66,13 +66,13 @@ extension ArticleListView {
                 .swipeActions {
                     swipeActionsView(article: article)
                 }
+                .sheet(isPresented: $getBriefed) {
+                        BriefView()
+                }
                 .sheet(isPresented: $showShareSheet) {
                     if let url = article.url {
                         ActivityViewController(items: [url])
                     }
-                }
-                .sheet(isPresented: $getBriefed) {
-                    BriefView()
                 }
                 .sheet(isPresented: $showNotes) {
                     NotesView()
@@ -84,6 +84,7 @@ extension ArticleListView {
                     .customToolbar(url: articleManager.sharedURL, buttons: [
                         ("note.text.badge.plus", { showNotes.toggle() }),
                         ("message", { showShareSheet.toggle() }),
+                        // Need to figure out why this disppears on first tap
                         ("briefcase.fill", { getBriefed.toggle() }),
                         ("trash.square", {
                             articleVM.deleteArticle(id: article.id, title: article.title, url: article.url!, read: article.read, dateSaved: article.dateSaved)

@@ -12,8 +12,11 @@ struct SheetTitleView: View {
     var fontStyle: String = "MerriweatherSans-VariableFont_Wght"
     var fontSize: CGFloat = 40
     var body: some View {
-        Text(title)
-            .font(.custom(fontStyle, size: fontSize).bold())
+        VStack(spacing: 10) {
+            Text(title)
+                .font(.custom(fontStyle, size: fontSize).bold())
+                .padding(.top, 15)
+        }
     }
 }
 

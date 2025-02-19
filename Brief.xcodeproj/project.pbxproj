@@ -32,6 +32,7 @@
 		ABB709642D65443000B21AFC /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB709632D65443000B21AFC /* NotesView.swift */; };
 		ABB709682D6544DF00B21AFC /* BriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB709672D6544DF00B21AFC /* BriefView.swift */; };
 		ABB7096A2D65462600B21AFC /* SheetTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB709692D65462600B21AFC /* SheetTitleView.swift */; };
+		ABB7096C2D65499200B21AFC /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB7096B2D65499200B21AFC /* SpeechSynthesizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		ABB709632D65443000B21AFC /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		ABB709672D6544DF00B21AFC /* BriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefView.swift; sourceTree = "<group>"; };
 		ABB709692D65462600B21AFC /* SheetTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetTitleView.swift; sourceTree = "<group>"; };
+		ABB7096B2D65499200B21AFC /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -224,6 +226,7 @@
 			children = (
 				ABA37CD52D4063640080096D /* ArticleViewModel.swift */,
 				AB41AA442D3D792100099765 /* SharedArticleManager.swift */,
+				ABB7096B2D65499200B21AFC /* SpeechSynthesizer.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -495,6 +498,7 @@
 				ABB709682D6544DF00B21AFC /* BriefView.swift in Sources */,
 				AB41AA622D3DA87700099765 /* OpeningView.swift in Sources */,
 				AB45DDEE2D4C2E38002298DE /* ArticleTitleView.swift in Sources */,
+				ABB7096C2D65499200B21AFC /* SpeechSynthesizer.swift in Sources */,
 				ABAD3E392D445FEE00180A86 /* ArticleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
