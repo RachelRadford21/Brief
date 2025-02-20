@@ -1,5 +1,5 @@
 //
-//  SheetTitleView.swift
+//  TitleView.swift
 //  Brief
 //
 //  Created by Rachel Radford on 2/18/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SheetTitleView: View {
+struct TitleView: View {
     var title: String = ""
     var fontStyle: String = "MerriweatherSans-VariableFont_Wght"
     var fontSize: CGFloat = 40
@@ -21,5 +21,5 @@ struct SheetTitleView: View {
 }
 
 #Preview {
-    SheetTitleView()
+    TitleView()
 }

@@ -89,6 +89,7 @@ extension SharedArticleManager {
         }
         
         if var title = parseTitle(from: htmlContent) {
+            // Handle named HTML entities
             title = title
                 .replacingOccurrences(of: "&nbsp;", with: " ")
                 .replacingOccurrences(of: "&amp;", with: "&")
@@ -97,7 +98,42 @@ extension SharedArticleManager {
                 .replacingOccurrences(of: "&quot;", with: "\"")
                 .replacingOccurrences(of: "&#39;", with: "'")
                 .replacingOccurrences(of: "&apos;", with: "'")
-        
+            
+            // Handle hexadecimal HTML entities (like &#x27;)
+            if let hexRegex = try? NSRegularExpression(pattern: "&#x([0-9a-fA-F]+);") {
+                let nsRange = NSRange(title.startIndex..<title.endIndex, in: title)
+                let matches = hexRegex.matches(in: title, range: nsRange)
+                
+                // Process matches in reverse order to not affect the ranges
+                for match in matches.reversed() {
+                    if match.numberOfRanges > 1,
+                       let hexRange = Range(match.range(at: 1), in: title),
+                       let codePoint = UInt32(title[hexRange], radix: 16),
+                       let scalar = UnicodeScalar(codePoint) {
+                        
+                        let fullRange = Range(match.range, in: title)!
+                        title.replaceSubrange(fullRange, with: String(scalar))
+                    }
+                }
+            }
+            
+            // Handle decimal HTML entities more comprehensively
+            if let decRegex = try? NSRegularExpression(pattern: "&#([0-9]+);") {
+                let nsRange = NSRange(title.startIndex..<title.endIndex, in: title)
+                let matches = decRegex.matches(in: title, range: nsRange)
+                
+                for match in matches.reversed() {
+                    if match.numberOfRanges > 1,
+                       let decRange = Range(match.range(at: 1), in: title),
+                       let codePoint = UInt32(title[decRange]),
+                       let scalar = UnicodeScalar(codePoint) {
+                        
+                        let fullRange = Range(match.range, in: title)!
+                        title.replaceSubrange(fullRange, with: String(scalar))
+                    }
+                }
+            }
+            
             title = title.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
             title = title.trimmingCharacters(in: .whitespacesAndNewlines)
             

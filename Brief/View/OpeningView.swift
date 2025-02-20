@@ -23,7 +23,7 @@ struct OpeningView: View {
 extension OpeningView {
     var openingView: some View {
         VStack {
-            headerView
+            TitleView(title: "Brief")
             
             subHeaderTextView
             
@@ -33,11 +33,6 @@ extension OpeningView {
             
             Spacer()
         }
-    }
-    
-    var headerView: some View {
-        Text("BRIEF")
-            .font(.custom("MerriweatherSans-VariableFont_wght", size: 28))
     }
     
     var subHeaderTextView: some View {

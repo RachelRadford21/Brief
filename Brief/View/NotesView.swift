@@ -11,7 +11,7 @@ struct NotesView: View {
     @State var notes: String = ""
     var body: some View {
         VStack(spacing: 15) {
-            SheetTitleView(title: "Notes")
+            TitleView(title: "Notes")
             TextEditor(text: $notes)
                 .font(.custom("BarlowCondensed-Regular", size: 20))
                 .border(Color.gray, width: 1)

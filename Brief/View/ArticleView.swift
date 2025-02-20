@@ -41,7 +41,9 @@ extension ArticleView {
         .onChange(of: url) {
             loadArticle(url: url)
             summarizer.extractAndTokenizeText(url: url)
-        }
+        } .customToolbar(url: nil, placement: .topBarTrailing, buttons: [
+        ("gear", {  })
+        ])
     }
     
     func loadArticle(url: URL) {

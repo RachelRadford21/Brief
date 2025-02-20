@@ -21,7 +21,7 @@ struct BriefView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .center, spacing: 20) {
-                SheetTitleView(title: "Brief")
+                TitleView(title: "Brief")
                 Text(articleVM.summary)
                     .font(.custom("BarlowCondensed-Regular", size: 25))
                     .onAppear {

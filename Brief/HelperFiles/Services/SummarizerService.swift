@@ -15,35 +15,74 @@ class SummarizerService {
     var articleVM = ArticleViewModel.shared
     var articleManager: SharedArticleManager = SharedArticleManager()
     
-    private let boilerplatePatterns = [
-        "contact us",
-        "privacy policy",
-        "terms of use",
-        "all rights reserved",
-        "follow us",
-        "share this",
-        "subscribe",
-        "newsletter",
-        "press release",
-        "press contact",
-        "cookie",
-        "subscribe"
-    ]
+    private struct Patterns {
+        static let boilerplate = [
+            "contact us", "privacy policy", "terms of use", "all rights reserved",
+            "follow us", "share this", "subscribe", "newsletter", "press release",
+            "press contact", "cookie"
+        ]
+        
+        static let mediaPatterns = MediaPatterns()
+        
+        static let navigation = [
+            "^menu$", "^home$", "^contact$", "^about$",
+            "^services$", "^top$", "^bottom$"
+        ]
+        
+        static let htmlTags = [
+            "<script[^>]*>[\\s\\S]*?</script>",
+            "<style[^>]*>[\\s\\S]*?</style>",
+            "<img[^>]*>",
+            "<figure[^>]*>[\\s\\S]*?</figure>",
+            "<video[^>]*>[\\s\\S]*?</video>",
+            "<iframe[^>]*>[\\s\\S]*?</iframe>",
+            "<div[^>]*(?:video|player|media)[^>]*>[\\s\\S]*?</div>"
+        ]
+    }
     
-    private let htmlEntities = [
-        "&nbsp;": " ",
-        "&amp;": "&",
-        "&lt;": "<",
-        "&gt;": ">",
-        "&quot;": "\"",
-        "&#39;": "'",
+    private struct MediaPatterns {
+        let imageCaption = [
+            "Photo:", "Image:", "Credit:", "Source:",
+            "Photo by", "Image courtesy of", "PHOTO:", "IMAGE:"
+        ]
+        
+        let imageMarkup = [
+            "\\[image\\].*?\\[/image\\]",
+            "\\{image\\}.*?\\{/image\\}",
+            "\\[caption\\].*?\\[/caption\\]"
+        ]
+        
+        let video = [
+            "(?:Video|Watch): [^.]+\\.",
+            "\\[(?:Video|Watch)\\].*?\\[/(?:Video|Watch)\\]",
+            "Watch the video below.*?\\.",
+            "Watch the full video.*?\\.",
+            "Click to play the video.*?\\.",
+            "\\d+:\\d+ video shows.*?\\.",
+            "The video above shows.*?\\.",
+            "\\d+:\\d+\\s*-\\s*\\d+:\\d+",
+            "\\[\\d+:\\d+\\]",
+            "Video (?:credit|courtesy of|by).*?\\."
+        ]
+        
+        let videoKeywords = [
+            "in this video", "watch as", "this clip shows",
+            "the footage shows", "video player", "play button",
+            "video thumbnail"
+        ]
+    }
+    
+    private let htmlEntities: [String: String] = [
+        "&nbsp;": " ", "&amp;": "&", "&lt;": "<",
+        "&gt;": ">", "&quot;": "\"", "&#39;": "'",
         "&apos;": "'"
     ]
     
     private let extendedStopWords: Set<String> = [
-        "the", "and", "is", "of", "to", "in", "that", "it", "on", "for", "with",
-        "about", "menu", "search", "home", "contact", "services", "resources",
-        "topics", "help", "learn", "click", "here", "read", "more"
+        "the", "and", "is", "of", "to", "in", "that", "it",
+        "on", "for", "with", "about", "menu", "search", "home",
+        "contact", "services", "resources", "topics", "help",
+        "learn", "click", "here", "read", "more"
     ]
     
     func summarize(_ html: String) -> String {
@@ -51,7 +90,7 @@ class SummarizerService {
             return cachedSummary
         }
         
-
+        
         let articleText = extractMainArticle(from: html)
         let cleanedText = cleanText(articleText)
         let processedText = preprocessText(cleanedText)
@@ -64,19 +103,30 @@ class SummarizerService {
         return summary
     }
     
+    func getCachedSummary(for text: String) -> String? {
+        return cache.object(forKey: text as NSString) as String?
+    }
+    
+    func extractAndTokenizeText(url: URL) {
+        articleManager.fetchAndExtractText(from: url.absoluteString) { [weak self] html in
+            guard let self = self, let html = html else { return }
+            self.articleVM.summary = self.summarize(html)
+        }
+    }
+    
+    
     private func extractMainArticle(from html: String) -> String {
-        // First remove scripts and styles
-        let cleanedHTML = html
-            .replacingOccurrences(of: "<script[^>]*>[\\s\\S]*?</script>", with: "", options: .regularExpression)
-            .replacingOccurrences(of: "<style[^>]*>[\\s\\S]*?</style>", with: "", options: .regularExpression)
-        
-        // Replace HTML entities
-        var processedHTML = cleanedHTML
-        for (entity, replacement) in htmlEntities {
-            processedHTML = processedHTML.replacingOccurrences(of: entity, with: replacement)
+        // Remove unwanted HTML tags
+        let cleanedHTML = Patterns.htmlTags.reduce(html) { text, pattern in
+            text.replacingOccurrences(of: pattern, with: "", options: .regularExpression)
         }
         
-        // Extract paragraphs
+        // Replace HTML entities
+        let processedHTML = htmlEntities.reduce(cleanedHTML) { text, entity in
+            text.replacingOccurrences(of: entity.key, with: entity.value)
+        }
+        
+        // Extract and filter paragraphs
         let regex = try! NSRegularExpression(pattern: "<p.*?>(.*?)</p>", options: .dotMatchesLineSeparators)
         let matches = regex.matches(in: processedHTML, range: NSRange(processedHTML.startIndex..., in: processedHTML))
         
@@ -84,148 +134,147 @@ class SummarizerService {
             Range($0.range(at: 1), in: processedHTML).map { String(processedHTML[$0]) }
         }
         
-        // Filter meaningful paragraphs
-        let filteredParagraphs = paragraphs.filter {
-            $0.count > 50 && !containsBoilerplate($0)
-        }
-        
-        // Clean up remaining HTML tags and normalize whitespace
-        return filteredParagraphs.joined(separator: " ")
+        return paragraphs
+            .filter { paragraph in
+                paragraph.count > 50 &&
+                !containsBoilerplate(paragraph) &&
+                !containsImageCaption(paragraph)
+            }
+            .joined(separator: " ")
             .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression)
             .replacingOccurrences(of: "\\s{2,}", with: " ", options: .regularExpression)
-            .replacingOccurrences(of: "\n{2,}", with: "\n", options: .regularExpression)
             .trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
-    private func containsBoilerplate(_ text: String) -> Bool {
-        let lowercasedText = text.lowercased()
-        return boilerplatePatterns.contains { pattern in
-            lowercasedText.contains(pattern.lowercased())
+    private func cleanText(_ text: String) -> String {
+        // First remove duplicated paragraphs
+        let paragraphs = text.components(separatedBy: ". ")
+        var seenParagraphs = Set<String>()
+        let uniqueParagraphs = paragraphs.filter { paragraph in
+            let normalized = paragraph.trimmingCharacters(in: .whitespacesAndNewlines)
+                                    .lowercased()
+                                    .replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+            return seenParagraphs.insert(normalized).inserted
+        }
+        let cleanedText = uniqueParagraphs.joined(separator: ". ")
+        
+        // Then apply all the other cleaners
+        let cleaners: [(String, String)] = [
+            // URLs
+            ("https?://\\S+\\b|www\\.\\S+\\b", ""),
+            // Email addresses
+            ("[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}", ""),
+            // Phone numbers
+            ("\\(?\\d{3}\\)?[-.\\s]?\\d{3}[-.\\s]?\\d{4}", ""),
+            // Image/video parentheticals
+            ("\\([^)]*(?:photo|image|picture|pic|figure|illustration)[^)]*\\)", ""),
+            // Photo credits
+            ("(?:Photo|Image)(?:\\s+credit|\\s+by|\\s+courtesy)[^\\n.]+", ""),
+            // Multiple spaces
+            ("\\s+", " ")
+        ]
+        
+        return cleaners.reduce(cleanedText) { partialResult, cleaner in
+            partialResult.replacingOccurrences(
+                of: cleaner.0,
+                with: cleaner.1,
+                options: .regularExpression
+            )
         }
     }
     
-    private func cleanText(_ text: String) -> String {
-        var cleanedText = text
-        
-        // Remove URLs
-        let urlPattern = "https?://\\S+\\b|www\\.\\S+\\b"
-        cleanedText = cleanedText.replacingOccurrences(of: urlPattern, with: "", options: .regularExpression)
-        
-        // Remove email addresses
-        let emailPattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        cleanedText = cleanedText.replacingOccurrences(of: emailPattern, with: "", options: .regularExpression)
-        
-        // Remove phone numbers
-        let phonePattern = "\\(?\\d{3}\\)?[-.\\s]?\\d{3}[-.\\s]?\\d{4}"
-        cleanedText = cleanedText.replacingOccurrences(of: phonePattern, with: "", options: .regularExpression)
-        
-        // Remove multiple spaces and newlines
-        cleanedText = cleanedText.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
-        
-        return cleanedText.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-    
     private func preprocessText(_ text: String) -> String {
-        let words = text.components(separatedBy: " ").filter { !extendedStopWords.contains($0.lowercased()) }
-        return words.joined(separator: " ")
+        return text.components(separatedBy: " ")
+            .filter { !extendedStopWords.contains($0.lowercased()) }
+            .joined(separator: " ")
     }
     
     private func tokenizeText(_ text: String) -> [String] {
         let tokenizer = NLTokenizer(unit: .sentence)
         tokenizer.string = text
-        var sentences: [String] = []
         
-        tokenizer.enumerateTokens(in: text.startIndex..<text.endIndex) { range, _ in
-            let sentence = String(text[range])
-            if sentence.split(separator: " ").count > 3 && !isNavigationElement(sentence) {
-                sentences.append(sentence)
+        return tokenizer.tokens(for: text.startIndex..<text.endIndex)
+            .map { String(text[$0]) }
+            .filter { sentence in
+                sentence.split(separator: " ").count > 3 &&
+                !isNavigationElement(sentence)
             }
-            return true
-        }
-        
-        return sentences
-    }
-    
-    private func isNavigationElement(_ text: String) -> Bool {
-        let navigationPatterns = [
-            "^menu$",
-            "^home$",
-            "^contact$",
-            "^about$",
-            "^services$",
-            "^top$",
-            "^bottom$"
-        ]
-        
-        let lowercasedText = text.lowercased()
-        return navigationPatterns.contains { pattern in
-            lowercasedText.range(of: pattern, options: .regularExpression) != nil
-        }
     }
     
     private func rankSentences(_ sentences: [String]) -> [String] {
+        // Create set to track unique sentences
+        var uniqueSentences = Set<String>()
         var scoredSentences: [(String, Double)] = []
         
         for sentence in sentences {
-            let entityScore = Double(entityScore(for: sentence))
-            let lengthScore = lengthScore(for: sentence)
-            let positionScore = positionScore(for: sentence, in: sentences)
+            // Normalize sentence for comparison
+            let normalizedSentence = sentence.trimmingCharacters(in: .whitespacesAndNewlines)
+                                           .lowercased()
+                                           .replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+            
+            // Skip if we've seen this sentence before
+            guard !uniqueSentences.contains(normalizedSentence) else { continue }
+            uniqueSentences.insert(normalizedSentence)
+            
+            // Regular scoring logic
+            let entityScore = Double(computeEntityScore(for: sentence))
+            let lengthScore = computeLengthScore(for: sentence)
+            let positionScore = computePositionScore(for: sentence, in: sentences)
             
             let totalScore = (entityScore * 0.4) + (lengthScore * 0.3) + (positionScore * 0.3)
             scoredSentences.append((sentence, totalScore))
         }
         
-        let topSentences = scoredSentences.sorted { $0.1 > $1.1 }
+        // Get top 3 unique sentences
+        return scoredSentences
+            .sorted { $0.1 > $1.1 }
             .prefix(3)
             .map { $0.0 }
-        
-        return topSentences
     }
     
-    private func entityScore(for text: String) -> Int {
+    private func containsBoilerplate(_ text: String) -> Bool {
+        let lowercasedText = text.lowercased()
+        return Patterns.boilerplate.contains { lowercasedText.contains($0) }
+    }
+    
+    private func containsImageCaption(_ text: String) -> Bool {
+        let lowercasedText = text.lowercased()
+        return Patterns.mediaPatterns.imageCaption.contains { lowercasedText.contains($0.lowercased()) }
+    }
+    
+    private func isNavigationElement(_ text: String) -> Bool {
+        let lowercasedText = text.lowercased()
+        return Patterns.navigation.contains { pattern in
+            lowercasedText.range(of: pattern, options: .regularExpression) != nil
+        }
+    }
+    
+    private func computeEntityScore(for text: String) -> Int {
         let tagger = NLTagger(tagSchemes: [.nameType])
         tagger.string = text
         
         var score = 0
         tagger.enumerateTags(in: text.startIndex..<text.endIndex,
-                            unit: .word,
-                            scheme: .nameType,
-                            options: [.omitPunctuation, .omitWhitespace]) { tag, _ in
-            if let tag = tag, tag == .personalName || tag == .placeName || tag == .organizationName {
+                             unit: .word,
+                             scheme: .nameType,
+                             options: [.omitPunctuation, .omitWhitespace]) { tag, _ in
+            if let tag = tag,
+               [.personalName, .placeName, .organizationName].contains(tag) {
                 score += 1
             }
             return true
         }
-        
         return score
     }
     
-    private func lengthScore(for sentence: String) -> Double {
+    private func computeLengthScore(for sentence: String) -> Double {
         let words = sentence.split(separator: " ")
         let idealLength = 20.0
         return 1.0 - (abs(Double(words.count) - idealLength) / idealLength)
     }
     
-    private func positionScore(for sentence: String, in sentences: [String]) -> Double {
-        if let index = sentences.firstIndex(of: sentence) {
-            return 1.0 - (Double(index) / Double(sentences.count))
-        }
-        return 0.0
-    }
-    
-    func getCachedSummary(for text: String) -> String? {
-           return cache.object(forKey: text as NSString) as String?
-    }
-    
-    func extractAndTokenizeText(url: URL) {
-        articleManager.fetchAndExtractText(from: url.absoluteString) { html in
-            if let html = html {
-                self.articleVM.summary = self.summarize(html)
-                print("summary: \(self.articleVM.summary)")
-                print("Summarizer: \(self.summarize(html))")
-                    
-            }
-        }
+    private func computePositionScore(for sentence: String, in sentences: [String]) -> Double {
+        guard let index = sentences.firstIndex(of: sentence) else { return 0.0 }
+        return 1.0 - (Double(index) / Double(sentences.count))
     }
 }
-
