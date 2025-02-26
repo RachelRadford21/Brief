@@ -7,12 +7,16 @@
 
 import SwiftUI
 import SwiftData
+import AppIntents
 
 @main
 struct BriefApp: App {
     @Environment(\.scenePhase) private var scenePhase
     var articleManager = SharedArticleManager()
     let container = try! ModelContainer(for: ArticleModel.self)
+    static var appShortcuts: AppShortcutsProvider.Type? {
+            return BriefIntentShortcut.self
+    }
     
     var body: some Scene {
         WindowGroup {

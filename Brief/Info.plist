@@ -22,6 +22,8 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSSiriUsageDescription</key>
+	<string>This app provides Siri Shortcuts to read article summaries aloud.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>MerriweatherSans-VariableFont_wght.ttf</string>

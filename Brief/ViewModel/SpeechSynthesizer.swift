@@ -21,6 +21,7 @@ class SpeechSynthesizer: ObservableObject {
         utterance.rate = speechSpeed
         utterance.pitchMultiplier = 1.15
         synthesizer.speak(utterance)
+        stopSpeaking()
     }
     
     func stopSpeaking() {
