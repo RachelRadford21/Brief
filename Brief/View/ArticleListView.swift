@@ -11,6 +11,7 @@ import SwiftData
 struct ArticleListView: View {
     @Environment(\.modelContext) var context
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.openURL) private var openURL
     @State private var showShareSheet: Bool = false
     @State private var showNotes: Bool = false
     @State private var getBriefed: Bool = false
@@ -77,6 +78,7 @@ extension ArticleListView {
                 .sheet(isPresented: $showNotes) {
                     NotesView()
                 }
+               
             }
             .navigationTitle(navTitleView)
             .navigationDestination(for: ArticleModel.self) { article in
@@ -95,6 +97,7 @@ extension ArticleListView {
             }
         }
         .tint(colorScheme == .dark ? Color.accent.opacity(0.7) : .black)
+
     }
     
     @MainActor @ViewBuilder
@@ -119,5 +122,7 @@ extension ArticleListView {
             Image(systemName: name)
         }
     }
+    
+    
 }
 
