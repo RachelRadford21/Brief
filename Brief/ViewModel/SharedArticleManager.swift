@@ -6,16 +6,19 @@
 //
 import Observation
 import Social
+import Network
 
 @Observable
 class SharedArticleManager {
     private let sharedDefaults = UserDefaults(suiteName: "group.com.brief.app")
     var sharedURL: URL?
-
+    var isOffline: Bool
     init(
-        sharedURL: URL? = nil
+        sharedURL: URL? = nil,
+        isOffline: Bool = false
     ) {
         self.sharedURL = sharedURL
+        self.isOffline = isOffline
     }
    
     func loadSharedURL() {
@@ -67,6 +70,19 @@ class SharedArticleManager {
             }
         }
     }
+    
+    func checkInternetConnectivity() async -> Bool {
+           let monitor = NWPathMonitor()
+           return await withCheckedContinuation { continuation in
+               monitor.pathUpdateHandler = { path in
+                   continuation.resume(returning: path.status != .satisfied)
+                   monitor.cancel()
+               }
+               
+               let queue = DispatchQueue(label: "InternetConnectivityMonitor")
+               monitor.start(queue: queue)
+           }
+       }
 }
 
 extension SharedArticleManager {

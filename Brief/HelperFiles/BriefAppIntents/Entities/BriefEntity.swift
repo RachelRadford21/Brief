@@ -12,13 +12,18 @@ import SwiftData
 struct BriefEntity: AppEntity {
     static var typeDisplayRepresentation = TypeDisplayRepresentation(name: "Article")
 
-    static var defaultQuery = BriefQuery()
+    static var defaultQuery = ArticleQuery()
 
     var id: UUID
     var title: String
     var url: URL?
     
+    
     var displayRepresentation: DisplayRepresentation {
-         DisplayRepresentation(title: "\(title)")
-      }
+        let subtitleText = url?.absoluteString ?? "No URL"
+        return DisplayRepresentation(
+            title: "\(title)",
+            subtitle: LocalizedStringResource(stringLiteral: subtitleText)
+        )
+    }
 }

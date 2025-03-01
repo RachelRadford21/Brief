@@ -12,10 +12,21 @@ import AppIntents
 @main
 struct BriefApp: App {
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.openURL) private var openURL
     var articleManager = SharedArticleManager()
-    let container = try! ModelContainer(for: ArticleModel.self)
+    var container = try! ModelContainer(for: ArticleModel.self)
+    
     static var appShortcuts: AppShortcutsProvider.Type? {
-            return BriefIntentShortcut.self
+        return BriefIntentShortcut.self
+    }
+    
+    init()  {
+        do {
+            container = try ModelContainer(for: ArticleModel.self)
+            
+        } catch {
+            fatalError("Failed to create ModelContainer")
+        }
     }
     
     var body: some Scene {
@@ -24,35 +35,50 @@ struct BriefApp: App {
                 .onChange(of: scenePhase) { _, newPhase in
                     if newPhase == .active {
                         articleManager.loadSharedURL()
-                                checkForURLToOpen()
+                        
                     }
                 }
+                .onOpenURL(perform: { url in
+                    handleDeeplink(url: url)
+                    
+                })
         }
-        .modelContainer(for: [ArticleModel.self])
+        .modelContainer(container)
     }
+}
+
+extension BriefApp {
     
-    func checkForURLToOpen() {
-        let shouldOpen = UserDefaults.standard.bool(forKey: "BriefIntent_ShouldOpenURL")
+    func handleDeeplink(url: URL) {
         
-        if shouldOpen {
-            UserDefaults.standard.set(false, forKey: "BriefIntent_ShouldOpenURL")
+        guard url.scheme == "brief", url.host == "article" else {
+            return
+        }
+        
+        let pathComponent = url.lastPathComponent
+        
+        if let articleID = UUID(uuidString: pathComponent) {
+            print("Looking for article with ID: \(articleID)")
             
-            if let urlString = UserDefaults.standard.string(forKey: "BriefIntent_URLToOpen"),
-               let url = URL(string: urlString) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    print("Now opening URL: \(url)")
-                    openURL(url)
-                }
-               
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(
+                    name: Notification.Name("OpenArticleByIDNotification"),
+                    object: nil,
+                    userInfo: ["articleID": articleID]
+                )
             }
         }
-    }
-    
-    func openURL(_ url: URL) {
-        #if os(iOS)
-        UIApplication.shared.open(url)
-        #elseif os(macOS)
-        NSWorkspace.shared.open(url)
-        #endif
+        
+        else if let decodedTitle = pathComponent.removingPercentEncoding {
+            print("Looking for article with title: \(decodedTitle)")
+            
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(
+                    name: Notification.Name("OpenArticleByTitleNotification"),
+                    object: nil,
+                    userInfo: ["title": decodedTitle]
+                )
+            }
+        }
     }
 }

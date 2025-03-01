@@ -9,28 +9,44 @@ import Foundation
 import SwiftData
 import AppIntents
 
-struct ArticleQuery: EntityQuery {
+
+struct BriefQuery: EntityQuery {
+    
+    typealias Entity = BriefEntity
+   
     func entities(for identifiers: [UUID]) async throws -> [BriefEntity] {
-        let container = try ModelContainer(for: ArticleModel.self)
-        let context = ModelContext(container)
-
-        let descriptor = FetchDescriptor<ArticleModel>(
-            predicate: #Predicate<ArticleModel> { article in
-                identifiers.contains(article.id)
-            }
-        )
-
-        let articles = try context.fetch(descriptor)
-
-        return articles.map { BriefEntity(id: $0.id, title: $0.title, url: $0.url) }
+        let viewModel = ArticleViewModel.shared
+        guard let articles = viewModel.fetchData() else { return [] }
+        
+        let filteredArticles = articles.filter { article in
+            identifiers.contains(article.id)
+        }
+        
+        return filteredArticles.map { article in
+            BriefEntity(
+                id: article.id,
+                title: article.title,
+                url: article.url
+            )
+        }
     }
-
+    
     func suggestedEntities() async throws -> [BriefEntity] {
-        let container = try ModelContainer(for: ArticleModel.self)
-        let context = ModelContext(container)
-
-        let articles = try context.fetch(FetchDescriptor<ArticleModel>())
-
-        return articles.map { BriefEntity(id: $0.id, title: $0.title, url: $0.url) }
-    }
+           let viewModel = ArticleViewModel.shared
+           guard let articles = viewModel.fetchData() else { return [] }
+           
+           // Return the most recent 5 articles for suggestions
+           let sortedArticles = articles.sorted { $0.dateSaved > $1.dateSaved }
+           let recentArticles = Array(sortedArticles.prefix(5))
+           
+           // Convert to BriefEntity
+           return recentArticles.map { article in
+               BriefEntity(
+                   id: article.id,
+                   title: article.title,
+                   url: article.url
+               )
+           }
+       }
 }
+

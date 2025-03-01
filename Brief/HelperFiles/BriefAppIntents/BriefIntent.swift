@@ -8,32 +8,35 @@
 import Foundation
 import AppIntents
 import SwiftData
-
-
+import Network
+import SwiftUI
 
 struct BriefIntent: AppIntent {
     static var title: LocalizedStringResource = "Open Article"
-    static var description = IntentDescription("Opens a saved article in the app.")
+    static var description: IntentDescription = IntentDescription(
+        "Opens a saved article in the app",
+        categoryName: "Articles",
+        searchKeywords: ["article", "read", "open", "view", "saved"]
+    )
     
-    @Parameter(title: "Article Title", optionsProvider: ArticleOptionsProvider())
+    @Parameter(title: "Article")
     var title: String
-    
     
     static var parameterSummary: some ParameterSummary {
         Summary("Open \(\.$title)")
     }
     
     @MainActor
-    func perform() async throws -> some IntentResult & ProvidesDialog {
+    func perform() async throws -> some IntentResult & ProvidesDialog  {
         print("BriefIntent activated: Looking for article '\(title)'")
         
         let container = try ModelContainer(for: ArticleModel.self)
-        let context = ModelContext(container)
+        let context = ModelContext(container) // Ensure it's on the main thread
         
         let descriptor = FetchDescriptor<ArticleModel>(
             predicate: #Predicate<ArticleModel> { article in
-                article.title.localizedCaseInsensitiveContains(title) ||
-                    article.title.contains(title)
+                article.title.contains(title) ||
+                article.title == title
             }
         )
         
@@ -43,13 +46,22 @@ struct BriefIntent: AppIntent {
             return .result(dialog: "No article found with title '\(title)'.")
         }
         
-        guard let url = article.url else {
-            return .result(dialog: "This article doesn't have a URL to open")
-        }
-        UserDefaults.standard.set(url.absoluteString, forKey: "BriefIntent_URLToOpen")
-        UserDefaults.standard.set(true, forKey: "BriefIntent_ShouldOpenURL")
+        let urlString = "brief://article/\(article.id)"
         
-        return .result(dialog: "Opening article: \(article.title)")
+        if let url = URL(string: urlString) {
+            await MainActor.run {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+            
+            UserDefaults.standard.set(true, forKey: "BriefIntent_ShouldOpenURL")
+            UserDefaults.standard.set(urlString, forKey: "BriefIntent_URLToOpen")
+            
+            return .result(dialog: "Opening article: \(article.title)")
+            
+        } else {
+            
+            return .result(dialog: "Could not create URL from: \(urlString)")
+        }
     }
 }
 
@@ -60,7 +72,7 @@ struct ArticleOptionsProvider: DynamicOptionsProvider {
         let container = try ModelContainer(for: ArticleModel.self)
         let context = ModelContext(container)
         let articles = try context.fetch(FetchDescriptor<ArticleModel>())
-
+        
         return articles.map { $0.title }
     }
 }

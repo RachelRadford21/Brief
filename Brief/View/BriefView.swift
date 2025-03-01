@@ -11,7 +11,7 @@ struct BriefView: View {
     @Bindable var articleVM = ArticleViewModel.shared
     var summarizer = SummarizerService.shared
     var articleManager: SharedArticleManager
-    var textToSpeech: SpeechSynthesizer = SpeechSynthesizer.shared
+    
     init(
         articleManager: SharedArticleManager = SharedArticleManager()
     ) {
@@ -24,10 +24,7 @@ struct BriefView: View {
                 TitleView(title: "Brief")
                 Text(articleVM.summary)
                     .font(.custom("BarlowCondensed-Regular", size: 25))
-                    .onAppear {
-                        textToSpeech.speak(articleVM.summary)
-                        textToSpeech.stopSpeaking()
-                    }
+
             }
             .padding()
         }

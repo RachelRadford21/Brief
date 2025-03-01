@@ -12,7 +12,7 @@ struct ArticleView: View {
     var articleManager: SharedArticleManager
     var summarizer = SummarizerService.shared
     var url: URL
-    
+
     init(
         articleManager: SharedArticleManager,
         url: URL
@@ -55,14 +55,6 @@ extension ArticleView {
                 }
             } catch {
                 print("Error fetching title: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    func extractAndTokenizeText(url: URL) {
-        articleManager.fetchAndExtractText(from: url.absoluteString) { html in
-            if let html = html {
-                articleVM.summary = summarizer.summarize(html)
             }
         }
     }
