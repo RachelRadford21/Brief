@@ -10,28 +10,26 @@ import SwiftData
 
 @Model
 class ArticleModel: Codable {
-    var id: UUID
+    @Attribute(.unique) var id: UUID = UUID()
     var title: String
     var url: URL?
     var read: Bool
-    var dateSaved: Date
+    var dateSaved: Date = Date()
     var isBookmarked: Bool
     var articleSummary: String?
     
+    @Relationship(inverse: \NoteModel.article) var notes: [NoteModel] = []
+    
     init(
-        id: UUID,
         title: String,
         url: URL? = nil,
         read: Bool = false,
-        dateSaved: Date,
         isBookmarked: Bool = false,
         articleSummary: String? = nil
     ) {
-        self.id = id
         self.title = title
         self.url = url
         self.read = read
-        self.dateSaved = dateSaved
         self.isBookmarked = isBookmarked
         self.articleSummary = articleSummary
     }

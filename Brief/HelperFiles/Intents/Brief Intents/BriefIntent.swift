@@ -8,7 +8,6 @@
 import Foundation
 import AppIntents
 import SwiftData
-import Network
 import SwiftUI
 
 struct BriefIntent: AppIntent {

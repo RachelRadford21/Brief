@@ -29,7 +29,17 @@ struct IntentShortcut: AppShortcutsProvider {
                 ],
                 shortTitle: "Open Article",
                 systemImageName: "doc.text"
-            )
+            ),
+            AppShortcut(
+                       intent: NoteIntent(),
+                       phrases: [
+                           "Open note [note] in Brief",
+                           "Show me note [note] in Brief",
+                           "Read my note [note] in Brief"
+                       ],
+                       shortTitle: "Open Note",
+                       systemImageName: "note.text"
+                   )
         ]
     }
 }

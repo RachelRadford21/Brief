@@ -10,15 +10,15 @@ import SwiftData
 
 struct NotesView: View {
     @Environment(\.modelContext) var context
-    var noteVM: NoteViewModel = NoteViewModel.shared
     @State private var text: String = ""
     @State private var title: String = ""
+    var noteVM: NoteViewModel = NoteViewModel.shared
     var note: NoteModel
     
     public init(
         note: NoteModel = NoteModel(title: "", text: ""),
         noteVM: NoteViewModel = NoteViewModel.shared
-
+        
     ) {
         self.note = note
         self.noteVM = noteVM
@@ -41,10 +41,10 @@ struct NotesView: View {
             }
         }
         .padding(.horizontal)
-        
     }
 }
 
 #Preview {
     NotesView(note: NoteModel(), noteVM: NoteViewModel())
 }
+

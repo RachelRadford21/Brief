@@ -10,19 +10,18 @@ import SwiftData
 
 @Model
 class NoteModel: Identifiable {
-    @Attribute(.unique) var id: UUID
+    @Attribute(.unique) var id: UUID = UUID()
+    var title: String
     var text: String
-    var dateCreated: Date
+    var dateCreated: Date = Date()
     
-    @Relationship(inverse: \ArticleModel.notes) var article: ArticleModel?
+    @Relationship var article: ArticleModel?
     
     init(
-        id: UUID,
-        text: String = "",
-        dateCreated: Date
+        title: String = "",
+        text: String = ""
     ) {
-        self.id = id
+        self.title = title
         self.text = text
-        self.dateCreated = dateCreated
     }
 }

@@ -15,10 +15,16 @@ class ArticleViewModel {
     var article: ArticleModel?
     var articleTitle: String = ""
     var summary: String = ""
+    var getBriefed: Bool
+    var showNotes: Bool
+    var showShareSheet: Bool
     
     init(
         context: ModelContext? = nil,
-        article: ArticleModel? = nil
+        article: ArticleModel? = nil,
+        getBriefed: Bool = false,
+        showNotes: Bool = false,
+        showShareSheet: Bool = false
     ) {
         if let providedContext = context {
             self.context = providedContext
@@ -27,11 +33,14 @@ class ArticleViewModel {
             self.context = ModelContext(container)
         }
         self.article = article
+        self.getBriefed = getBriefed
+        self.showNotes = showNotes
+        self.showShareSheet = showShareSheet
     }
     
     func saveArticle(title: String, url: URL, dateSaved: Date, articleSummary: String) {
         
-        let newArticle = ArticleModel(id: UUID(), title: title, url: url, dateSaved: dateSaved, articleSummary: articleSummary)
+        let newArticle = ArticleModel(title: title, url: url, articleSummary: articleSummary)
         context.insert(newArticle)
         
         do {

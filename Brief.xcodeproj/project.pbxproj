@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		AB02E6EA2D6D28F0002F04B6 /* AppIntents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB02E6E92D6D28F0002F04B6 /* AppIntents.framework */; };
 		AB02E6EC2D6D2919002F04B6 /* BriefIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB02E6EB2D6D2918002F04B6 /* BriefIntent.swift */; };
-		AB02E6EE2D6D2970002F04B6 /* BriefIntentShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB02E6ED2D6D2970002F04B6 /* BriefIntentShortcut.swift */; };
+		AB02E6EE2D6D2970002F04B6 /* IntentShortcut.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB02E6ED2D6D2970002F04B6 /* IntentShortcut.swift */; };
 		AB1DCD9D2D504620005E1A0E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = AB1DCD9C2D504620005E1A0E /* README.md */; };
 		AB41AA322D3D780900099765 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA2B2D3D780900099765 /* Preview Assets.xcassets */; };
 		AB41AA332D3D780900099765 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB41AA2D2D3D780900099765 /* Assets.xcassets */; };
@@ -29,16 +29,23 @@
 		AB5ADB342D5C152B00AF5B74 /* BriefShareExt.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB5ADB2A2D5C152B00AF5B74 /* BriefShareExt.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB95522A2D4EA4AD00BE843F /* SummarizerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9552292D4EA4AD00BE843F /* SummarizerService.swift */; };
 		ABA37CD62D4063640080096D /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA37CD52D4063640080096D /* ArticleViewModel.swift */; };
-		ABA37CD82D4071D00080096D /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA37CD72D4071D00080096D /* ArticleListView.swift */; };
 		ABA7D5962D73BA900063FD05 /* SubHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA7D5952D73BA900063FD05 /* SubHeaderView.swift */; };
 		ABA7D5982D73BB100063FD05 /* MultiLineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA7D5972D73BB100063FD05 /* MultiLineTextView.swift */; };
+		ABA7D59B2D74E9CA0063FD05 /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA7D59A2D74E9CA0063FD05 /* NoteModel.swift */; };
+		ABA7D59D2D74EA340063FD05 /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA7D59C2D74EA2C0063FD05 /* NoteViewModel.swift */; };
+		ABA7D5A12D74FACD0063FD05 /* NoteIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA7D5A02D74FACD0063FD05 /* NoteIntent.swift */; };
 		ABAAC2F02D6E9F6200687382 /* BriefEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAC2EF2D6E9F6200687382 /* BriefEntity.swift */; };
 		ABAAC2F22D6E9F8E00687382 /* BriefQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAAC2F12D6E9F8E00687382 /* BriefQuery.swift */; };
 		ABAC3BC12D62BBC900EA1B9B /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAC3BC02D62BBC900EA1B9B /* ShareSheetView.swift */; };
 		ABAD3E392D445FEE00180A86 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABAD3E382D445FEE00180A86 /* ArticleView.swift */; };
-		ABB709642D65443000B21AFC /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB709632D65443000B21AFC /* NotesView.swift */; };
 		ABB709682D6544DF00B21AFC /* BriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB709672D6544DF00B21AFC /* BriefView.swift */; };
 		ABB7096A2D65462600B21AFC /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB709692D65462600B21AFC /* TitleView.swift */; };
+		ABCDD4432D751F4200D7102B /* NavListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDD4422D751F4200D7102B /* NavListView.swift */; };
+		ABF2B0B02D753C150009568F /* NoteEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF2B0AF2D753C150009568F /* NoteEntity.swift */; };
+		ABF2B0B22D753CA30009568F /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF2B0B12D753CA30009568F /* ArticleListView.swift */; };
+		ABF2B0B42D753CE00009568F /* NavStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF2B0B32D753CE00009568F /* NavStackView.swift */; };
+		ABF2B0B62D753DD10009568F /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF2B0B52D753DD10009568F /* NotesView.swift */; };
+		ABF33D232D750ACF005B6DFA /* NoteQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF33D222D750ACF005B6DFA /* NoteQuery.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,7 +89,7 @@
 /* Begin PBXFileReference section */
 		AB02E6E92D6D28F0002F04B6 /* AppIntents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppIntents.framework; path = System/Library/Frameworks/AppIntents.framework; sourceTree = SDKROOT; };
 		AB02E6EB2D6D2918002F04B6 /* BriefIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefIntent.swift; sourceTree = "<group>"; };
-		AB02E6ED2D6D2970002F04B6 /* BriefIntentShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefIntentShortcut.swift; sourceTree = "<group>"; };
+		AB02E6ED2D6D2970002F04B6 /* IntentShortcut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentShortcut.swift; sourceTree = "<group>"; };
 		AB1DCD9C2D504620005E1A0E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AB41A9DA2D3D762900099765 /* Brief.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Brief.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB41A9EA2D3D762A00099765 /* BriefTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BriefTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,16 +114,23 @@
 		AB5ADB3C2D5C1D8E00AF5B74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB9552292D4EA4AD00BE843F /* SummarizerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizerService.swift; sourceTree = "<group>"; };
 		ABA37CD52D4063640080096D /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
-		ABA37CD72D4071D00080096D /* ArticleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListView.swift; sourceTree = "<group>"; };
 		ABA7D5952D73BA900063FD05 /* SubHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubHeaderView.swift; sourceTree = "<group>"; };
 		ABA7D5972D73BB100063FD05 /* MultiLineTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiLineTextView.swift; sourceTree = "<group>"; };
+		ABA7D59A2D74E9CA0063FD05 /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
+		ABA7D59C2D74EA2C0063FD05 /* NoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
+		ABA7D5A02D74FACD0063FD05 /* NoteIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteIntent.swift; sourceTree = "<group>"; };
 		ABAAC2EF2D6E9F6200687382 /* BriefEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefEntity.swift; sourceTree = "<group>"; };
 		ABAAC2F12D6E9F8E00687382 /* BriefQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefQuery.swift; sourceTree = "<group>"; };
 		ABAC3BC02D62BBC900EA1B9B /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
 		ABAD3E382D445FEE00180A86 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
-		ABB709632D65443000B21AFC /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 		ABB709672D6544DF00B21AFC /* BriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefView.swift; sourceTree = "<group>"; };
 		ABB709692D65462600B21AFC /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		ABCDD4422D751F4200D7102B /* NavListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavListView.swift; sourceTree = "<group>"; };
+		ABF2B0AF2D753C150009568F /* NoteEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEntity.swift; sourceTree = "<group>"; };
+		ABF2B0B12D753CA30009568F /* ArticleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListView.swift; sourceTree = "<group>"; };
+		ABF2B0B32D753CE00009568F /* NavStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavStackView.swift; sourceTree = "<group>"; };
+		ABF2B0B52D753DD10009568F /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
+		ABF33D222D750ACF005B6DFA /* NoteQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteQuery.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -192,15 +206,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		AB02E6EF2D6E815B002F04B6 /* BriefAppIntents */ = {
+		AB02E6EF2D6E815B002F04B6 /* Brief Intents */ = {
 			isa = PBXGroup;
 			children = (
-				AB02E6ED2D6D2970002F04B6 /* BriefIntentShortcut.swift */,
 				AB02E6EB2D6D2918002F04B6 /* BriefIntent.swift */,
 				ABAAC2EF2D6E9F6200687382 /* BriefEntity.swift */,
 				ABAAC2F12D6E9F8E00687382 /* BriefQuery.swift */,
 			);
-			path = BriefAppIntents;
+			path = "Brief Intents";
 			sourceTree = "<group>";
 		};
 		AB41A9D12D3D762800099765 = {
@@ -257,6 +270,7 @@
 		AB41AA462D3D792100099765 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				ABA7D59C2D74EA2C0063FD05 /* NoteViewModel.swift */,
 				ABA37CD52D4063640080096D /* ArticleViewModel.swift */,
 				AB41AA442D3D792100099765 /* SharedArticleManager.swift */,
 			);
@@ -268,8 +282,8 @@
 			children = (
 				ABA7D5942D73BA6F0063FD05 /* Opening View */,
 				ABAD3E382D445FEE00180A86 /* ArticleView.swift */,
-				ABA37CD72D4071D00080096D /* ArticleListView.swift */,
-				ABB709632D65443000B21AFC /* NotesView.swift */,
+				ABCDD43F2D751EB400D7102B /* Article List View */,
+				ABA7D5992D74E6BF0063FD05 /* Notes View */,
 				ABB709672D6544DF00B21AFC /* BriefView.swift */,
 				AB41AA672D3DB64E00099765 /* ToolBarButtonView.swift */,
 				ABB21BC22D458FEA00A0FD86 /* GlobalViews */,
@@ -280,9 +294,9 @@
 		AB41AA4E2D3D9D2C00099765 /* HelperFiles */ = {
 			isa = PBXGroup;
 			children = (
+				ABA7D59F2D74FA930063FD05 /* Intents */,
 				AB8115032D4EA541003ED46E /* Services */,
 				AB41AA572D3D9EDB00099765 /* Fonts */,
-				AB02E6EF2D6E815B002F04B6 /* BriefAppIntents */,
 			);
 			path = HelperFiles;
 			sourceTree = "<group>";
@@ -309,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				AB41AA652D3DAEA700099765 /* ArticleModel.swift */,
+				ABA7D59A2D74E9CA0063FD05 /* NoteModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -331,6 +346,34 @@
 			path = "Opening View";
 			sourceTree = "<group>";
 		};
+		ABA7D5992D74E6BF0063FD05 /* Notes View */ = {
+			isa = PBXGroup;
+			children = (
+				ABF2B0B52D753DD10009568F /* NotesView.swift */,
+			);
+			path = "Notes View";
+			sourceTree = "<group>";
+		};
+		ABA7D59E2D74FA750063FD05 /* Note Intents */ = {
+			isa = PBXGroup;
+			children = (
+				ABA7D5A02D74FACD0063FD05 /* NoteIntent.swift */,
+				ABF2B0AF2D753C150009568F /* NoteEntity.swift */,
+				ABF33D222D750ACF005B6DFA /* NoteQuery.swift */,
+			);
+			path = "Note Intents";
+			sourceTree = "<group>";
+		};
+		ABA7D59F2D74FA930063FD05 /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				AB02E6ED2D6D2970002F04B6 /* IntentShortcut.swift */,
+				AB02E6EF2D6E815B002F04B6 /* Brief Intents */,
+				ABA7D59E2D74FA750063FD05 /* Note Intents */,
+			);
+			path = Intents;
+			sourceTree = "<group>";
+		};
 		ABB21BC22D458FEA00A0FD86 /* GlobalViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,6 +383,16 @@
 				ABB709692D65462600B21AFC /* TitleView.swift */,
 			);
 			path = GlobalViews;
+			sourceTree = "<group>";
+		};
+		ABCDD43F2D751EB400D7102B /* Article List View */ = {
+			isa = PBXGroup;
+			children = (
+				ABF2B0B12D753CA30009568F /* ArticleListView.swift */,
+				ABF2B0B32D753CE00009568F /* NavStackView.swift */,
+				ABCDD4422D751F4200D7102B /* NavListView.swift */,
+			);
+			path = "Article List View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -526,28 +579,35 @@
 			files = (
 				AB41AA592D3D9F0500099765 /* Extensions.swift in Sources */,
 				AB53443F2D5CF42F007B27D8 /* Notes.swift in Sources */,
+				ABA7D59D2D74EA340063FD05 /* NoteViewModel.swift in Sources */,
 				AB95522A2D4EA4AD00BE843F /* SummarizerService.swift in Sources */,
 				ABAAC2F22D6E9F8E00687382 /* BriefQuery.swift in Sources */,
-				AB02E6EE2D6D2970002F04B6 /* BriefIntentShortcut.swift in Sources */,
-				ABA37CD82D4071D00080096D /* ArticleListView.swift in Sources */,
+				AB02E6EE2D6D2970002F04B6 /* IntentShortcut.swift in Sources */,
 				AB41AA4A2D3D799F00099765 /* WebView.swift in Sources */,
 				ABB7096A2D65462600B21AFC /* TitleView.swift in Sources */,
 				AB41AA682D3DB64E00099765 /* ToolBarButtonView.swift in Sources */,
+				ABF2B0B02D753C150009568F /* NoteEntity.swift in Sources */,
+				ABA7D59B2D74E9CA0063FD05 /* NoteModel.swift in Sources */,
 				AB41AA482D3D792100099765 /* SharedArticleManager.swift in Sources */,
 				ABAC3BC12D62BBC900EA1B9B /* ShareSheetView.swift in Sources */,
+				ABF2B0B22D753CA30009568F /* ArticleListView.swift in Sources */,
+				ABCDD4432D751F4200D7102B /* NavListView.swift in Sources */,
 				AB41AA342D3D780900099765 /* BriefApp.swift in Sources */,
 				AB41AA352D3D780900099765 /* ContentView.swift in Sources */,
-				ABB709642D65443000B21AFC /* NotesView.swift in Sources */,
+				ABF33D232D750ACF005B6DFA /* NoteQuery.swift in Sources */,
+				ABA7D5A12D74FACD0063FD05 /* NoteIntent.swift in Sources */,
 				ABAAC2F02D6E9F6200687382 /* BriefEntity.swift in Sources */,
 				ABA37CD62D4063640080096D /* ArticleViewModel.swift in Sources */,
 				AB41AA662D3DAEA700099765 /* ArticleModel.swift in Sources */,
 				AB02E6EC2D6D2919002F04B6 /* BriefIntent.swift in Sources */,
 				ABA7D5982D73BB100063FD05 /* MultiLineTextView.swift in Sources */,
 				ABB709682D6544DF00B21AFC /* BriefView.swift in Sources */,
+				ABF2B0B42D753CE00009568F /* NavStackView.swift in Sources */,
 				AB41AA622D3DA87700099765 /* OpeningView.swift in Sources */,
 				ABA7D5962D73BA900063FD05 /* SubHeaderView.swift in Sources */,
 				AB45DDEE2D4C2E38002298DE /* ArticleTitleView.swift in Sources */,
 				ABAD3E392D445FEE00180A86 /* ArticleView.swift in Sources */,
+				ABF2B0B62D753DD10009568F /* NotesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

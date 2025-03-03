@@ -17,7 +17,7 @@ struct BriefApp: App {
     var container = try! ModelContainer(for: ArticleModel.self)
     
     static var appShortcuts: AppShortcutsProvider.Type? {
-        return BriefIntentShortcut.self
+        return IntentShortcut.self
     }
     
     init()  {
@@ -50,35 +50,95 @@ struct BriefApp: App {
 extension BriefApp {
     
     func handleDeeplink(url: URL) {
-        
-        guard url.scheme == "brief", url.host == "article" else {
+        guard url.scheme == "brief" else {
             return
         }
         
-        let pathComponent = url.lastPathComponent
-        
-        if let articleID = UUID(uuidString: pathComponent) {
-            print("Looking for article with ID: \(articleID)")
+        if url.host == "article" {
+            // Your existing article handling
+            let pathComponent = url.lastPathComponent
             
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(
-                    name: Notification.Name("OpenArticleByIDNotification"),
-                    object: nil,
-                    userInfo: ["articleID": articleID]
-                )
+            if let articleID = UUID(uuidString: pathComponent) {
+                print("Looking for article with ID: \(articleID)")
+                
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(
+                        name: Notification.Name("OpenArticleByIDNotification"),
+                        object: nil,
+                        userInfo: ["articleID": articleID]
+                    )
+                }
+            } else if let decodedTitle = pathComponent.removingPercentEncoding {
+                print("Looking for article with title: \(decodedTitle)")
+                
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(
+                        name: Notification.Name("OpenArticleByTitleNotification"),
+                        object: nil,
+                        userInfo: ["title": decodedTitle]
+                    )
+                }
             }
         }
-        
-        else if let decodedTitle = pathComponent.removingPercentEncoding {
-            print("Looking for article with title: \(decodedTitle)")
+        else if url.host == "note" {
+            // New note handling
+            let pathComponent = url.lastPathComponent
             
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(
-                    name: Notification.Name("OpenArticleByTitleNotification"),
-                    object: nil,
-                    userInfo: ["title": decodedTitle]
-                )
+            if let noteID = UUID(uuidString: pathComponent) {
+                print("Looking for note with ID: \(noteID)")
+                
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(
+                        name: Notification.Name("OpenNoteByIDNotification"),
+                        object: nil,
+                        userInfo: ["noteID": noteID]
+                    )
+                }
+            } else if let decodedText = pathComponent.removingPercentEncoding {
+                print("Looking for note containing text: \(decodedText)")
+                
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(
+                        name: Notification.Name("OpenNoteByTextNotification"),
+                        object: nil,
+                        userInfo: ["text": decodedText]
+                    )
+                }
             }
         }
     }
+    
+    
+//    func handleDeeplink(url: URL) {
+//        
+//        guard url.scheme == "brief", url.host == "article" else {
+//            return
+//        }
+//        
+//        let pathComponent = url.lastPathComponent
+//        
+//        if let articleID = UUID(uuidString: pathComponent) {
+//            print("Looking for article with ID: \(articleID)")
+//            
+//            DispatchQueue.main.async {
+//                NotificationCenter.default.post(
+//                    name: Notification.Name("OpenArticleByIDNotification"),
+//                    object: nil,
+//                    userInfo: ["articleID": articleID]
+//                )
+//            }
+//        }
+//        
+//        else if let decodedTitle = pathComponent.removingPercentEncoding {
+//            print("Looking for article with title: \(decodedTitle)")
+//            
+//            DispatchQueue.main.async {
+//                NotificationCenter.default.post(
+//                    name: Notification.Name("OpenArticleByTitleNotification"),
+//                    object: nil,
+//                    userInfo: ["title": decodedTitle]
+//                )
+//            }
+//        }
+//    }
 }
