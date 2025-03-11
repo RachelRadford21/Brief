@@ -14,7 +14,7 @@ struct BriefApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.openURL) private var openURL
     var articleManager = SharedArticleManager()
-    var container = try! ModelContainer(for: ArticleModel.self)
+    var container = try! ModelContainer(for: ArticleModel.self, NoteModel.self)
     
     static var appShortcuts: AppShortcutsProvider.Type? {
         return IntentShortcut.self
@@ -22,7 +22,7 @@ struct BriefApp: App {
     
     init()  {
         do {
-            container = try ModelContainer(for: ArticleModel.self)
+            container = try ModelContainer(for: ArticleModel.self, NoteModel.self)
             
         } catch {
             fatalError("Failed to create ModelContainer")
@@ -79,8 +79,7 @@ extension BriefApp {
                     )
                 }
             }
-        }
-        else if url.host == "note" {
+        } else if url.host == "note" {
             // New note handling
             let pathComponent = url.lastPathComponent
             
@@ -107,38 +106,4 @@ extension BriefApp {
             }
         }
     }
-    
-    
-//    func handleDeeplink(url: URL) {
-//        
-//        guard url.scheme == "brief", url.host == "article" else {
-//            return
-//        }
-//        
-//        let pathComponent = url.lastPathComponent
-//        
-//        if let articleID = UUID(uuidString: pathComponent) {
-//            print("Looking for article with ID: \(articleID)")
-//            
-//            DispatchQueue.main.async {
-//                NotificationCenter.default.post(
-//                    name: Notification.Name("OpenArticleByIDNotification"),
-//                    object: nil,
-//                    userInfo: ["articleID": articleID]
-//                )
-//            }
-//        }
-//        
-//        else if let decodedTitle = pathComponent.removingPercentEncoding {
-//            print("Looking for article with title: \(decodedTitle)")
-//            
-//            DispatchQueue.main.async {
-//                NotificationCenter.default.post(
-//                    name: Notification.Name("OpenArticleByTitleNotification"),
-//                    object: nil,
-//                    userInfo: ["title": decodedTitle]
-//                )
-//            }
-//        }
-//    }
 }

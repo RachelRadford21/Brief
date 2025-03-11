@@ -15,7 +15,7 @@ struct NoteQuery: EntityQuery {
     func entities(for identifiers: [UUID]) async throws -> [NoteEntity] {
         let noteVM = NoteViewModel.shared
         
-        guard let notes = noteVM.fetchNotes(article: nil) else { return [] }
+         let notes = noteVM.fetchNotes()
        
         let uuids = identifiers.compactMap { UUID(uuidString: $0.uuidString) }
         
@@ -33,7 +33,7 @@ struct NoteQuery: EntityQuery {
     
     func suggestedEntities() async throws -> [NoteEntity] {
         let noteVM = NoteViewModel.shared
-        guard let notes = noteVM.fetchNotes(article: nil) else { return [] }
+        let notes = noteVM.fetchNotes()
         
         let sortedNotes = notes.sorted { $0.dateCreated > $1.dateCreated }
         let recentNotes = Array(sortedNotes.prefix(5))

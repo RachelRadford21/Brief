@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct OpeningView: View {
-    @Environment(\.colorScheme) var colorScheme
-    
     var body: some View {
         openingView
-        
     }
 }
 

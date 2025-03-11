@@ -10,9 +10,10 @@ import SwiftData
 
 struct NavListView: View {
     @Environment(\.modelContext) var context
-    @State var articleVM: ArticleViewModel = ArticleViewModel.shared
+    @State private var articleVM: ArticleViewModel = .shared
     @Query var articles: [ArticleModel]
-
+    @Query var notes: [NoteModel]
+   
     var body: some View {
         navListView
     }
@@ -21,12 +22,13 @@ struct NavListView: View {
 extension NavListView {
     
     var navListView: some View {
+        
         List(articles, id: \.id) { article in
             NavigationLink(value: article) {
-                Text(article.title)
-                    .font(.custom("BarlowCondensed-Regular", size: 20))
-                    .frame(height: 50)
-                    .lineLimit(2)
+                    Text(article.title)
+                        .font(.custom("BarlowCondensed-Regular", size: 20))
+                        .frame(height: 50)
+                        .lineLimit(2)
             }
             .swipeActions {
                 swipeActionsView(article: article)
@@ -38,9 +40,6 @@ extension NavListView {
                 if let url = article.url {
                     ActivityViewController(items: [url])
                 }
-            }
-            .sheet(isPresented: $articleVM.showNotes) {
-                NotesView()
             }
         }
     }

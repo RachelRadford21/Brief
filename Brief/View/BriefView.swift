@@ -24,7 +24,6 @@ struct BriefView: View {
                 TitleView(title: "Brief")
                 Text(articleVM.summary)
                     .font(.custom("BarlowCondensed-Regular", size: 25))
-
             }
             .padding()
         }

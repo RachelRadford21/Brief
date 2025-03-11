@@ -11,19 +11,18 @@ import SwiftData
 @Observable
 class ArticleViewModel {
     static let shared = ArticleViewModel()
+    
     let context: ModelContext
     var article: ArticleModel?
     var articleTitle: String = ""
     var summary: String = ""
     var getBriefed: Bool
-    var showNotes: Bool
     var showShareSheet: Bool
     
     init(
         context: ModelContext? = nil,
         article: ArticleModel? = nil,
         getBriefed: Bool = false,
-        showNotes: Bool = false,
         showShareSheet: Bool = false
     ) {
         if let providedContext = context {
@@ -34,7 +33,7 @@ class ArticleViewModel {
         }
         self.article = article
         self.getBriefed = getBriefed
-        self.showNotes = showNotes
+        
         self.showShareSheet = showShareSheet
     }
     
@@ -49,6 +48,44 @@ class ArticleViewModel {
             }
         } catch {
             print("Could Not Save Article")
+        }
+    }
+    
+    func saveArticleNote(title: String, text: String) -> ArticleModel? {
+        
+        let descriptor = FetchDescriptor<ArticleModel>(predicate: #Predicate { $0.title == articleTitle })
+        
+        do {
+            
+            let existingArticles = try context.fetch(descriptor)
+            
+            if let existingArticle = existingArticles.first {
+                
+                let newNote = NoteModel(title: title, text: text)
+                existingArticle.note = newNote
+                newNote.article = existingArticle
+                
+                context.insert(newNote)
+                try context.save()
+                
+                print("Added note to existing article: \(existingArticle.id)")
+                return existingArticle
+            } else {
+                
+                let newNote = NoteModel(title: title, text: text)
+                let newArticle = ArticleModel(title: articleTitle, note: newNote)
+                newNote.article = newArticle
+                
+                context.insert(newArticle)
+                context.insert(newNote)
+                
+                try context.save()
+                print("Created new article with note: \(newArticle.id)")
+                return newArticle
+            }
+        } catch {
+            print("Error in saveArticleNote: \(error.localizedDescription)")
+            return nil
         }
     }
     
@@ -77,7 +114,9 @@ class ArticleViewModel {
     func fetchData() -> [ArticleModel]? {
         do {
             let descriptor = FetchDescriptor<ArticleModel>()
+            print("Fetching Data")
             return try context.fetch(descriptor)
+            
         } catch {
             print("Error fetching articles: \(error.localizedDescription)")
             return nil

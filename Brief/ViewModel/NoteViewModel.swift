@@ -11,8 +11,9 @@ import SwiftData
 @Observable
 class NoteViewModel {
     static let shared = NoteViewModel()
+    let articleVM: ArticleViewModel = .shared
     let context: ModelContext
-    
+    var article: ArticleModel?
     init(
         context: ModelContext? = nil
     ) {
@@ -25,7 +26,7 @@ class NoteViewModel {
         }
     }
     
-    func saveNote(title: String, text: String, article: ArticleModel? = nil) {
+    func saveNote(title: String, text: String) -> NoteModel {
         let newNote = NoteModel(
             title: title,
             text: text
@@ -39,26 +40,51 @@ class NoteViewModel {
         } catch {
             print("Could Not Save Note: \(error.localizedDescription)")
         }
-        
+        return newNote
     }
     
-    func fetchNotes(article: ArticleModel?) -> [NoteModel]? {
+    func deleteNote(id: UUID, title: String, text: String, dateCreated: Date) {
+        let fetchRequest = FetchDescriptor<NoteModel>()
+        
         do {
-            let descriptor = FetchDescriptor<NoteModel>()
-            let allNotes = try? context.fetch(descriptor)
+            let notes = try context.fetch(fetchRequest)
             
-            if article == nil {
-                return allNotes
+            if let noteToDelete = notes.first(where: { $0.title == title }) {
+                context.delete(noteToDelete)
+                
+                if context.hasChanges {
+                    try context.save()
+                    print("Note deleted successfully.")
+                }
+                
+            } else {
+                print("No matching note found.")
+            }
+        } catch {
+            print("Error fetching or deleting note: \(error.localizedDescription)")
+        }
+    }
+    
+    func fetchNotes(sortBy sortDescriptor: SortDescriptor<NoteModel>? = nil,
+                    predicate: Predicate<NoteModel>? = nil) -> [NoteModel] {
+        do {
+            var descriptor = FetchDescriptor<NoteModel>()
+        
+            if let predicate = predicate {
+                descriptor.predicate = predicate
             }
             
-            let filteredNotes = allNotes?.filter { note in
-                        if let noteArticle = note.article, let article = article {
-                            return noteArticle.id == article.id
-                        }
-                        return false
-                    }
-            
-            return filteredNotes
+            if let sortDescriptor = sortDescriptor {
+                descriptor.sortBy = [sortDescriptor]
+            } else {
+                descriptor.sortBy = [SortDescriptor(\.dateCreated, order: .reverse)]
+            }
+ 
+            let notes = try context.fetch(descriptor)
+            return notes
+        } catch {
+            print("Error fetching notes: \(error.localizedDescription)")
+            return []
         }
     }
 }

@@ -18,20 +18,22 @@ class ArticleModel: Codable {
     var isBookmarked: Bool
     var articleSummary: String?
     
-    @Relationship(inverse: \NoteModel.article) var notes: [NoteModel] = []
+    @Relationship(deleteRule: .cascade) var note: NoteModel?
     
     init(
         title: String,
         url: URL? = nil,
         read: Bool = false,
         isBookmarked: Bool = false,
-        articleSummary: String? = nil
+        articleSummary: String? = nil,
+        note: NoteModel? = nil
     ) {
         self.title = title
         self.url = url
         self.read = read
         self.isBookmarked = isBookmarked
         self.articleSummary = articleSummary
+        self.note = note
     }
     
     enum CodingKeys: String, CodingKey {
@@ -42,6 +44,7 @@ class ArticleModel: Codable {
         case dateSaved
         case isBookmarked
         case articleSummary
+        case note
     }
     
     required public init(from decoder: Decoder) throws {
@@ -52,6 +55,7 @@ class ArticleModel: Codable {
         self.dateSaved = try decoder.container(keyedBy: CodingKeys.self).decode(Date.self, forKey: .dateSaved)
         self.isBookmarked = try decoder.container(keyedBy: CodingKeys.self).decode(Bool.self, forKey: .isBookmarked)
         self.articleSummary = try decoder.container(keyedBy: CodingKeys.self).decode(String.self, forKey: .articleSummary)
+        self.note = try decoder.container(keyedBy: CodingKeys.self).decode(NoteModel?.self, forKey: .note)
     }
     
     func encode(to encoder: any Encoder) throws {
@@ -63,5 +67,6 @@ class ArticleModel: Codable {
         try container.encode(dateSaved, forKey: .dateSaved)
         try container.encode(isBookmarked, forKey: .isBookmarked)
         try container.encode(articleSummary, forKey: .articleSummary)
+        try container.encode(note, forKey: .note)
     }
 }

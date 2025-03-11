@@ -25,39 +25,46 @@ struct NoteIntent: AppIntent {
         Summary("Open \(\.$note)")
     }
     
+    
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        print("NoteIntent activated: Looking for note containing '\(note)'")
+        print("NoteIntent activated: Looking for note with title '\(note)'")
         
         let container = try ModelContainer(for: NoteModel.self)
         let context = ModelContext(container)
         
         let descriptor = FetchDescriptor<NoteModel>(
-            predicate: #Predicate<NoteModel> { note in
-                note.text.contains(note.text)
+            predicate: #Predicate<NoteModel> { noteModel in
+                noteModel.title.contains(note)
             }
         )
         
-        let notes = try context.fetch(descriptor)
-        
-        guard let note = notes.first else {
-            return .result(dialog: "No note found containing '\(note)'.")
-        }
-        
-        let encodedText = note.text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        let urlString = "brief://note/\(note.id)?text=\(encodedText)"
-        
-        if let url = URL(string: urlString) {
-            await MainActor.run {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        do {
+            let notes = try context.fetch(descriptor)
+            
+            guard let matchedNote = notes.first else {
+                return .result(dialog: "No note found with title containing '\(note)'.")
             }
             
-            UserDefaults.standard.set(true, forKey: "BriefIntent_ShouldShowNotes")
-            UserDefaults.standard.set(note.id.uuidString, forKey: "BriefIntent_NoteToOpen")
+            let encodedTitle = matchedNote.title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            // This did say text=\(encodedTitle)
+            let urlString = "brief://note/\(matchedNote.id)?title=\(encodedTitle)"
             
-            return .result(dialog: "Opening note containing: \(note.text)")
-        } else {
-            return .result(dialog: "Could not create URL")
+            if let url = URL(string: urlString) {
+                await MainActor.run {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    
+                    UserDefaults.standard.set(true, forKey: "BriefIntent_ShouldShowNotes")
+                    UserDefaults.standard.set(matchedNote.id.uuidString, forKey: "BriefIntent_NoteToOpen")
+                }
+                
+                return .result(dialog: "Opening note: \(matchedNote.title)")
+            } else {
+                return .result(dialog: "Could not create URL")
+            }
+        } catch {
+            print("Error fetching notes: \(error)")
+            return .result(dialog: "Error finding note")
         }
     }
 }

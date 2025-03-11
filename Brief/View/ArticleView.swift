@@ -23,7 +23,6 @@ struct ArticleView: View {
     
     var body: some View {
         articleView
-        
     }
 }
 
@@ -41,9 +40,7 @@ extension ArticleView {
         .onChange(of: url) {
             loadArticle(url: url)
             summarizer.extractAndTokenizeText(url: url)
-        } .customToolbar(url: nil, placement: .topBarTrailing, buttons: [
-        ("gear", {  })
-        ])
+        }
     }
     
     func loadArticle(url: URL) {
