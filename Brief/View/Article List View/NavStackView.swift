@@ -41,7 +41,7 @@ extension NavStackView {
             
             HStack {
                 NavigationStack(path: $articlePath) {
-                    NavListView()
+                    NavListView(showNotes: $showNotes)
                         .navigationTitle(navTitleView)
                         .navigationDestination(for: ArticleModel.self) { article in
                             if !showNotes {
@@ -92,7 +92,7 @@ extension NavStackView {
     }
     
     var navTitleView: Text {
-        Text("ARTICLES")
+        Text(!showNotes ? "ARTICLES" : "NOTES")
             .font(.custom("Merriweather-SemiBold", size: 35).bold())
         // This is bad but I want to customize, may change later
     }

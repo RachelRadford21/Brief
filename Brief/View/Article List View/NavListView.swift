@@ -13,7 +13,7 @@ struct NavListView: View {
     @State private var articleVM: ArticleViewModel = .shared
     @Query var articles: [ArticleModel]
     @Query var notes: [NoteModel]
-   
+    @Binding var showNotes: Bool
     var body: some View {
         navListView
     }
@@ -25,7 +25,7 @@ extension NavListView {
         
         List(articles, id: \.id) { article in
             NavigationLink(value: article) {
-                    Text(article.title)
+                Text(!showNotes ? article.title : article.note?.title ?? "Add Note")
                         .font(.custom("BarlowCondensed-Regular", size: 20))
                         .frame(height: 50)
                         .lineLimit(2)
