@@ -15,7 +15,6 @@ class SummarizerService {
     var articleVM = ArticleViewModel.shared
     var articleManager: SharedArticleManager = SharedArticleManager()
     
-    // Pattern constants - moved to a struct for organization
     private struct Patterns {
         static let boilerplate = [
             "contact us", "privacy policy", "terms of use", "all rights reserved",
@@ -93,25 +92,20 @@ class SummarizerService {
         "learn", "click", "here", "read", "more", "said", "says",
         "told", "according", "reported", "stated", "explained"
     ]
-    
-    // Main summarization function
+
     func summarize(_ html: String) -> String {
-        // Check cache first to avoid redundant processing
         if let cachedSummary = cache.object(forKey: html as NSString) as String? {
             return cachedSummary
         }
         
-        // Process the HTML into a summary
         let articleText = extractMainArticle(from: html)
         let cleanedText = cleanText(articleText)
         let processedText = preprocessText(cleanedText)
         let sentences = tokenizeText(processedText)
         let keySentences = rankSentences(sentences)
         
-        // Join the sentences into a coherent summary
         let summary = keySentences.joined(separator: " ")
         
-        // Cache the result
         cache.setObject(summary as NSString, forKey: html as NSString)
         return summary
     }
@@ -126,8 +120,6 @@ class SummarizerService {
             self.articleVM.summary = self.summarize(html)
         }
     }
-    
-    // MARK: - Text Extraction and Processing
     
     private func extractMainArticle(from html: String) -> String {
         let cleanedHTML = removeUnwantedTags(from: html)

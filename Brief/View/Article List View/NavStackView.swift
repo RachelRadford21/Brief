@@ -12,18 +12,22 @@ struct NavStackView: View {
     @Environment(\.modelContext) var context
     @Environment(\.colorScheme) var colorScheme
     @State private var articlePath = NavigationPath()
-    @State private var selectedNote: NoteModel? = nil
     @State private var text: String = ""
     @State private var title: String = ""
     @State var showNotes: Bool = false
+    @Binding var editNote: Bool
     @Bindable var articleVM: ArticleViewModel = .shared
     @Query var articles: [ArticleModel]
     @Query var notes: [NoteModel]
     var articleManager: SharedArticleManager
     
     init(
-        articleManager: SharedArticleManager
+        editNote: Binding<Bool> = .constant(false),
+        articleManager: SharedArticleManager,
+        noteTitle: Binding<String> = .constant(""),
+        noteText: Binding<String> = .constant("")
     ) {
+        self._editNote = editNote   
         self.articleManager = articleManager
     }
     
@@ -41,7 +45,7 @@ extension NavStackView {
             
             HStack {
                 NavigationStack(path: $articlePath) {
-                    NavListView(showNotes: $showNotes)
+                    NavListView(showNotes: $showNotes, articleManager: articleManager)
                         .navigationTitle(navTitleView)
                         .navigationDestination(for: ArticleModel.self) { article in
                             if !showNotes {
@@ -49,10 +53,10 @@ extension NavStackView {
                                 navDestinationFromList(article: article)
                                 
                             } else if showNotes, let note = article.note {
-                                CurrentNoteView(noteTitle: note.title, noteText: note.text)
-                            } else  {
-                                CreateNoteView(title: $title, text: $text)
+                                CurrentNoteView(editNote: editNote, noteTitle: note.title, noteText: note.text)
                                 
+                            } else {
+                                 CreateNoteView(title: $title, text: $text)
                             }
                         }
                         .navigationDestination(for: UUID.self) { articleID in

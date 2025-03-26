@@ -43,6 +43,7 @@
 		ABB709682D6544DF00B21AFC /* BriefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB709672D6544DF00B21AFC /* BriefView.swift */; };
 		ABB7096A2D65462600B21AFC /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB709692D65462600B21AFC /* TitleView.swift */; };
 		ABCDD4432D751F4200D7102B /* NavListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCDD4422D751F4200D7102B /* NavListView.swift */; };
+		ABD104A22D8615C9006288EF /* EditNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD104A12D8615C9006288EF /* EditNoteView.swift */; };
 		ABF2B0B02D753C150009568F /* NoteEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF2B0AF2D753C150009568F /* NoteEntity.swift */; };
 		ABF2B0B22D753CA30009568F /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF2B0B12D753CA30009568F /* ArticleListView.swift */; };
 		ABF2B0B42D753CE00009568F /* NavStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF2B0B32D753CE00009568F /* NavStackView.swift */; };
@@ -129,6 +130,7 @@
 		ABB709672D6544DF00B21AFC /* BriefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefView.swift; sourceTree = "<group>"; };
 		ABB709692D65462600B21AFC /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		ABCDD4422D751F4200D7102B /* NavListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavListView.swift; sourceTree = "<group>"; };
+		ABD104A12D8615C9006288EF /* EditNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteView.swift; sourceTree = "<group>"; };
 		ABF2B0AF2D753C150009568F /* NoteEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEntity.swift; sourceTree = "<group>"; };
 		ABF2B0B12D753CA30009568F /* ArticleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListView.swift; sourceTree = "<group>"; };
 		ABF2B0B32D753CE00009568F /* NavStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavStackView.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 			children = (
 				AB423D562D79137400DCA46C /* CurrentNoteView.swift */,
 				AB423D582D79150A00DCA46C /* CreateNoteView.swift */,
+				ABD104A12D8615C9006288EF /* EditNoteView.swift */,
 			);
 			path = "Notes View";
 			sourceTree = "<group>";
@@ -593,6 +596,7 @@
 				ABA7D59B2D74E9CA0063FD05 /* NoteModel.swift in Sources */,
 				AB41AA482D3D792100099765 /* SharedArticleManager.swift in Sources */,
 				ABAC3BC12D62BBC900EA1B9B /* ShareSheetView.swift in Sources */,
+				ABD104A22D8615C9006288EF /* EditNoteView.swift in Sources */,
 				ABF2B0B22D753CA30009568F /* ArticleListView.swift in Sources */,
 				ABCDD4432D751F4200D7102B /* NavListView.swift in Sources */,
 				AB41AA342D3D780900099765 /* BriefApp.swift in Sources */,

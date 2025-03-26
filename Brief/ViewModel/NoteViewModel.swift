@@ -26,22 +26,44 @@ class NoteViewModel {
         }
     }
     
-    func saveNote(title: String, text: String) -> NoteModel {
-        let newNote = NoteModel(
-            title: title,
-            text: text
-        )
-        
-        context.insert(newNote)
-        
+    func saveNote(title: String, text: String, for article: ArticleModel) {
+        if let existingNote = article.note {
+            // Update the existing note
+            existingNote.title = title
+            existingNote.text = text
+        } else {
+            // Create a new note and attach it to the article
+            let newNote = NoteModel(title: title, text: text)
+            article.note = newNote
+            context.insert(newNote)
+        }
+
         do {
             try context.save()
-            print("Note saved successfully with ID: \(newNote.id)")
+            print("Note saved successfully.")
         } catch {
-            print("Could Not Save Note: \(error.localizedDescription)")
+            print("Could not save note: \(error.localizedDescription)")
         }
-        return newNote
     }
+
+    
+    
+//    func saveNote(title: String, text: String) -> NoteModel {
+//        let newNote = NoteModel(
+//            title: title,
+//            text: text
+//        )
+//        
+//        context.insert(newNote)
+//        
+//        do {
+//            try context.save()
+//            print("Note saved successfully with ID: \(newNote.id)")
+//        } catch {
+//            print("Could Not Save Note: \(error.localizedDescription)")
+//        }
+//        return newNote
+//    }
     
     func deleteNote(id: UUID, title: String, text: String, dateCreated: Date) {
         let fetchRequest = FetchDescriptor<NoteModel>()

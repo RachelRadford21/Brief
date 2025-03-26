@@ -14,6 +14,8 @@ struct NavListView: View {
     @Query var articles: [ArticleModel]
     @Query var notes: [NoteModel]
     @Binding var showNotes: Bool
+    var articleManager: SharedArticleManager
+    
     var body: some View {
         navListView
     }
@@ -27,14 +29,14 @@ extension NavListView {
             NavigationLink(value: article) {
                 Text(!showNotes ? article.title : article.note?.title ?? "Add Note")
                         .font(.custom("BarlowCondensed-Regular", size: 20))
-                        .frame(height: 50)
+                        .frame(minHeight: 35)
                         .lineLimit(2)
             }
             .swipeActions {
                 swipeActionsView(article: article)
             }
             .sheet(isPresented: $articleVM.getBriefed) {
-                BriefView()
+                BriefView(article: article)
             }
             .sheet(isPresented: $articleVM.showShareSheet) {
                 if let url = article.url {

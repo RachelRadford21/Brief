@@ -93,8 +93,13 @@ extension SharedArticleManager {
             return nil
         }
         
-        let title = html[startRange.upperBound..<endRange.lowerBound].trimmingCharacters(in: .whitespacesAndNewlines)
-        return title
+        if startRange.upperBound <= endRange.lowerBound {
+            let titleRange = startRange.upperBound..<endRange.lowerBound
+            
+            return String(html[titleRange]).trimmingCharacters(in: .whitespacesAndNewlines)
+        }else {
+            return nil
+        }
     }
     
     func fetchArticleTitle(from url: URL) async throws -> String {
@@ -105,7 +110,6 @@ extension SharedArticleManager {
         }
         
         if var title = parseTitle(from: htmlContent) {
-            // Handle named HTML entities
             title = title
                 .replacingOccurrences(of: "&nbsp;", with: " ")
                 .replacingOccurrences(of: "&amp;", with: "&")

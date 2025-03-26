@@ -8,32 +8,48 @@
 import SwiftUI
 
 struct CreateNoteView: View {
+    @Environment(\.colorScheme) var colorScheme
     @Binding var title: String
     @Binding var text: String
+    @Binding var editNote: Bool
     var articleVM: ArticleViewModel = .shared
+    
     init(
         title: Binding<String> = .constant(""),
-        text: Binding<String> = .constant("")
+        text: Binding<String> = .constant(""),
+        editNote: Binding<Bool> = .constant(false)
     ) {
         self._title = title
         self._text = text
+        self._editNote = editNote
     }
+    
     var body: some View {
         VStack {
-            TextField("Title", text: $title)
+            
+            TextField("Title", text:  $title)
                 .padding(.horizontal)
             
             TextEditor(text: $text)
                 .font(.custom("BarlowCondensed-Regular", size: 20))
                 .border(Color.gray, width: 1)
                 .padding()
-            
             Button {
+                editNote.toggle()
                 Task {
                     articleVM.saveArticleNote(title: title, text: text)
                 }
             } label: {
                 Text("Save")
+                    .foregroundStyle(Color.pink)
+            }
+        }
+        .tint(colorScheme == .dark ? Color.paperWhite : .black)
+        .onAppear {
+            if !title.isEmpty || !text.isEmpty {
+                editNote = true
+            } else {
+                editNote = false
             }
         }
     }

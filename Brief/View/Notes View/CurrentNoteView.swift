@@ -10,25 +10,47 @@ import SwiftData
 
 struct CurrentNoteView: View {
     @Environment(\.colorScheme) var colorScheme
-    var noteTitle: String
-    var noteText: String
-   
+    @Environment(\.modelContext) var context
+    @State var editNote: Bool = false
+    @State var noteTitle: String = ""
+    @State var noteText: String = ""
+    var articleVM: ArticleViewModel = .shared
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 15) {
-                Text(noteTitle)
-                    .font(.custom("BarlowCondensed-SemiBold", size: 30))
-                
-                Text(noteText)
-                    .font(.custom("BarlowCondensed-Regular", size: 25))
-                Spacer()
+               
+                if !editNote {
+                    currentNoteView
+                } else {
+                    EditNoteView(noteTitle: $noteTitle, noteText: $noteText, editNote: $editNote)
+                }
             }
-            .foregroundStyle(colorScheme == .dark ? Color.paperWhite : Color.accentColor)
         }
         .padding(.horizontal, 20)
+      
+        .foregroundStyle(colorScheme == .dark ? Color.paperWhite : Color.accentColor)
     }
 }
 
-#Preview {
-    CurrentNoteView(noteTitle: "Test", noteText: "This is an example note")
+extension CurrentNoteView {
+    var currentNoteView: some View {
+        VStack {
+            Text(noteTitle)
+                .font(.custom("BarlowCondensed-SemiBold", size: 30))
+            
+            Text(noteText)
+                .font(.custom("BarlowCondensed-Regular", size: 25))
+            Spacer()
+            
+            Button {
+                editNote.toggle()
+                Task {
+                    articleVM.saveArticleNote(title: noteTitle, text: noteText)
+                }
+            } label: {
+                Text(!editNote ? "EDIT" : "SAVE")
+            }
+        }
+    }
 }

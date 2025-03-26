@@ -51,41 +51,36 @@ class ArticleViewModel {
         }
     }
     
-    func saveArticleNote(title: String, text: String) -> ArticleModel? {
-        
+    func saveArticleNote(title: String, text: String) {
         let descriptor = FetchDescriptor<ArticleModel>(predicate: #Predicate { $0.title == articleTitle })
         
         do {
-            
             let existingArticles = try context.fetch(descriptor)
             
             if let existingArticle = existingArticles.first {
+                if let existingNote = existingArticle.note {
+                    existingNote.title = title
+                    existingNote.text = text
+                    
+                    try context.save()
+                } else {
+                    if existingArticle.note == nil {
+                        let newNote = NoteModel(title: title, text: text)
+                        existingArticle.note = newNote
+                        newNote.article = existingArticle
+                        context.insert(newNote)
+                    }
+                }
                 
-                let newNote = NoteModel(title: title, text: text)
-                existingArticle.note = newNote
-                newNote.article = existingArticle
+                if context.hasChanges {
+                    try context.save()
+                }
                 
-                context.insert(newNote)
-                try context.save()
-                
-                print("Added note to existing article: \(existingArticle.id)")
-                return existingArticle
-            } else {
-                
-                let newNote = NoteModel(title: title, text: text)
-                let newArticle = ArticleModel(title: articleTitle, note: newNote)
-                newNote.article = newArticle
-                
-                context.insert(newArticle)
-                context.insert(newNote)
-                
-                try context.save()
-                print("Created new article with note: \(newArticle.id)")
-                return newArticle
+                print("Updated note for existing article: \(existingArticle.id)")
             }
+            
         } catch {
             print("Error in saveArticleNote: \(error.localizedDescription)")
-            return nil
         }
     }
     
