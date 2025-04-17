@@ -11,22 +11,18 @@ import SwiftData
 @Observable
 class ArticleViewModel {
     static let shared = ArticleViewModel()
-    
     let context: ModelContext
     var article: ArticleModel?
     var articleTitle: String = ""
     var summary: String = ""
     var getBriefed: Bool
     var showShareSheet: Bool
-    var noteID: UUID?
-    var note: NoteModel?
+    
     init(
         context: ModelContext? = nil,
         article: ArticleModel? = nil,
         getBriefed: Bool = false,
-        showShareSheet: Bool = false,
-        noteID: UUID? = nil,
-        note: NoteModel? = nil
+        showShareSheet: Bool = false
     ) {
         if let providedContext = context {
             self.context = providedContext
@@ -37,8 +33,6 @@ class ArticleViewModel {
         self.article = article
         self.getBriefed = getBriefed
         self.showShareSheet = showShareSheet
-        self.noteID = noteID
-        self.note = note
     }
     
     func saveArticle(title: String, url: URL, dateSaved: Date, articleSummary: String) {
@@ -55,35 +49,31 @@ class ArticleViewModel {
         }
     }
     
-    func saveArticleNote(article: ArticleModel?, title: String, text: String) {
-
-        guard let currentArticle = self.article else {
-            
-            return
-        }
-  
-        if let existingNote = currentArticle.note {
-            existingNote.title = title
-            existingNote.text = text
-            
-            print("Note updated - new title: \(existingNote.title)")
-        } else {
-            print("Creating new note for article: \(currentArticle.title)")
-
-            let newNote = NoteModel(title: title, text: text)
-            
-            currentArticle.note = newNote
-            newNote.article = currentArticle
-            
-            context.insert(newNote)
-        }
+    func createArticleNote(article: ArticleModel, title: String, text: String) {
+        let newNote = NoteModel(title: title, text: text)
+        article.note = newNote
+        newNote.article = article
         
         do {
             try context.save()
-            print("Context saved successfully")
         } catch {
-            print("ERROR saving context: \(error.localizedDescription)")
+            print("Error saving directly: \(error)")
         }
+    }
+    
+    func editArticleNote(article: ArticleModel, title: String, text: String) {
+        if let existingNote = article.note {
+                existingNote.title = title
+                existingNote.text = text
+                
+                do {
+                    try context.save()
+                } catch {
+                    print("ERROR updating note: \(error)")
+                }
+            } else {
+                print("Cannot update - article has no existing note")
+            }
     }
     
     func deleteArticle(id: UUID, title: String, url: URL, read: Bool, dateSaved: Date) {
@@ -97,7 +87,6 @@ class ArticleViewModel {
                 
                 if context.hasChanges {
                     try context.save()
-                    print("Article deleted successfully.")
                 }
                 
             } else {
@@ -111,7 +100,6 @@ class ArticleViewModel {
     func fetchData() -> [ArticleModel]? {
         do {
             let descriptor = FetchDescriptor<ArticleModel>()
-            print("Fetching Data")
             return try context.fetch(descriptor)
             
         } catch {

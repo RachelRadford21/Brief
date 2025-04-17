@@ -29,7 +29,7 @@ struct EditNoteView: View {
                 Button {
                     editNote.toggle()
                     Task {
-                        articleVM.saveArticleNote(article: note.article, title: note.title, text: note.text)
+                        articleVM.createArticleNote(article: note.article ?? ArticleModel(title: note.article?.title ?? ""), title: note.title, text: note.text)
                     }
                 } label: {
                     

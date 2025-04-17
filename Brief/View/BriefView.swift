@@ -8,15 +8,11 @@
 import SwiftUI
 
 struct BriefView: View {
-    @Bindable var articleVM = ArticleViewModel.shared
-    var summarizer = SummarizerService.shared
-    var articleManager: SharedArticleManager
     var article: ArticleModel?
+    
     init(
-        articleManager: SharedArticleManager = SharedArticleManager(),
         article: ArticleModel? = ArticleModel(title: "")
     ) {
-        self.articleManager = articleManager
         self.article = article
     }
     
@@ -32,6 +28,3 @@ struct BriefView: View {
     }
 }
 
-#Preview {
-    BriefView(articleManager: SharedArticleManager())
-}

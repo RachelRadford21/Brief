@@ -14,16 +14,19 @@ struct CreateNoteView: View {
     @Binding var editNote: Bool
     var articleVM: ArticleViewModel = .shared
     @Bindable var note: NoteModel
+    @Bindable var article: ArticleModel
     init(
         title: Binding<String> = .constant(""),
         text: Binding<String> = .constant(""),
         editNote: Binding<Bool> = .constant(false),
-        note: NoteModel
+        note: NoteModel,
+        article: ArticleModel
     ) {
         self._title = title
         self._text = text
         self._editNote = editNote
         self.note = note
+        self.article = article
     }
     
     var body: some View {
@@ -38,9 +41,9 @@ struct CreateNoteView: View {
                 .padding()
             Button {
                 editNote.toggle()
-                Task {
-                    articleVM.saveArticleNote(article: note.article, title: title, text: text)
-                }
+                
+                
+                articleVM.createArticleNote(article: article, title: title, text: text)
             } label: {
                 Text("Save")
                     .foregroundStyle(Color.pink)

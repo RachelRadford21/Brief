@@ -14,11 +14,11 @@ struct CurrentNoteView: View {
     @State var editNote: Bool = false
     @Bindable var note: NoteModel
     var articleVM: ArticleViewModel = .shared
-   
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 15) {
-                    currentNoteView
+                currentNoteView
             }
         }
         .padding(.horizontal, 20)
@@ -29,7 +29,6 @@ struct CurrentNoteView: View {
 extension CurrentNoteView {
     var currentNoteView: some View {
         VStack {
-            
             Text(note.title)
                 .font(.custom("BarlowCondensed-SemiBold", size: 30))
             
@@ -40,7 +39,7 @@ extension CurrentNoteView {
             Button {
                 editNote.toggle()
                 Task {
-                    articleVM.saveArticleNote(article: note.article, title: note.title, text: note.text)
+                    articleVM.editArticleNote(article: note.article ?? ArticleModel(title: note.article?.title ?? ""), title: note.title, text: note.text)
                 }
             } label: {
                 Text(!editNote ? "EDIT" : "SAVE")

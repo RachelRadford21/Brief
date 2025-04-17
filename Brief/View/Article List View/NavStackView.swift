@@ -57,7 +57,7 @@ extension NavStackView {
                                     
                             }
                             else {
-                                CreateNoteView(title: $title, text: $text, note: article.note ?? NoteModel())
+                                CreateNoteView(title: $title, text: $text, note: article.note ?? NoteModel(), article: article)
                             }
                            
                         }

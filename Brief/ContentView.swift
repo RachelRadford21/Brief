@@ -50,7 +50,7 @@ extension ContentView {
                         dateSaved: Date(),
                         articleSummary: articleVM.summary
                     )
-                    
+                   
                     articleManager.sharedURL = nil
                     articleManager.clearSharedURL()
                 }),
