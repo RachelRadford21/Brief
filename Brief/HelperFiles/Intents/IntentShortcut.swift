@@ -23,9 +23,9 @@ struct IntentShortcut: AppShortcutsProvider {
             AppShortcut(
                 intent: BriefIntent(),
                 phrases: [
-                    "Open article about [article] in Brief",
-                    "Find news about [article] in Brief",
-                    "Show me the [article] article in Brief"
+                    "Open article about [article] in Brief \(.applicationName)",
+                    "Find news about [article] in Brief \(.applicationName)",
+                    "Show me the [article] article in Brief \(.applicationName)"
                 ],
                 shortTitle: "Open Article",
                 systemImageName: "doc.text"
@@ -33,9 +33,9 @@ struct IntentShortcut: AppShortcutsProvider {
             AppShortcut(
                        intent: NoteIntent(),
                        phrases: [
-                           "Open note [note] in Brief",
-                           "Show me note [note] in Brief",
-                           "Read my note [note] in Brief"
+                           "Open note [note] in Brief \(.applicationName)",
+                           "Show me note [note] in Brief \(.applicationName)",
+                           "Read my note [note] in Brief \(.applicationName)"
                        ],
                        shortTitle: "Open Note",
                        systemImageName: "note.text"

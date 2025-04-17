@@ -5,7 +5,6 @@
 //  Created by Rachel Radford on 2/24/25.
 //
 
-import Foundation
 import AppIntents
 import SwiftData
 import SwiftUI

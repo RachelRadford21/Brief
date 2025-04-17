@@ -12,23 +12,16 @@ struct CurrentNoteView: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.modelContext) var context
     @State var editNote: Bool = false
-    @State var noteTitle: String = ""
-    @State var noteText: String = ""
+    @Bindable var note: NoteModel
     var articleVM: ArticleViewModel = .shared
-    
+   
     var body: some View {
         ScrollView {
             VStack(spacing: 15) {
-               
-                if !editNote {
                     currentNoteView
-                } else {
-                    EditNoteView(noteTitle: $noteTitle, noteText: $noteText, editNote: $editNote)
-                }
             }
         }
         .padding(.horizontal, 20)
-      
         .foregroundStyle(colorScheme == .dark ? Color.paperWhite : Color.accentColor)
     }
 }
@@ -36,21 +29,25 @@ struct CurrentNoteView: View {
 extension CurrentNoteView {
     var currentNoteView: some View {
         VStack {
-            Text(noteTitle)
+            
+            Text(note.title)
                 .font(.custom("BarlowCondensed-SemiBold", size: 30))
             
-            Text(noteText)
+            Text(note.text)
                 .font(.custom("BarlowCondensed-Regular", size: 25))
             Spacer()
             
             Button {
                 editNote.toggle()
                 Task {
-                    articleVM.saveArticleNote(title: noteTitle, text: noteText)
+                    articleVM.saveArticleNote(article: note.article, title: note.title, text: note.text)
                 }
             } label: {
                 Text(!editNote ? "EDIT" : "SAVE")
             }
+        }
+        .sheet(isPresented: $editNote) {
+            EditNoteView(note: note, editNote: $editNote)
         }
     }
 }

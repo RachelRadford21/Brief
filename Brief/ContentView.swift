@@ -60,7 +60,9 @@ extension ContentView {
                 })
             ])
             .onAppear {
-                summarizer.extractAndTokenizeText(url: articleManager.sharedURL!)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    summarizer.extractAndTokenizeText(url: articleManager.sharedURL!)
+                }
             }
         }
     }

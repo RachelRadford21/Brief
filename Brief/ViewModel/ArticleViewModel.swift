@@ -18,12 +18,15 @@ class ArticleViewModel {
     var summary: String = ""
     var getBriefed: Bool
     var showShareSheet: Bool
-    
+    var noteID: UUID?
+    var note: NoteModel?
     init(
         context: ModelContext? = nil,
         article: ArticleModel? = nil,
         getBriefed: Bool = false,
-        showShareSheet: Bool = false
+        showShareSheet: Bool = false,
+        noteID: UUID? = nil,
+        note: NoteModel? = nil
     ) {
         if let providedContext = context {
             self.context = providedContext
@@ -33,8 +36,9 @@ class ArticleViewModel {
         }
         self.article = article
         self.getBriefed = getBriefed
-        
         self.showShareSheet = showShareSheet
+        self.noteID = noteID
+        self.note = note
     }
     
     func saveArticle(title: String, url: URL, dateSaved: Date, articleSummary: String) {
@@ -51,36 +55,34 @@ class ArticleViewModel {
         }
     }
     
-    func saveArticleNote(title: String, text: String) {
-        let descriptor = FetchDescriptor<ArticleModel>(predicate: #Predicate { $0.title == articleTitle })
+    func saveArticleNote(article: ArticleModel?, title: String, text: String) {
+
+        guard let currentArticle = self.article else {
+            
+            return
+        }
+  
+        if let existingNote = currentArticle.note {
+            existingNote.title = title
+            existingNote.text = text
+            
+            print("Note updated - new title: \(existingNote.title)")
+        } else {
+            print("Creating new note for article: \(currentArticle.title)")
+
+            let newNote = NoteModel(title: title, text: text)
+            
+            currentArticle.note = newNote
+            newNote.article = currentArticle
+            
+            context.insert(newNote)
+        }
         
         do {
-            let existingArticles = try context.fetch(descriptor)
-            
-            if let existingArticle = existingArticles.first {
-                if let existingNote = existingArticle.note {
-                    existingNote.title = title
-                    existingNote.text = text
-                    
-                    try context.save()
-                } else {
-                    if existingArticle.note == nil {
-                        let newNote = NoteModel(title: title, text: text)
-                        existingArticle.note = newNote
-                        newNote.article = existingArticle
-                        context.insert(newNote)
-                    }
-                }
-                
-                if context.hasChanges {
-                    try context.save()
-                }
-                
-                print("Updated note for existing article: \(existingArticle.id)")
-            }
-            
+            try context.save()
+            print("Context saved successfully")
         } catch {
-            print("Error in saveArticleNote: \(error.localizedDescription)")
+            print("ERROR saving context: \(error.localizedDescription)")
         }
     }
     

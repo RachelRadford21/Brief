@@ -53,11 +53,13 @@ extension NavStackView {
                                 navDestinationFromList(article: article)
                                 
                             } else if showNotes, let note = article.note {
-                                CurrentNoteView(editNote: editNote, noteTitle: note.title, noteText: note.text)
-                                
-                            } else {
-                                 CreateNoteView(title: $title, text: $text)
+                                CurrentNoteView(editNote: editNote, note: note)
+                                    
                             }
+                            else {
+                                CreateNoteView(title: $title, text: $text, note: article.note ?? NoteModel())
+                            }
+                           
                         }
                         .navigationDestination(for: UUID.self) { articleID in
                             if let article = articles.first(where: { $0.id == articleID }) {
