@@ -34,7 +34,12 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSSiriUsageDescription</key>
-	<string>This app provides Siri Shortcuts to read article summaries aloud.</string>
+	<string>Allow Siri to Open Articles in Brief</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.rar.Brief.BriefIntent</string>
+		<string>com.rar.Brief.NoteIntent</string>
+	</array>
 	<key>UIAppFonts</key>
 	<array>
 		<string>MerriweatherSans-VariableFont_wght.ttf</string>
