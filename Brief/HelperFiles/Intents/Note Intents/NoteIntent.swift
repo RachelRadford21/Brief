@@ -47,7 +47,7 @@ struct NoteIntent: AppIntent {
             }
             
             let encodedTitle = matchedNote.title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-            // This did say text=\(encodedTitle)
+            
             let urlString = "brief://note/\(matchedNote.id)?title=\(encodedTitle)"
             
             if let url = URL(string: urlString) {

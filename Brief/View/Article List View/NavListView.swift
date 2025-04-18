@@ -35,10 +35,6 @@ extension NavListView {
             .swipeActions {
                 swipeActionsView(article: article)
             }
-            .sheet(isPresented: $articleVM.getBriefed) {
-                    
-                    BriefView(article: article)
-            }
             .sheet(isPresented: $articleVM.showShareSheet) {
                 if let url = article.url {
                     ActivityViewController(items: [url])

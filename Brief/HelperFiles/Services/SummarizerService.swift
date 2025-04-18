@@ -7,6 +7,7 @@
 
 import Foundation
 import NaturalLanguage
+import WebKit
 
 @Observable
 class SummarizerService {
@@ -439,3 +440,220 @@ class SummarizerService {
         }
     }
 }
+
+extension SummarizerService {
+    struct EnhancedPatterns {
+        static let dateTime = [
+            "\\d+ (?:hour|minute|second|day|week|month|year)s? ago",
+            "(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]* \\d{1,2},? \\d{4}",
+            "\\d{1,2}:\\d{2}(?::\\d{2})? ?(?:AM|PM|am|pm)",
+            "\\[(?:hour\\]:\\[minute\\]\\[AMPM\\]\\[timezone\\]|monthFull\\]\\[day\\],? \\[year\\])",
+            "Updated(?: on)?(?: at)? .*",
+            "Published(?: on)?(?: at)? .*"
+        ]
+        
+        static let socialSharing = [
+            "Share (?:this )?(?:on )?(?:Facebook|Twitter|LinkedIn|Pinterest|Reddit|Email)",
+            "(?:Share|Tweet|Pin|Email|Send|Copy) (?:this|link|article|story|post)",
+            "Copy (?:Link|URL) copied",
+            "Share Facebook Copy Link",
+            "Print Email X LinkedIn Bluesky Flipboard Pinterest Reddit"
+        ]
+        
+        static let authorByline = [
+            "By [A-Z][a-zA-Z]+(?: [A-Z][a-zA-Z]+){0,4}",
+            "(?:Written|Reported) by [A-Z][a-zA-Z]+(?: [A-Z][a-zA-Z]+){0,4}",
+            "(?:Author|Writer|Reporter): [A-Z][a-zA-Z]+(?: [A-Z][a-zA-Z]+){0,4}",
+            "(?:Associated Press|AP) (?:writers|reporters)"
+        ]
+        
+        static let runTogetherText = [
+            // CamelCase detection
+            "(?<=[a-z])(?=[A-Z])",
+            // Long strings without spaces
+            "[A-Za-z]{15,}",
+            // Repeated capitalization pattern
+            "(?:[A-Z][a-z]+){3,}"
+        ]
+    }
+    
+    func fixRunTogetherText(_ text: String) -> String {
+        var result = text
+  
+        if let regex = try? NSRegularExpression(pattern: EnhancedPatterns.runTogetherText[0]) {
+            result = regex.stringByReplacingMatches(
+                in: result,
+                options: [],
+                range: NSRange(result.startIndex..., in: result),
+                withTemplate: " "
+            )
+        }
+        
+        if let regex = try? NSRegularExpression(pattern: EnhancedPatterns.runTogetherText[2]) {
+            let nsString = result as NSString
+            let matches = regex.matches(in: result, range: NSRange(location: 0, length: nsString.length))
+            
+            for match in matches.reversed() {
+                let range = match.range
+                let matchedText = nsString.substring(with: range)
+                
+                var processed = ""
+                var previousCharWasLower = false
+                
+                for char in matchedText {
+                    if char.isUppercase && previousCharWasLower {
+                        processed.append(" ")
+                    }
+                    processed.append(char)
+                    previousCharWasLower = char.isLowercase
+                }
+                
+                let mutableString = NSMutableString(string: nsString)
+                mutableString.replaceCharacters(in: range, with: processed)
+                result = mutableString as String
+            }
+        }
+        
+        return result
+    }
+    
+    func enhancedCleanText(_ text: String) -> String {
+        let fixedText = fixRunTogetherText(text)
+        
+        let basicCleanedText = cleanText(fixedText)
+        
+        let additionalCleaners: [(String, String)] = [
+            (EnhancedPatterns.dateTime.joined(separator: "|"), ""),
+            (EnhancedPatterns.socialSharing.joined(separator: "|"), ""),
+            (EnhancedPatterns.authorByline.joined(separator: "|"), ""),
+            ("\\([^)]*(?:AP|AFP|Reuters|Getty)[^)]*\\)", ""),
+            ("\\((?:AP|AFP|Reuters) Photo/[^)]+\\)", ""),
+            ("WASHINGTON \\(AP\\) [—-]", ""),
+            ("[A-Z]{2,}(?: [A-Z]{2,}){1,3} [—-]", ""), // CITY NAME —
+            ("\\d{1,2}:\\d{2}(?::\\d{2})?", "") // Remove timestamps
+        ]
+        
+        return additionalCleaners.reduce(basicCleanedText) { partialResult, cleaner in
+            partialResult.replacingOccurrences(
+                of: cleaner.0,
+                with: cleaner.1,
+                options: .regularExpression
+            )
+        }
+    }
+}
+
+extension SummarizerService {
+    func enhancedExtractAndSummarize(url: URL, completion: @escaping (String) -> Void) {
+        let extractor = WebContentExtractor()
+        
+        extractor.extractContent(from: url.absoluteString) { [weak self] html in
+            guard let self = self, let html = html else {
+                completion("Failed to extract content")
+                return
+            }
+            
+            let cleanedHtml = self.enhancedCleanText(html)
+            let summary = self.summarize(cleanedHtml)
+            completion(summary)
+        }
+    }
+}
+
+
+class WebContentExtractor: NSObject, WKNavigationDelegate {
+    private var webView: WKWebView!
+    private var completionHandler: ((String?) -> Void)?
+    
+    override init() {
+        super.init()
+        let configuration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: configuration)
+        webView.navigationDelegate = self
+    }
+    
+    func extractContent(from urlString: String, completion: @escaping (String?) -> Void) {
+        guard let url = URL(string: urlString) else {
+            completion(nil)
+            return
+        }
+        
+        completionHandler = completion
+        webView.load(URLRequest(url: url))
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        let extractionScript = """
+        (function() {
+            // Try content-specific selectors first
+            const selectors = [
+                'article', '[role="article"]', '.article-content', '.story-body', 
+                '.main-content', '.post-content', '.entry-content', '.content-body',
+                '.story', '.post', 'main', '#main-content', '.news-content'
+            ];
+            
+            // Find element by selector
+            for (const selector of selectors) {
+                const element = document.querySelector(selector);
+                if (element && element.textContent.length > 500) {
+                    return element.outerHTML;
+                }
+            }
+            
+            // If no selector worked, find the div with most text content in paragraphs
+            let bestElement = null;
+            let maxTextLength = 0;
+            
+            const contentContainers = document.querySelectorAll('div, section');
+            for (const container of contentContainers) {
+                // Skip obvious non-content areas
+                if (/header|footer|sidebar|nav|menu|comment|social|share|related|widget/i.test(container.className) ||
+                    /header|footer|sidebar|nav|menu|comment|social|share|related|widget/i.test(container.id)) {
+                    continue;
+                }
+                
+                const paragraphs = container.querySelectorAll('p');
+                if (paragraphs.length < 3) continue;
+                
+                let textLength = 0;
+                for (const p of paragraphs) {
+                    textLength += p.textContent.length;
+                }
+                
+                if (textLength > maxTextLength) {
+                    maxTextLength = textLength;
+                    bestElement = container;
+                }
+            }
+            
+            if (bestElement && maxTextLength > 500) {
+                return bestElement.outerHTML;
+            }
+            
+            // Fallback to just the paragraphs
+            const allParagraphs = document.querySelectorAll('p');
+            if (allParagraphs.length > 0) {
+                let html = '';
+                for (const p of allParagraphs) {
+                    if (p.textContent.trim().length > 30) {
+                        html += p.outerHTML;
+                    }
+                }
+                return html;
+            }
+            
+            // Ultimate fallback
+            return document.body.outerHTML;
+        })();
+        """
+        
+        webView.evaluateJavaScript(extractionScript) { [weak self] result, error in
+            if let htmlContent = result as? String {
+                self?.completionHandler?(htmlContent)
+            } else {
+                self?.completionHandler?(nil)
+            }
+        }
+    }
+}
+

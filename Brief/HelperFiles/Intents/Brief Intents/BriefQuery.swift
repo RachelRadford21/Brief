@@ -32,7 +32,6 @@ struct BriefQuery: EntityQuery {
         }
     }
     
-    
     func suggestedEntities() async throws -> [BriefEntity] {
         let viewModel = ArticleViewModel.shared
         guard let articles = viewModel.fetchData() else { return [] }
@@ -40,8 +39,7 @@ struct BriefQuery: EntityQuery {
         // Return the most recent 5 articles for suggestions
         let sortedArticles = articles.sorted { $0.dateSaved > $1.dateSaved }
         let recentArticles = Array(sortedArticles.prefix(5))
-        
-        // Convert to BriefEntity
+      
         return recentArticles.map { article in
             BriefEntity(
                 id: article.id,

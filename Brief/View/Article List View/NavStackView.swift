@@ -107,7 +107,6 @@ extension NavStackView {
         ArticleView(articleManager: articleManager, url: article.url ?? articleManager.sharedURL!)
             .customToolbar(url: articleManager.sharedURL, buttons: [
                 ("message", { articleVM.showShareSheet.toggle() }),
-                // Need to figure out why this disppears on first tap
                 ("briefcase.fill", { articleVM.getBriefed.toggle() }),
                 ("trash.square", {
                     articleVM.deleteArticle(id: article.id, title: article.title, url: article.url!, read: article.read, dateSaved: article.dateSaved)
@@ -115,6 +114,9 @@ extension NavStackView {
                     
                 })
             ])
+            .sheet(isPresented: $articleVM.getBriefed) {
+                    BriefView(article: article)
+            }
     }
     
     func navDestinationFromSiri(article: ArticleModel) -> some View  {
