@@ -34,10 +34,11 @@ struct EditNoteView: View {
                 } label: {
                     
                     Text("Save")
-                        .foregroundStyle(Color.pink)
+                        .foregroundStyle(Color.paperWhite)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .padding(.top, 20)
     }
 }
