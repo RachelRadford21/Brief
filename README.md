@@ -48,9 +48,9 @@ Thanks also to the Apple Developer documentation and community resources, which 
 
 - [x] Basic app structure and Share Extension for saving articles.
 - [x] Initial UI for displaying saved articles.
-- [ ] taking notes.
-- [ ] Implementing article summarization with **Natural Language**.
-- [ ] Exploring Siri integration for voice-driven summaries.
+- [x] taking notes.
+- [x] Implementing article summarization with **Natural Language**.
+- [x] Exploring Siri integration for opening articles.
 
 ## License
 
