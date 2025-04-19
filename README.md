@@ -10,7 +10,7 @@ Whether successful or not, I hope this project serves as a source of learning an
 
 ## Features
 
-- **Save Articles**: Users can save articles from Safari or other apps directly into Brief.
+- **Save Articles**: Users can save articles from the web or other apps directly into Brief.
 - **Article Summaries**: Using Apple's **Natural Language** and **Core ML** frameworks, Brief aims to summarize saved articles to provide concise and meaningful insights.
 - **Note-Taking**: A built-in feature allowing users to jot down thoughts or insights while reading.
 - **Voice Integration**: Exploring the potential of **SiriKit** to enable users to ask Siri for a summary of saved articles.
