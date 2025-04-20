@@ -46,10 +46,12 @@ struct CreateNoteView: View {
                 articleVM.createArticleNote(article: article, title: title, text: text)
             } label: {
                 Text("Save")
-                    .foregroundStyle(Color.pink)
             }
+            .frame(width: 100, height: 45)
+            .background(Color.accent)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
         }
-        .tint(colorScheme == .dark ? Color.paperWhite : .black)
+        .foregroundStyle(colorScheme == .dark ? Color.paperWhite : .black)
         .onAppear {
             if !title.isEmpty || !text.isEmpty {
                 editNote = true

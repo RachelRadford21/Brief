@@ -28,9 +28,10 @@ struct CurrentNoteView: View {
 
 extension CurrentNoteView {
     var currentNoteView: some View {
-        VStack {
+        ScrollView {
+            VStack(spacing: 15) {
             Text(note.title)
-                .font(.custom("BarlowCondensed-SemiBold", size: 30))
+                .font(.custom("BarlowCondensed-SemiBold", size: 35))
             
             Text(note.text)
                 .font(.custom("BarlowCondensed-Regular", size: 25))
@@ -42,9 +43,13 @@ extension CurrentNoteView {
                     articleVM.editArticleNote(article: note.article ?? ArticleModel(title: note.article?.title ?? ""), title: note.title, text: note.text)
                 }
             } label: {
-                Text(!editNote ? "EDIT" : "SAVE")
+                Text("Edit")
             }
+            .frame(width: 100, height: 45)
+            .background(Color.accent)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
         }
+    }
         .sheet(isPresented: $editNote) {
             EditNoteView(note: note, editNote: $editNote)
         }
