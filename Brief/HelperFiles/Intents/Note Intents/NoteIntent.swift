@@ -35,7 +35,8 @@ struct NoteIntent: AppIntent {
         
         let descriptor = FetchDescriptor<NoteModel>(
             predicate: #Predicate<NoteModel> { noteModel in
-                noteModel.title.contains(note)
+                noteModel.title.contains(note) ||
+                noteModel.title == note
             }
         )
         

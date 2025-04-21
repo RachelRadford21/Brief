@@ -24,12 +24,16 @@ struct BriefIntent: AppIntent {
         Summary("Open \(\.$title)")
     }
     
+    static var openAppWhenRun: Bool {
+        return true
+    }
+    
     @MainActor
-    func perform() async throws -> some IntentResult & ProvidesDialog  {
+    func perform() async throws -> some IntentResult & ProvidesDialog {
         print("BriefIntent activated: Looking for article '\(title)'")
         
         let container = try ModelContainer(for: ArticleModel.self)
-        let context = ModelContext(container) // Ensure it's on the main thread
+        let context = ModelContext(container)
         
         let descriptor = FetchDescriptor<ArticleModel>(
             predicate: #Predicate<ArticleModel> { article in
@@ -43,23 +47,12 @@ struct BriefIntent: AppIntent {
         guard let article = articles.first else {
             return .result(dialog: "No article found with title '\(title)'.")
         }
+
+        UserDefaults(suiteName: "group.com.brief.app")?.set(article.id.uuidString, forKey: "SiriRequestedArticleID")
         
-        let urlString = "brief://article/\(article.id)"
-        
-        if let url = URL(string: urlString) {
-            await MainActor.run {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            }
-            
-            UserDefaults.standard.set(true, forKey: "BriefIntent_ShouldOpenURL")
-            UserDefaults.standard.set(urlString, forKey: "BriefIntent_URLToOpen")
-            
-            return .result(dialog: "Opening article: \(article.title)")
-            
-        } else {
-            
-            return .result(dialog: "Could not create URL from: \(urlString)")
-        }
+        return .result(
+            dialog: "Opening article: \(article.title)"
+        )
     }
 }
 

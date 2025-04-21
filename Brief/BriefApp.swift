@@ -33,9 +33,20 @@ struct BriefApp: App {
         WindowGroup {
             ContentView(articleManager: articleManager)
                 .onChange(of: scenePhase) { _, newPhase in
-                    if newPhase == .active {
+                    if newPhase == .background {
                         articleManager.loadSharedURL()
-                        
+                        if let articleIDString = UserDefaults(suiteName: "group.com.brief.app")?.string(forKey: "SiriRequestedArticleID"),
+                              let articleID = UUID(uuidString: articleIDString) {
+                               
+                               UserDefaults(suiteName: "group.com.brief.app")?.removeObject(forKey: "SiriRequestedArticleID")
+                               
+                               NotificationCenter.default.post(
+                                   name: Notification.Name("OpenArticleByIDNotification"),
+                                   object: nil,
+                                   userInfo: ["articleID": articleID]
+                               )
+                           }
+          
                     }
                 }
                 .onOpenURL(perform: { url in
