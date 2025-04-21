@@ -27,7 +27,6 @@
 		AB423D572D79137400DCA46C /* CurrentNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB423D562D79137400DCA46C /* CurrentNoteView.swift */; };
 		AB423D592D79150A00DCA46C /* CreateNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB423D582D79150A00DCA46C /* CreateNoteView.swift */; };
 		AB45DDEE2D4C2E38002298DE /* ArticleTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB45DDED2D4C2E38002298DE /* ArticleTitleView.swift */; };
-		AB53443F2D5CF42F007B27D8 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB53443E2D5CF42A007B27D8 /* Notes.swift */; };
 		AB5ADB342D5C152B00AF5B74 /* BriefShareExt.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AB5ADB2A2D5C152B00AF5B74 /* BriefShareExt.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AB6638722DB5C04F00231067 /* Brief.entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB6638712DB5C04F00231067 /* Brief.entitlements.plist */; };
 		AB6638732DB5C04F00231067 /* Brief.entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB6638712DB5C04F00231067 /* Brief.entitlements.plist */; };
@@ -115,7 +114,6 @@
 		AB423D562D79137400DCA46C /* CurrentNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentNoteView.swift; sourceTree = "<group>"; };
 		AB423D582D79150A00DCA46C /* CreateNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteView.swift; sourceTree = "<group>"; };
 		AB45DDED2D4C2E38002298DE /* ArticleTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTitleView.swift; sourceTree = "<group>"; };
-		AB53443E2D5CF42A007B27D8 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 		AB5ADB2A2D5C152B00AF5B74 /* BriefShareExt.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BriefShareExt.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB5ADB3C2D5C1D8E00AF5B74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB6638712DB5C04F00231067 /* Brief.entitlements.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Brief.entitlements.plist; sourceTree = "<group>"; };
@@ -258,7 +256,6 @@
 		AB41AA312D3D780900099765 /* Brief */ = {
 			isa = PBXGroup;
 			children = (
-				AB53443E2D5CF42A007B27D8 /* Notes.swift */,
 				AB5ADB3C2D5C1D8E00AF5B74 /* Info.plist */,
 				AB1DCD9C2D504620005E1A0E /* README.md */,
 				AB41AA2F2D3D780900099765 /* BriefApp.swift */,
@@ -590,7 +587,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB41AA592D3D9F0500099765 /* Extensions.swift in Sources */,
-				AB53443F2D5CF42F007B27D8 /* Notes.swift in Sources */,
 				ABA7D59D2D74EA340063FD05 /* NoteViewModel.swift in Sources */,
 				AB95522A2D4EA4AD00BE843F /* SummarizerService.swift in Sources */,
 				ABAAC2F22D6E9F8E00687382 /* BriefQuery.swift in Sources */,
