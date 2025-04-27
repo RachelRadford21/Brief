@@ -54,7 +54,7 @@ Thanks also to the Apple Developer documentation and community resources, which 
 
 ---
 
-- [Post-Mortem](Post-Mortem.md) - Reflections on the development process and technical challenges
+- [Post-Mortem](Post Mortem.md) - Reflections on the development process and technical challenges
 
 ---
 
