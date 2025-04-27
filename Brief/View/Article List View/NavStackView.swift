@@ -68,6 +68,9 @@ extension NavStackView {
                                 Text("Article not found")
                             }
                         }
+                        .navigationDestination(for: NoteModel.self) { note in
+                               CurrentNoteView(editNote: editNote, note: note)
+                           }
                         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("OpenNoteByIDNotification"))) { notification in
                             onReceiveNote(notification: notification)
                         }
@@ -148,16 +151,18 @@ extension NavStackView {
     @MainActor
     func onReceiveNote(notification: NotificationCenter.Publisher.Output) {
         if let noteID = notification.userInfo?["noteID"] as? UUID {
-            print("ContentView received notification to open note with ID: \(noteID)")
             
-            if let note = notes.first(where: { $0.id == noteID }),
-               let article = note.article {
-                showNotes = true
-                articlePath.append(article)
-                
-                print("Navigating to note for article: \(article.title)")
+            showNotes = true
+            
+            if let note = notes.first(where: { $0.id == noteID }) {
+
+                if let articleWithNote = articles.first(where: { $0.note?.id == note.id }) {
+                    articlePath.append(articleWithNote)
+                } else {
+                    articlePath.append(note)
+                }
             } else {
-                print("Note not found or has no article with ID: \(noteID)")
+                print("Note with ID \(noteID) not found - available notes:")
             }
         }
     }

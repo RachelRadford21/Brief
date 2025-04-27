@@ -48,6 +48,7 @@ struct CreateNoteView: View {
                 Text("Save")
             }
             .frame(width: 100, height: 45)
+            .buttonStyle(.plain)
             .background(Color.accent)
             .clipShape(RoundedRectangle(cornerRadius: 10))
         }

@@ -33,12 +33,10 @@ struct EditNoteView: View {
                         articleVM.createArticleNote(article: note.article ?? ArticleModel(title: note.article?.title ?? ""), title: note.title, text: note.text)
                     }
                 } label: {
-                    
                     Text("Save")
-                       
-                        
                 }
                 .frame(width: 100, height: 45)
+                .buttonStyle(.plain)
                 .background(Color.accent)
                 .clipShape(RoundedRectangle(cornerRadius: 10))
             }

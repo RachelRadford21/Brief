@@ -33,7 +33,7 @@ struct BriefApp: App {
         WindowGroup {
             ContentView(articleManager: articleManager)
                 .onChange(of: scenePhase) { _, newPhase in
-                    if newPhase == .background {
+                    if newPhase == .active {
                         articleManager.loadSharedURL()
                         if let articleIDString = UserDefaults(suiteName: "group.com.brief.app")?.string(forKey: "SiriRequestedArticleID"),
                               let articleID = UUID(uuidString: articleIDString) {

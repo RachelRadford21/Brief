@@ -25,6 +25,9 @@ struct NoteIntent: AppIntent {
         Summary("Open \(\.$note)")
     }
     
+    static var openAppWhenRun: Bool {
+        return true
+    }
     
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog {
@@ -47,22 +50,18 @@ struct NoteIntent: AppIntent {
                 return .result(dialog: "No note found with title containing '\(note)'.")
             }
             
-            let encodedTitle = matchedNote.title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            UserDefaults.standard.set(true, forKey: "BriefIntent_ShouldShowNotes")
+            UserDefaults.standard.set(matchedNote.id.uuidString, forKey: "BriefIntent_NoteToOpen")
             
-            let urlString = "brief://note/\(matchedNote.id)?title=\(encodedTitle)"
-            
-            if let url = URL(string: urlString) {
-                await MainActor.run {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                    
-                    UserDefaults.standard.set(true, forKey: "BriefIntent_ShouldShowNotes")
-                    UserDefaults.standard.set(matchedNote.id.uuidString, forKey: "BriefIntent_NoteToOpen")
-                }
-                
-                return .result(dialog: "Opening note: \(matchedNote.title)")
-            } else {
-                return .result(dialog: "Could not create URL")
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(
+                    name: Notification.Name("OpenNoteByIDNotification"),
+                    object: nil,
+                    userInfo: ["noteID": matchedNote.id]
+                )
             }
+            
+            return .result(dialog: "Opening note: \(matchedNote.title)")
         } catch {
             print("Error fetching notes: \(error)")
             return .result(dialog: "Error finding note")

@@ -46,11 +46,12 @@ extension CurrentNoteView {
                 Text("Edit")
             }
             .frame(width: 100, height: 45)
+            .buttonStyle(.plain)
             .background(Color.accent)
             .clipShape(RoundedRectangle(cornerRadius: 10))
         }
     }
-        .sheet(isPresented: $editNote) {
+    .sheet(isPresented: $editNote) {
             EditNoteView(note: note, editNote: $editNote)
         }
     }

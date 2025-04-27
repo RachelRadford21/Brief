@@ -56,15 +56,4 @@ struct BriefIntent: AppIntent {
     }
 }
 
-// Siri suggestions
-struct ArticleOptionsProvider: DynamicOptionsProvider {
-    @MainActor
-    func results() async throws -> [String] {
-        let container = try ModelContainer(for: ArticleModel.self)
-        let context = ModelContext(container)
-        let articles = try context.fetch(FetchDescriptor<ArticleModel>())
-        
-        return articles.map { $0.title }
-    }
-}
 
