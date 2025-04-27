@@ -52,6 +52,12 @@ Thanks also to the Apple Developer documentation and community resources, which 
 - [x] Implementing article summarization with **Natural Language**.
 - [x] Exploring Siri integration for opening articles.
 
+---
+
+- [Post-Mortem](Post-Mortem.md) - Reflections on the development process and technical challenges
+
+---
+
 ## License
 
 This project is open-source and available under the [MIT License](License).
