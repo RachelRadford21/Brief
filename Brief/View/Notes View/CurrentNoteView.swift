@@ -30,9 +30,7 @@ extension CurrentNoteView {
     var currentNoteView: some View {
         ScrollView {
             VStack(spacing: 15) {
-            Text(note.title)
-                .font(.custom("BarlowCondensed-SemiBold", size: 35))
-            
+                TitleView(title: note.title, fontSize: 35)
             Text(note.text)
                 .font(.custom("BarlowCondensed-Regular", size: 25))
             Spacer()
